@@ -1,62 +1,67 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+# Base de données structurée, ouverte et liée
+*Version 1.5 de ce document, 2021-02-11*<br>
+Établir une base de données structurées, ouvertes et liées (BDSOL) qui recense et géolocalise dans le Croissant Boréal les talents, compétences, équipements, initiatives technocréatives et apprentissages. 
+La BDSOL utilisera les données de la communauté Avantage numérique et intégrera ensuite celles existantes dans le Croissant boréal.
+La mise en ligne de cet outil augmentera la découvrabilité, la visibilité, ainsi que la transmission des savoirs. Les données seront structurées selon un travail méthodique de métadonnées et référencement. En parallèle, des formations, accompagnements et wikiclub seront réalisés, ainsi qu’une activité de cocréation sur une plateforme de partage des équipements. Des chantiers de réflexion seront organisés autour de la gouvernance des données et de la réduction de l’impact environnemental.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Environnements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Données Ouvertes (données Québec, par exemple)
+- Données Liées (via un service de requête et d’une API)
+- Plateforme web facilitant la recherche et permettant aux utilisateurs de gérer leurs données.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Les utilisateurs anticipés
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Les organismes et les membres de la communauté d’Avantage numérique
+- **Technocréatif et Organisme oeuvrant dans le numérique** : Personne ayant déjà des compétences acquises dans le domaine des technologies numériques.
+- **Technocurieux et Organisme qui orbite autour du numérique** : Personne tentant d’acquérir des compétences dans le domaine des technologies numériques.
+- **Technonul et Organisme curieuse du numérique** : Personne qui cherche à en savoir plus dans un domaine.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Objectifs de la plateforme
 
-### Premium Partners
+### Objectifs anticipés pour les utilisateurs
+- Trouver une personne ayant les compétences dans un domaine, dans une technologie ou avec un équipement, afin de réaliser un projet technocréatif.
+- Trouver des espaces et des équipements permettant de réaliser un projet précis.
+- Découvrir les compétences nécessaires pour accomplir un type projet ou pour l’utilisation d’un équipement.
+- Partager des solutions et des marches à suivre (tutoriel) à des problèmes techniques et managériaux.
+- Poser des questions relatives à la production en contexte technocréatif (équipements, compétences, domaines d’activité, projets, etc.).
+- Améliorer la découvrabilité (Repérabilité, Accessibilité et Interopérabilité) d’un projet ou d’un organismes.
+- Planifier et budgéter des projets.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+### Objectifs intrinsèques et collatéraux pour les utilisateurs
+Faire rayonner le Croissant boréal dans la francophonie locale et internationale.
+Faire briller les communautés du Croissant boréal entre elles.
+Favoriser l’attraction et la rétentiondes talents dans la communauté du Croissant boréal.
+Favoriser la collaboration multidisciplinaire et inusitée.
 
-## Contributing
+### Objectifs anticipés pour les membres
+- Promouvoir leurs œuvres, formations, travaux, projets, etc.
+- Ajouter une plateforme à leur stratégie de repérabilité et/ou SEO (dans une stratégie de découvrabilité).
+- Participer et réseauter dans la communauté Avantage Numérique.
+- Découvrir et apprendre sur un domaine, une compétence, une technologie ou un équipement grâce au partage d’information de la communauté.
+- Trouver des partenaires et des ressources pour un projet.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Objectifs intrinsèques et collatéraux pour les membres
+- Augmenter la rentabilité d’une oeuvre, projet, etc.
+- Formation de collectifs formels ou informels (plusieurs membres qui deviennent une entité légale de création, par exemple).
+- Découvrir de nouveaux talents.
 
-## Code of Conduct
+## Livrables selon les objectifs
+Carte des objectifs
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+## Définition :
+**Utilisateurs**
+Une personne visitant la plateforme via l’accès public avec les données regroupées sur des URL.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Membres**
+Une p*ersonne ayant un compte sur la plateforme qui permet d’ajouter du contenu et de commenter.
 
-## License
+**URL**
+Une URL, couramment appelée adresse web, est une chaîne de caractères uniforme qui permet d’identifier une ressource du World Wide Web par son emplacement et de préciser le protocole internet pour la récupérer. Uniform Resource Locator - Wikipedia
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
