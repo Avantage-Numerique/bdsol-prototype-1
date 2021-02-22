@@ -51,8 +51,22 @@ Favoriser la collaboration multidisciplinaire et inusitée.
 - Formation de collectifs formels ou informels (plusieurs membres qui deviennent une entité légale de création, par exemple).
 - Découvrir de nouveaux talents.
 
-## Livrables selon les objectifs
-Carte des objectifs
+## Livrables et planification du projet 
+On gèrera les fonctionnalités ici, dans Github, dans l'outil de gestionde projet.
+[Voir les tâches planifiées pour la BDSOL - Protoype #1](https://github.com/Avantage-Numerique/bdsol/projects/1)
+
+## Choix de la technologie du prototype #1
+État actuel : version utilisable 1.0
+- Backend : Laravel
+- Frontend administrateur : À déterminer
+- Frontend public : à déterminer
+
+## Collaboration
+Vous aimeriez contribuer ? Ou vous avez des idées pour des fonctionnalités ?
+
+[Ajouter un ticket en documentant votre idée](https://github.com/Avantage-Numerique/bdsol/issues). 
+
+Plus de mécanismes seront mis en place lorsque les corrections à la version #1 utilisable seront actives.
 
 
 ## Définition :
