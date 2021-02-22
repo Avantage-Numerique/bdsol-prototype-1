@@ -61,6 +61,11 @@ On gèrera les fonctionnalités ici, dans Github, dans l'outil de gestionde proj
 - Frontend administrateur : À déterminer
 - Frontend public : à déterminer
 
+## Structure de la base de données
+
+[Version 1.0.1](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw) (22 février) 
+En cours de migration du travail effectué dans File Maker.
+
 ## Collaboration
 Vous aimeriez contribuer ? Ou vous avez des idées pour des fonctionnalités ?
 
