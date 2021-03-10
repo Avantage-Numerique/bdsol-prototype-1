@@ -8,14 +8,12 @@ La BDSOL utilisera les données de la communauté Avantage numérique et intégr
 La mise en ligne de cet outil augmentera la découvrabilité, la visibilité, ainsi que la transmission des savoirs. Les données seront structurées selon un travail méthodique de métadonnées et référencement. En parallèle, des formations, accompagnements et wikiclub seront réalisés, ainsi qu’une activité de cocréation sur une plateforme de partage des équipements. Des chantiers de réflexion seront organisés autour de la gouvernance des données et de la réduction de l’impact environnemental.
 
 
-
 ## Outils de gestions
 
 - [Gestion du projet et de l'avancement](https://github.com/Avantage-Numerique/bdsol/projects/1) 
 - [Structure de la base de données](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw) 
 - [Gestion des versions](https://github.com/Avantage-Numerique/bdsol) (Github)
-- [Cahier des charge](cahier-des-charges.md) (choix technologiques pour l'instant seulement, version 1.00)
-
+- [Cahier des charge](Cahier-des-charges.md) (choix technologiques pour l'instant seulement, version 1.00)
 
 
 ## Environnements
@@ -67,7 +65,7 @@ On gèrera les fonctionnalités ici, dans Github, dans l'outil de gestionde proj
 [Voir les tâches planifiées pour la BDSOL - Protoype #1](https://github.com/Avantage-Numerique/bdsol/projects/1)
 
 ## Choix de la technologie du prototype #1
-État actuel : version utilisable 1.0, voir [Cahier des charge](cahier-des-charges.md)
+État actuel : version utilisable 1.0, voir [Cahier des charge](Cahier-des-charges.md)
 - Backend : Laravel
 - Backend interaction avec les tables relationnels : Backpack for Laravel
 - Frontend administrateur : À déterminer
@@ -75,7 +73,7 @@ On gèrera les fonctionnalités ici, dans Github, dans l'outil de gestionde proj
 
 ## Structure de la base de données
 
-[Version 1.0.2](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw) (22 février) 
+[Version 1.0.2](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw) (10 mars) 
 En cours de migration du travail effectué dans File Maker.
 
 ## Collaboration
