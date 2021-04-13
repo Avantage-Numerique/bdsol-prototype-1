@@ -2,7 +2,7 @@
 {{-- show error using sidebar layout if looged in AND on an admin page; otherwise use a blank page --}}
 
 @php
-  $title = 'Error '.$error_number;
+  $title = __('errors.title-default')." ".$error_number;
 @endphp
 
 @section('after_styles')
@@ -40,7 +40,7 @@
 <div class="row">
   <div class="col-md-12 text-center">
     <div class="error_number">
-      <small>ERROR</small><br>
+      <small>@lang('errors.title-default')</small><br>
       {{ $error_number }}
       <hr>
     </div>
@@ -48,9 +48,10 @@
       @yield('title')
     </div>
     <div class="error_description text-muted">
-      <small>
-        @yield('description')
-     </small>
+        {!! isset($exception)? ($exception->getMessage()?$exception->getMessage() : "<small>".$default_error_message."</small>"): ""!!}
+        <p>
+            @lang('errors.default-message', ['url'=>backpack_url('dashboard')])
+        </p>
     </div>
   </div>
 </div>
