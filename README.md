@@ -84,6 +84,41 @@ Vous aimeriez contribuer ? Ou vous avez des idées pour des fonctionnalités ou 
 Plus de mécanismes seront mis en place lorsque les corrections à la version #1 utilisable seront actives.
 
 
+## Procédure d'installation version 0.0.1 :
+
+### Préalable
+- Cloner le répertoire
+- S'assurer d'avoir un environnement compatible
+    - Composer, 
+    - Node, 
+    - Npm,
+    - Serveur web actif
+
+### Installer
+Installer les dépendances `php`
+```shell
+composer install
+```
+
+Installer Backpack for Laravel et le service de permission pour Backpack
+```shell
+À venir
+```
+
+Installer les dépendances javascript
+```shell
+npm install
+```
+
+#### Note à l'installation des dépendances javascript.
+Laravel-mix a eu un problème lors de l'installation. Il faut appliquer, suite à l'installation des dépendances javascript.
+```shell
+npm update --depth 5 @babel/preset-env
+```
+```shell
+npm update --depth 5 @babel/plugin-transform-runtime
+```
+
 ## Définition :
 **Utilisateurs**
 Une personne visitant la plateforme via l’accès public avec les données regroupées sur des URL.
