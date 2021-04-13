@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <class class="col-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <figure>
@@ -12,7 +12,7 @@
                     </figure>
                 </div>
             </div>
-        </class>
+        </div>
 
     </div>
 
