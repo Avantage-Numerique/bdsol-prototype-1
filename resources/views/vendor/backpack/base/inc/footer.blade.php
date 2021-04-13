@@ -6,5 +6,6 @@
         @if (config('backpack.base.show_powered_by'))
             {{ trans('backpack::base.powered_by') }} <a target="_blank" rel="noopener" href="http://backpackforlaravel.com?ref=panel_footer_link">Backpack for Laravel</a>.
         @endif
+            <span class="badge badge-primary">@lang('app.version') {{config('app.version')}}</span>
     </div>
 @endif

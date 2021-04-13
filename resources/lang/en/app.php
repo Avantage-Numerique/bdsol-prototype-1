@@ -9,4 +9,5 @@
 
 return [
     'handcrafted_by'   => 'Created by ',
+    'version'   => 'version ',
 ];

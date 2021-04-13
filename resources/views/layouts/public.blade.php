@@ -12,7 +12,7 @@
     <div class="zone-centered">
         <h1 class="text-center">{{config('app.name')}} v.{{config('app.version')}}</h1>
         <figure>
-            <img src="{{asset('images/avantage-numerique-horizontal.svg')}}" alt="{{config('app.name')}}" style="width:100%; height: auto;" />
+            <img src="{{asset('images/avantage-numerique-noire-nopadding.svg')}}" alt="{{config('app.name')}}" style="width:100%; height: auto;" />
         </figure>
     </div>
 </div>

@@ -13,4 +13,5 @@
 
 return [
     'handcrafted_by'   => 'Conçu par ',
+    'version'   => 'version ',
 ];
