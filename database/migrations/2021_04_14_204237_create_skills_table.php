@@ -19,7 +19,7 @@ class CreateSkillsTable extends Migration
             $table->string('slug');
             $table->longtext('description')->nullable();
 
-            //associté à beaucoup de chose.
+            //associé à beaucoup de chose.
 
             $table->timestamps();
         });
