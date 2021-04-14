@@ -13,7 +13,7 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::connection('mysqldata')->create('projects', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

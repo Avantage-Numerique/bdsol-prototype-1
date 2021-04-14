@@ -13,7 +13,7 @@ class CreatePersonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('persons', function (Blueprint $table) {
+        Schema::connection('mysqldata')->create('persons', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
             $table->text('firstname');

@@ -13,7 +13,7 @@ class CreateOrganisationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('organisations', function (Blueprint $table) {
+        Schema::connection('mysqldata')->create('organisations', function (Blueprint $table) {
             $table->id();
 
             $table->id();

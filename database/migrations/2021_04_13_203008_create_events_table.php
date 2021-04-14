@@ -13,7 +13,7 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::connection('mysqldata')->create('events', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');
