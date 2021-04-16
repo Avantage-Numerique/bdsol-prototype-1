@@ -13,7 +13,7 @@ class CreateBudgetRangesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('budget_ranges', function (Blueprint $table) {
+        Schema::create('budget_ranges', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

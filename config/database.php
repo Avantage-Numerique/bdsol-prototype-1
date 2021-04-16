@@ -15,8 +15,11 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
-    'default_data' => env('DB_CONNECTION_DATA', 'mysql'),
+    'data' => env('DB_CONNECTION_DATA', 'data'),
+    'users' => env('DB_CONNECTION_DATA', 'data'),//env('DB_CONNECTION_USERS', 'users'),
+
+
+    'default' => env('DB_CONNECTION_DATA', 'data'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,15 +47,15 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'mysql' => [
+        'users' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'url' => env('DATABASE_URL_USERS'),
+            'host' => env('DB_HOST_USERS', '127.0.0.1'),
+            'port' => env('DB_PORT_USERS', '3306'),
+            'database' => env('DB_DATABASE_USERS', 'forge'),
+            'username' => env('DB_USERNAME_USERS', 'forge'),
+            'password' => env('DB_PASSWORD_USERS', ''),
+            'unix_socket' => env('DB_SOCKET_USERS', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -64,7 +67,7 @@ return [
             ]) : [],
         ],
 
-        'mysqldata' => [
+        'data' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL_DATA'),
             'host' => env('DB_HOST_DATA', '127.0.0.1'),

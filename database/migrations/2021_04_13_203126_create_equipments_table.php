@@ -13,7 +13,7 @@ class CreateEquipmentsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('equipments', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');

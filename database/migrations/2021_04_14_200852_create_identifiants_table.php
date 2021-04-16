@@ -13,7 +13,7 @@ class CreateIdentifiantsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('identifiants', function (Blueprint $table) {
+        Schema::create('identifiants', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');
@@ -23,7 +23,6 @@ class CreateIdentifiantsTable extends Migration
             $table->text('target_name');
             $table->string('target_id');
             $table->text('target_slug');
-            $table->string('target_complete_url');
             $table->string('target_complete_url');
             $table->text('target_value');
 
@@ -42,6 +41,6 @@ class CreateIdentifiantsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysqldata')->dropIfExists('identifiants');
+        Schema::dropIfExists('identifiants');
     }
 }

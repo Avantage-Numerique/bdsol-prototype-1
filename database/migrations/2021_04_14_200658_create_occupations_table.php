@@ -13,7 +13,7 @@ class CreateOccupationsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('occupations', function (Blueprint $table) {
+        Schema::create('occupations', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');
@@ -31,6 +31,6 @@ class CreateOccupationsTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysqldata')->dropIfExists('occupations');
+        Schema::dropIfExists('occupations');
     }
 }

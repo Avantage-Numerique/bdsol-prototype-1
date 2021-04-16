@@ -13,7 +13,7 @@ class CreateSourcesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('sources', function (Blueprint $table) {
+        Schema::create('sources', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

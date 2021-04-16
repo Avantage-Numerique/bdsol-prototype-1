@@ -12,9 +12,9 @@ return [
     */
 
     'models' => [
-        'user'       => config('backpack.base.user_model_fqn', \App\Models\User::class),
-        'permission' => Backpack\PermissionManager\app\Models\Permission::class,
-        'role'       => Backpack\PermissionManager\app\Models\Role::class,
+        'user'       => config('backpack.base.user_model_fqn', \Domain\Users\Models\User::class),
+        'permission' => \Domain\Users\Models\Permission::class,
+        'role'       => \Domain\Users\Models\Role::class
     ],
 
     /*

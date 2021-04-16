@@ -13,7 +13,7 @@ class CreatePurposesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('purposes', function (Blueprint $table) {
+        Schema::create('purposes', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

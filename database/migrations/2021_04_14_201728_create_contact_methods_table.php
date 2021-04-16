@@ -13,7 +13,7 @@ class CreateContactMethodsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('contact_methods', function (Blueprint $table) {
+        Schema::create('contact_methods', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');

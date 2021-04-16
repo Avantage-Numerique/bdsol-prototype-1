@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Domain\Users\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -44,5 +44,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    //protected $connection = "users";
 
 }

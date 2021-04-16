@@ -13,7 +13,7 @@ class CreateSkillsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('skills', function (Blueprint $table) {
+        Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

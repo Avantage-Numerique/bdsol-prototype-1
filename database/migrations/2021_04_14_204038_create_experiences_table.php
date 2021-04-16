@@ -13,7 +13,7 @@ class CreateExperiencesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('experiences', function (Blueprint $table) {
+        Schema::create('experiences', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

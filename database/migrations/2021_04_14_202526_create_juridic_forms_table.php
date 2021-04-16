@@ -13,7 +13,7 @@ class CreateJuridicFormsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('juridic_forms', function (Blueprint $table) {
+        Schema::create('juridic_forms', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');

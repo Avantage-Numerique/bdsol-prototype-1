@@ -13,7 +13,7 @@ class CreateLearningsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('learnings', function (Blueprint $table) {
+        Schema::create('learnings', function (Blueprint $table) {
             $table->id();
             $table->text('name');
             $table->string('slug');

@@ -13,7 +13,7 @@ class CreatePlacesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('places', function (Blueprint $table) {
+        Schema::create('places', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');

@@ -13,10 +13,9 @@ class CreateOrganisationsTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('organisations', function (Blueprint $table) {
+        Schema::create('organisations', function (Blueprint $table) {
             $table->id();
 
-            $table->id();
             $table->text('name');
             $table->string('slug');
             $table->text('legal_name');

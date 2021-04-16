@@ -13,7 +13,7 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysqldata')->create('roles', function (Blueprint $table) {
+        Schema::create('person_roles', function (Blueprint $table) {
             $table->id();
 
             $table->text('name');
@@ -31,6 +31,6 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysqldata')->dropIfExists('roles');
+        Schema::dropIfExists('person_roles');
     }
 }

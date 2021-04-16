@@ -68,13 +68,15 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => config('backpack.base.user_model_fqn', \Domain\Users\Models\User::class)
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        //'users' => [
+        //    'connection' => 'users',
+        //    'driver' => 'database',
+        //    'table' => 'users',
+        //    'model' => config('backpack.base.user_model_fqn', \Domain\Users\Models\User::class)
+        //],
     ],
 
     /*
@@ -97,7 +99,7 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
-            'throttle' => 60,
+            'throttle' => 60
         ],
     ],
 
