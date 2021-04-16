@@ -228,6 +228,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        /*  BDSOL   */
+
+        /*  DATA    */
+        'Person' => \Domain\Persons\Models\Person::class,//needed for the observers works.
     ],
 
 ];

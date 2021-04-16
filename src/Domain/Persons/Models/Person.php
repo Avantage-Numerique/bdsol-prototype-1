@@ -9,13 +9,23 @@ class Person extends Model
 {
     use CrudTrait;
 
+    protected $table = 'persons';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
+        'slug',
+        'firstname',
+        'lastname',
+        'nickname',
+        'address',
+        'description',
+        'logo',
+        'avatar',
+        'header_image',
         'updated_at',
         'created_at'
     ];
@@ -33,5 +43,12 @@ class Person extends Model
      * @var array
      */
     protected $casts = [];
+
+
+    //  ##  MUTATORS    ##
+
+    public function getNameAttribute() {
+        return $this->firstname." ".$this->lastname;
+    }
 
 }
