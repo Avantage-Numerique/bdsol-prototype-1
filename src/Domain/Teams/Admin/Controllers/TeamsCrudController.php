@@ -1,19 +1,19 @@
 <?php
 
-namespace Domain\Projects\Admin\Controllers;
+namespace Domain\Teams\Admin\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Domain\Admin\Controllers\BaseCrudController;
 
 /**
- * ProjectCrudController
+ * TeamCrudController
  *
  * @projet
  * @organisation <>
  * @author  <>
  * @license <https://opensource.org/licenses/MIT> MIT
  */
-class ProjectsCrudController extends BaseCrudController
+class TeamsCrudController extends BaseCrudController
 {
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -22,24 +22,19 @@ class ProjectsCrudController extends BaseCrudController
      */
     public function setup()
     {
-        $this->crud->setModel(\Domain\Projects\Models\Project::class);
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/projets');
-        $this->crud->setEntityNameStrings('project', 'projects');
+        $this->crud->setModel(\Domain\Teams\Models\Team::class);
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/equipes');
+        $this->crud->setEntityNameStrings('team', 'teams');
     }
 
     protected function _addColumns($state='all')
     {
         $this->crud->addColumn([
-            'name' => 'avatar',
-            'type' => 'image',
+            'name' => 'name',
+            'type' => 'text',
             'label' => __('organisations.avatar')
         ]);
 
-        $this->crud->addColumn([
-            'name' => 'name',
-            'type' => 'text',
-            'label' => __('admin.name')
-        ]);
         $this->crud->addColumn([
             'name' => 'slug',
             'type' => 'text',
@@ -49,7 +44,6 @@ class ProjectsCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-
         $tab_info = __('admin.tab-info');
         $tab_medias = __('admin.tab-medias');
         $tab_parameters = __('admin.tab-parameters');
@@ -65,33 +59,6 @@ class ProjectsCrudController extends BaseCrudController
             ],
             'tab' => $tab_info,
         ]);
-
-        $this->crud->addField([
-            'name' => 'description',
-            'type' => 'wysiwyg',
-            'label' => __('organisations.description'),
-            'tab' => $tab_info,
-        ]);
-
-        //  ##  TAB : MEDIAS
-
-        $this->crud->addField([
-            'name' => 'avatar',
-            'type' => 'image',
-            'label' => __('organisations.avatar'),
-            'wrapper'   => [
-                'class'      => 'form-group col-md-4'
-            ],
-            'tab' => $tab_medias,
-        ]);
-
-        $this->crud->addField([
-            'name' => 'header_image',
-            'type' => 'image',
-            'label' => __('organisations.header-image'),
-            'tab' => $tab_medias,
-        ]);
-
 
         //  ##  TAB : PARAMÈTRES
 

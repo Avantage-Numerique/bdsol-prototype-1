@@ -8,6 +8,8 @@
 */
 
 return [
+
+
     'entities'   => 'Entités',
     'entity'   => 'Entité',
     'persons'   => 'Personnes',
@@ -17,4 +19,24 @@ return [
     'places'   => 'Lieux',
     'skills'   => 'Compétences',
     'equipments'   => 'Équipements',
+    'teams'   => 'Équipes',
+
+    'services'   => 'Services',
+    'languages'   => 'Langues',
+    'occupations'   => 'Occupations',
+    'roles-de-personne'   => 'Roles de personne',
+    'identifiers'   => 'Identifiants',
+    'contact-methods'   => 'Méthodes de contact',
+    'juridic-forms'   => 'Forme juridiques',
+    'tools'   => 'Outils',
+
+    //sections
+    'types'   => 'Types',
+    'categories'   => 'Catégories',
+    'datas'   => 'Données',
+
+    //seperator
+    'entities' => 'Entitées',
+    'administration' => 'Administration',
+    'categorisation' => 'Categorisation',
 ];
