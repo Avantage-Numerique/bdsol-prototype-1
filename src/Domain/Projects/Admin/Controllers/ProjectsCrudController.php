@@ -1,19 +1,19 @@
 <?php
 
-namespace Domain\Organisations\Admin\Controllers;
+namespace Domain\Projects\Admin\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Domain\Admin\Controllers\BaseCrudController;
 
 /**
- * OrganisationCrudController
+ * ProjectCrudController
  *
  * @projet
  * @organisation <>
  * @author  <>
  * @license <https://opensource.org/licenses/MIT> MIT
  */
-class OrganisationsCrudController extends BaseCrudController
+class ProjectsCrudController extends BaseCrudController
 {
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -22,9 +22,9 @@ class OrganisationsCrudController extends BaseCrudController
      */
     public function setup()
     {
-        $this->crud->setModel(\Domain\Organisations\Models\Organisation::class);
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/organisations');
-        $this->crud->setEntityNameStrings('organisation', 'organisations');
+        $this->crud->setModel(\Domain\Projects\Models\Project::class);
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/projets');
+        $this->crud->setEntityNameStrings('project', 'projects');
     }
 
     protected function _addColumns($state='all')

@@ -3,6 +3,7 @@
 
 @php
   $title = __('errors.title-default')." ".$error_number;
+    $default_error_message = '';
 @endphp
 
 @section('after_styles')

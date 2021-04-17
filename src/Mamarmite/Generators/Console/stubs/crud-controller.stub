@@ -22,19 +22,19 @@ class DummyClassCrudController extends BaseCrudController
      */
     public function setup()
     {
-        CRUD::setModel(DummyDomainNamespace\Models\DummyClass::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/dummy_class');
-        CRUD::setEntityNameStrings('entity_singular', 'entity_plural');
+        $this->crud->setModel(DummyDomainNamespace\Models\DummyClass::class);
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/dummy_class');
+        $this->crud->setEntityNameStrings('entity_singular', 'entity_plural');
     }
 
     protected function _addColumns($state='all')
     {
-        CRUD::setFromDb(); // columns
+        $this->crud->setFromDb(); // columns
     }
 
     protected function _addFields($state='all')
     {
-        CRUD::setFromDb(); // fields
+        $this->crud->setFromDb(); // fields
 
         /**
          * Fields can be defined using the fluent syntax or array syntax:

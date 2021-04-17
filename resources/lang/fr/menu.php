@@ -12,4 +12,9 @@ return [
     'entity'   => 'Entité',
     'persons'   => 'Personnes',
     'organisations'   => 'Organisations',
+    'projects'   => 'Projets',
+    'events'   => 'Événements',
+    'places'   => 'Lieux',
+    'skills'   => 'Compétences',
+    'equipments'   => 'Équipements',
 ];
