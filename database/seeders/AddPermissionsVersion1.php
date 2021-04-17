@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 
-class add_permissions_version1 extends Seeder
+class AddPermissionsVersion1 extends Seeder
 {
 
     /**
