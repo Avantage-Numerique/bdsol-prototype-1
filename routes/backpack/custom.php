@@ -15,9 +15,7 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
 
-
 }); // this should be the absolute last line of this file
-
 
 Route::group([
     'prefix'     => config('backpack.base.route_prefix', 'admin'),
@@ -25,9 +23,10 @@ Route::group([
         (array) config('backpack.base.web_middleware', 'web'),
         (array) config('backpack.base.middleware_key', 'admin')
     ),
-    'namespace'  => '\Domain\Persons\Admin',
+    'namespace'  => '\Domain',
 ], function () { // custom admin routes
 
-    Route::crud('personnes', 'Controllers\PersonCrudController');
+    Route::crud('personnes', 'Persons\Admin\Controllers\PersonCrudController');
+    Route::crud('organisations', 'Organisations\Admin\Controllers\OrganisationsCrudController');
 
 }); // this should be the absolute last line of this file

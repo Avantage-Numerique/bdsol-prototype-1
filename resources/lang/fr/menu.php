@@ -11,4 +11,5 @@ return [
     'entities'   => 'Entités',
     'entity'   => 'Entité',
     'persons'   => 'Personnes',
+    'organisations'   => 'Organisations',
 ];

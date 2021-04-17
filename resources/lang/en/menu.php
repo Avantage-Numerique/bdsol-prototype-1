@@ -10,4 +10,5 @@ return [
     'entities'   => 'Entities',
     'entity'   => 'Entity',
     'persons'   => 'Persons',
+    'organisations'   => 'Organisations',
 ];

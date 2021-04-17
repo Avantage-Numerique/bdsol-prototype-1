@@ -6,6 +6,7 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-user"></i> @lang('menu.entities')</a>
     <ul class="nav-dropdown-items">
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('personnes') }}"><i class="nav-icon la la-user"></i> <span>@lang('menu.persons')</span></a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('organisations') }}'><i class='nav-icon la la-business'></i> @lang('menu.organisations')</a></li>
     </ul>
 </li>
 
@@ -20,3 +21,5 @@
     </ul>
 </li>
 @endif
+
+
