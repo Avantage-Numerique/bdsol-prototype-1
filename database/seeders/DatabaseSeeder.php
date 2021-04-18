@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $seeders = array(
             AddPermissionsVersion1::class,
             AddAdminOnlyPermission::class,
+            SeedContactsMethodsTable::class,
             //'AddMarcAndreUser',
         );
         foreach($seeders as $seeder) {

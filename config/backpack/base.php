@@ -179,7 +179,7 @@ return [
     // If you've modified your "web" middleware group (ex: removed sessions), you can use a different
     // route group, that has all the the middleware listed below in the comments.
     'web_middleware' => 'web',
-    
+
     // Or you can comment the above, and uncomment the complete list below.
     // 'web_middleware' => [
     //     \App\Http\Middleware\EncryptCookies::class,
@@ -200,7 +200,7 @@ return [
 
     // Set this to false if you would like to skip adding the dashboard routes
     // (you then need to overwrite the login route on your AuthController)
-    'setup_dashboard_routes' => true,
+    'setup_dashboard_routes' => false,
 
     // Set this to false if you would like to skip adding "my account" routes
     // (you then need to manually define the routes in your web.php)

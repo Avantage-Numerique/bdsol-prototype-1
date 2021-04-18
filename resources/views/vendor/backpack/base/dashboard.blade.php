@@ -14,6 +14,18 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            @foreach($personnes as $personne)
+            <div class="card">
+                <div class="card-body">
+                    {{$personne->name}}
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
 @endsection
 
 @php

@@ -42,4 +42,7 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
 
+    Route::get('dashboard', 'DashboardController@dashboard')->name('backpack.dashboard');
+    Route::get('/', 'DashboardController@redirect')->name('backpack');
+
 }); // this should be the absolute last line of this file

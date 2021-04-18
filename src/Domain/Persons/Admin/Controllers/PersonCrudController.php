@@ -74,6 +74,7 @@ class PersonCrudController extends BaseCrudController
         'header_image',*/
         $tab_info = __('admin.tab-info');
         $tab_medias = __('admin.tab-medias');
+        $tab_contact = __('admin.tab-contacts');
         $tab_parameters = __('admin.tab-parameters');
 
         //  ##  TAB : INFORMATION
@@ -105,6 +106,59 @@ class PersonCrudController extends BaseCrudController
             ],
             'tab' => $tab_info,
         ]);
+
+        /*$this->crud->addField([
+            'label'     => 'Méthodes de contact',
+            'type'      => 'select2',
+            'name'      => 'contact_method_id',
+            'entity'    => 'contact_methods',
+            'attribute' => 'name',
+            'model'     => 'Domain\ContactMethods\Models\ContactMethod',
+            'pivot'     => true,
+        ]);*/
+
+        /*$this->crud->addField([
+            'label' => 'Méthode de contact',
+            'type' => 'select2_multiple',
+            'name' => 'contactable',
+            'entity' => 'contact_methods',
+            'model' => 'Domain\ContactMethods\Models\ContactMethod',
+            'attribute' => 'name',
+            'morph' => true,
+            'wrapper' => ['class' => 'form-group col-md-6'],
+        ]);*/
+
+
+        //  ## Données de contact.
+
+        /*$this->crud->addField([   // repeatable
+            'name'  => 'contact_methods',
+            'label' => 'Méthode pour entrer en contact',
+            'type'  => 'repeatable',
+            'fields' => [
+                [
+                    'name' => 'contact_method_user',
+                    'type' => 'text',
+                    'label' => 'Nom d\'utilisateur',
+                    'wrapper' => ['class' => 'form-group col-md-6'],
+                ],[
+                    'name' => 'contactable',
+                    'type' => 'select2',
+                    'label' => 'Méthode de contact',
+                    'entity' => 'contactable',
+                    'model' => 'Domain\ContactMethods\Models\ContactMethod',
+                    'attribute' => 'name',
+                    'pivot' => true,
+                    'wrapper' => ['class' => 'form-group col-md-6'],
+                ]
+            ],
+            // optional
+            'new_item_label' => 'Ajouter une méthode',
+            'init_rows' => 1,
+            'min_rows' => 0,
+            'max_rows' => -1,
+            'tab' => $tab_contact,
+        ]);*/
 
         /*
          * Algolia is killing Places. Please note that Algolia Places will stop working in May 2022

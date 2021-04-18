@@ -2,12 +2,14 @@
 
 namespace Domain\Persons\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Domain\ContactMethods\Traits\ContactableTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
     use CrudTrait;
+    //use ContactableTrait;
 
     protected $table = 'persons';
 
@@ -45,7 +47,18 @@ class Person extends Model
     protected $casts = [];
 
 
-    //  ##  MUTATORS    ##
+
+    //  ##  Relations   ##  //
+
+
+    public function contact_methods() {
+        $this->morphMany('Domain\ContactMethods\Models\ContactMethod', 'contactable');
+    }
+
+
+
+    //  ##  MUTATORS    ##  //
+
 
     public function getNameAttribute() {
         return $this->firstname." ".$this->lastname;

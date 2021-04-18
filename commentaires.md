@@ -23,3 +23,15 @@ Plusieurs autres licence : https://www.gnu.org/licenses/license-list.fr.html#Mod
  * @etc on peut ajouter d'autres éléments comme on veut. On peut suivre ceux de phpDocumentor. Pour l'instant on ne génère pas de documentation associée.
  */
 ```
+
+
+```php
+/**
+ * 
+ * @projet BDSOL
+ * @organisation <avantage-numerique.org> Avantage Numérique
+ * @author Marc-André Martin <marcandre@mamarmite.com>
+ * @license <https://opensource.org/licenses/MIT> MIT
+ * @etc on peut ajouter d'autres éléments comme on veut. On peut suivre ceux de phpDocumentor. Pour l'instant on ne génère pas de documentation associée.
+ */
+```

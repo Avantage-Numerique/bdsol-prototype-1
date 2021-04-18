@@ -13,4 +13,5 @@ return [
     'tab-info'   => 'Informations',
     'tab-medias'   => 'Médias',
     'tab-parameters'   => 'Paramètres',
+    'tab-contacts'   => 'Données de contact',
 ];

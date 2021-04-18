@@ -19,12 +19,8 @@ class CreateIdentifiantsTable extends Migration
             $table->text('name');
             $table->string('slug');
             $table->longtext('description')->nullable();
-
-            $table->text('target_name');
-            $table->string('target_id');
-            $table->text('target_slug');
-            $table->string('target_complete_url');
-            $table->text('target_value');
+            $table->text('base_url')->nullable();
+            $table->text('connection_method')->nullable();
 
             $table->boolean(('is_syncable'))->default(false);
 
