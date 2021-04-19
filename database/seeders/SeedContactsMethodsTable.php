@@ -70,6 +70,18 @@ class SeedContactsMethodsTable extends Seeder
                 'base_url' => '',
                 'link_prefix' => '',
             ],[
+                'name' => 'Youtube',
+                'slug' => 'youtube',
+                'description' => 'Compte youtube',
+                'base_url' => 'https://youtube.com',
+                'link_prefix' => '',
+            ],[
+                'name' => 'Vimeo',
+                'slug' => 'vimeo',
+                'description' => 'Compte vimeo',
+                'base_url' => 'https://vimeo.com',
+                'link_prefix' => '',
+            ],[
                 'name' => 'Autre',
                 'slug' => 'autre',
                 'description' => 'Ajouter un compte / plateforme.',

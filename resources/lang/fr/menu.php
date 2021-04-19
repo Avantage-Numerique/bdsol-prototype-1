@@ -28,6 +28,7 @@ return [
     'identifiers'   => 'Identifiants',
     'contact-methods'   => 'Méthodes de contact',
     'juridic-forms'   => 'Forme juridiques',
+    'domaines'   => 'Domaines',
     'tools'   => 'Outils',
 
     //sections

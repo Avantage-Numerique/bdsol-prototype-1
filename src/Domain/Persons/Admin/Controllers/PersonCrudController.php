@@ -2,10 +2,12 @@
 
 namespace Domain\Persons\Admin\Controllers;
 
-use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
+use Domain\Persons\Admin\Requests\PersonCrudRequest as StoreRequest;
+use Domain\Persons\Admin\Requests\PersonCrudRequest as UpdateRequest;
+use Domain\Persons\Models\Person;
 
-// VALIDATION
 
 /**
  * PersonCrudController
@@ -17,6 +19,7 @@ use Domain\Admin\Controllers\BaseCrudController;
  */
 class PersonCrudController extends BaseCrudController
 {
+    use HasUploadFields;
 
     public function setup()
     {
@@ -25,18 +28,28 @@ class PersonCrudController extends BaseCrudController
         $this->crud->setRoute(backpack_url('personnes'));
     }
 
-    /*public function store()
+    public function setupCreateOperation()
     {
-        dd($this->crud->getRequest()->request);
-    }*/
+        parent::setupCreateOperation();
 
+        $this->crud->setValidation(StoreRequest::class);
+    }
+
+    public function setupUpdateOperation()
+    {
+        parent::setupUpdateOperation();
+
+        $this->crud->setValidation(UpdateRequest::class);
+    }
 
     protected function _addColumns($state='all') {
 
         $this->crud->addColumn([
             'name' => 'avatar',
             'type' => 'image',
-            'label' => __('persons.avatar')
+            'label' => __('persons.avatar'),
+            'prefix' => 'persons/avatars/',
+            'disk'   => 'public',
         ]);
 
         $this->crud->addColumn([
@@ -185,17 +198,20 @@ class PersonCrudController extends BaseCrudController
             'name' => 'avatar',
             'type' => 'image',
             'label' => __('persons.avatar'),
+            'upload' => true,
+            'prefix' => 'persons/avatars/',
+            'disk'   => 'public',
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
             'tab' => $tab_medias,
         ]);
-        $this->crud->addField([
+        /*$this->crud->addField([
             'name' => 'logo',
             'type' => 'image',
             'label' => __('persons.logo'),
             'tab' => $tab_medias,
-        ]);
+        ]);*/
 
         $this->crud->addField([
             'name' => 'header_image',
@@ -214,5 +230,38 @@ class PersonCrudController extends BaseCrudController
             'hint' => __('admin.slug-hint'),
             'tab' => $tab_parameters,
         ]);
+    }
+
+
+    public function update()
+    {
+        //$redirect =  parent::traitUpdate();
+
+        //$request = $this->crud->getRequest();
+
+        //$inputs = $request->inputs();
+        /*$request->request->get('avatar');
+        $avatarBase64 = $request->request->get('avatar');
+        if (isset($avatarBase64)) {
+            $retour = Person::addMediaFromRequest('avatar')->toMediaCollection('avatars');
+            dd($retour);
+        }*/
+        //$this->uploadFileToDisk($request->request->get('avatar'), "avatar", "public","persons/avatars/");
+        return parent::update();
+    }
+
+    public function store()
+    {
+        //$request = $this->crud->getRequest();
+        //$request = $this->crud->getRequest();
+        //dd($redirect);
+        //$inputs = $request->inputs();
+        //$request->request->get(['avatar'=> '/']);
+        //$this->uploadFileToDisk($request->request->get('avatar'), "avatar", "public","persons/avatars/");
+        /*if (isset($data['avatar'])) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
+
+        }*/
+        return parent::store();
     }
 }

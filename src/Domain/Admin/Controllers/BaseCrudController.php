@@ -32,6 +32,10 @@ class BaseCrudController extends CrudController
         destroy as traitDelete;
     }
 
+    public function setupShowOperation()
+    {
+        $this->_addColumns('list');
+    }
 
     public function setupListOperation()
     {

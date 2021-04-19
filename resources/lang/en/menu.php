@@ -25,6 +25,7 @@ return [
     'identifiers'   => 'identifiers',
     'contact-methods'   => 'Contact methods',
     'juridic-forms'   => 'Juridic forms',
+    'domaines'   => 'Domaines',
     'tools'   => 'Tools',
 
     //sections

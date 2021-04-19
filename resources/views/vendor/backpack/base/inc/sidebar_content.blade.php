@@ -23,6 +23,7 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('services') }}'><i class='nav-icon la la-concierge-bell'></i> @lang('menu.services')</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('occupations') }}'><i class='nav-icon la la-glasses'></i> @lang('menu.occupations')</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('roles-de-personne') }}'><i class='nav-icon la la-user-tag'></i> @lang('menu.roles-de-personne')</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('domaines') }}'><i class='nav-icon la la-question'></i> @lang('menu.domaines')</a></li>
     </ul>
 </li>
 <li class="nav-item nav-dropdown">

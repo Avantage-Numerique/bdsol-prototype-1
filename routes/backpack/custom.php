@@ -30,6 +30,7 @@ Route::group([
     Route::crud('identifiants', 'Identifiants\Admin\Controllers\IdentifiantsCrudController');
     Route::crud('methodes-de-contact', 'ContactMethods\Admin\Controllers\ContactMethodsCrudController');
     Route::crud('formes-juridique', 'JuridicForms\Admin\Controllers\JuridicFormsCrudController');
+    Route::crud('domaines', 'Domaines\Admin\Controllers\DomainesCrudController');
 
 });
 
@@ -44,5 +45,4 @@ Route::group([
 
     Route::get('dashboard', 'DashboardController@dashboard')->name('backpack.dashboard');
     Route::get('/', 'DashboardController@redirect')->name('backpack');
-
 }); // this should be the absolute last line of this file
