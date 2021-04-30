@@ -82,6 +82,36 @@ class SeedContactsMethodsTable extends Seeder
                 'base_url' => 'https://vimeo.com',
                 'link_prefix' => '',
             ],[
+                'name' => 'Spotify',
+                'slug' => 'spotify',
+                'description' => 'Lien spotify',
+                'base_url' => 'https://spotify.com',
+                'link_prefix' => '',
+            ],[
+                'name' => 'MySpace',
+                'slug' => 'myspace',
+                'description' => 'Réseau social de groupes de musique et de DJ',
+                'base_url' => 'https://myspace.com',
+                'link_prefix' => '',
+            ],[
+                'name' => 'Bandcamp',
+                'slug' => 'bandcamp',
+                'description' => 'Bandcamp',
+                'base_url' => 'https://bandcamp.com',
+                'link_prefix' => '',
+            ],[
+                'name' => '500px',
+                'slug' => '500px',
+                'description' => 'Réseau social de partage de photos',
+                'base_url' => 'https://500px.com',
+                'link_prefix' => '',
+            ],[
+                'name' => 'Flickr',
+                'slug' => 'flickr',
+                'description' => 'Réseau social de partage de photos et de vidéos',
+                'base_url' => 'https://flickr.com',
+                'link_prefix' => '',
+            ],[
                 'name' => 'Autre',
                 'slug' => 'autre',
                 'description' => 'Ajouter un compte / plateforme.',
