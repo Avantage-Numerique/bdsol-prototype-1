@@ -58,6 +58,20 @@ class SeedIdentifiersTable extends Seeder
                 'connection_method' => 'HTTP',
                 'is_syncable' => false,
             ],[
+                'name' => 'MusicBrainz',
+                'slug' => 'musicbrainz',
+                'description' => 'MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.',
+                'base_url' => 'https://musicbrainz.org/',
+                'connection_method' => 'HTTP',
+                'is_syncable' => false,
+            ],[
+                'name' => 'Artsdata',
+                'slug' => 'artsdata',
+                'description' => 'Artsdata.ca vise à donner au secteur des arts du Canada la possibilité d’optimiser des données ouvertes liées et à promouvoir activement un écosystème numérique plus juste et équitable. Cette initiative procède à la construction d’un graphe de connaissances pour les arts qui soit lisible par machine, ouvert et accessible à tout le monde.',
+                'base_url' => 'http://kg.artsdata.ca/',
+                'connection_method' => 'HTTP',
+                'is_syncable' => false,
+            ],[
                 'name' => 'SynapeC',
                 'slug' => 'regie-du-cinema-du-quebec',
                 'description' => 'Mutualisation fermé',
@@ -104,13 +118,6 @@ class SeedIdentifiersTable extends Seeder
                 'slug' => 'ISSN',
                 'description' => 'L\'International Standard Serial Number ou Numéro international normalisé des publications en série est un numéro international qui permet d\'identifier de manière unique une publication en série.',
                 'base_url' => 'www.bac-lac.gc.ca/fra/services/issn-canada/Pages/issn-canada.aspx',
-                'connection_method' => 'HTTP',
-                'is_syncable' => false,
-            ],[
-                'name' => 'MusicBrainz',
-                'slug' => 'musicbrainz',
-                'description' => 'MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.',
-                'base_url' => 'https://musicbrainz.org/',
                 'connection_method' => 'HTTP',
                 'is_syncable' => false,
             ]
