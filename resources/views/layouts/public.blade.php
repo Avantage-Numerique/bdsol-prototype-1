@@ -7,8 +7,9 @@
     <title>{{config('app.name')}} v.{{config('app.version')}}</title>
     @include('public.inc.head')
 </head>
-<body class="antialiased">
-<div class="relative flex items-top justify-center min-h-screen min-w-50 bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
+<body class="antialiased" style="background-image:url({{asset('images/fond-avantage-numeriqe.png')}});">
+
+<div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center sm:pt-0">
     <div class="zone-centered">
         <h1 class="text-center">{{config('app.name')}} v.{{config('app.version')}}</h1>
         <figure>

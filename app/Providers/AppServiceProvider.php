@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use App\Observers\Admin\SluggerObserver;
-use Domain\Persons\Models\Person;
 use Illuminate\Support\ServiceProvider;
 
+use Domain\Occupations\Models\Occupation;
+use Domain\Persons\Models\Person;
+use Domain\Uri\Observers\SluggerObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+
     }
 
     /**
@@ -26,7 +28,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        \Domain\Persons\Models\Person::observe(SluggerObserver::class);
     }
 }

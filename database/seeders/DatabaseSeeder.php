@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             AddPermissionsVersion1::class,
             AddAdminOnlyPermission::class,
             SeedContactsMethodsTable::class,
-            //'AddMarcAndreUser',
+            SeedIdentifiersTable::class,
+            AddOccupationArtistique::class,
+            AddMarcAndreUser::class,
         );
         foreach($seeders as $seeder) {
             $this->call($seeder);
