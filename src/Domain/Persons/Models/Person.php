@@ -4,21 +4,26 @@ namespace Domain\Persons\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\HasUploadFields;
-use Domain\ContactMethods\Traits\ContactableTrait;
-use Illuminate\Database\Eloquent\Model;
+use Domain\ContactMethods\Models\Traits\ContactableTrait;
 use Domain\Images\Traits\AvatarTrait;
+use Domain\Uri\Models\Traits\SluggableTrait;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+
 // implements HasMedia
 
 
 class Person extends Model
 {
     use CrudTrait;
+    use SluggableTrait;
     //use HasUploadFields;
     //use InteractsWithMedia;
     //use AvatarTrait;
-    //use ContactableTrait;
+    use ContactableTrait;
 
     protected $table = 'persons';
 
@@ -37,6 +42,7 @@ class Person extends Model
         'logo',
         'avatar',
         'header_image',
+        'all_contact_methods',  //polymorphic relation table.
         'updated_at',
         'created_at'
     ];
@@ -60,20 +66,23 @@ class Person extends Model
     //  ##  Relations   ##  //
 
 
-    public function contact_methods() {
-        $this->morphMany('Domain\ContactMethods\Models\ContactMethod', 'contactable');
-    }
-
-
-
     //  ##  MUTATORS    ##  //
 
 
+    /**
+     * Concatenate the firstname and lastname value, to avoid having a column for that.
+     * @return string
+     */
     public function getNameAttribute() {
         return $this->firstname." ".$this->lastname;
     }
 
 
+
+    /**
+     * Use Backpack upload field to save the image on target storage.
+     * @param $value String with base64 value.
+     */
     public function setAvatarAttribute($value) {
 
         //$this->uploadFileToDisk($value, "avatar", "public","persons/avatars/");
@@ -113,4 +122,8 @@ class Person extends Model
             $this->attributes[$attribute_name] = $filename;//$public_destination_path.'/'.
         }
     }
+
+
+
+    //  ##  TOOLS   ##  //
 }

@@ -7,6 +7,7 @@ use Domain\Admin\Controllers\BaseCrudController;
 use Domain\Persons\Admin\Requests\PersonCrudRequest as StoreRequest;
 use Domain\Persons\Admin\Requests\PersonCrudRequest as UpdateRequest;
 use Domain\Persons\Models\Person;
+use Domain\ContactMethods\Models\ContactMethod;
 
 
 /**
@@ -21,8 +22,12 @@ class PersonCrudController extends BaseCrudController
 {
     use HasUploadFields;
 
+    public $contact_method_model;
+
     public function setup()
     {
+        $this->contact_method_model = $contact_method_model = ContactMethod::class;
+
         $this->crud->setModel('\Domain\Persons\Models\Person');
         $this->crud->setEntityNameStrings(trans('persons.person'), trans('persons.persons'));
         $this->crud->setRoute(backpack_url('personnes'));
@@ -120,58 +125,56 @@ class PersonCrudController extends BaseCrudController
             'tab' => $tab_info,
         ]);
 
-        /*$this->crud->addField([
-            'label'     => 'Méthodes de contact',
-            'type'      => 'select2',
-            'name'      => 'contact_method_id',
-            'entity'    => 'contact_methods',
-            'attribute' => 'name',
-            'model'     => 'Domain\ContactMethods\Models\ContactMethod',
-            'pivot'     => true,
-        ]);*/
 
-        /*$this->crud->addField([
-            'label' => 'Méthode de contact',
-            'type' => 'select2_multiple',
-            'name' => 'contactable',
-            'entity' => 'contact_methods',
-            'model' => 'Domain\ContactMethods\Models\ContactMethod',
-            'attribute' => 'name',
-            'morph' => true,
-            'wrapper' => ['class' => 'form-group col-md-6'],
+        /*$this->crud->addField([    // Select2Multiple = n-n relationship (with pivot table)
+            'label'     => "Méthodes de contact",
+            'type'      => 'checklist',
+            'name'      => 'contact_methods', // the method that defines the relationship in your Model
+
+            // optional
+            'entity'    => 'contact_methods', // the method that defines the relationship in your Model
+            'model'     => "Domain\ContactMethods\Models\ContactMethod", // foreign key model
+            'attribute' => 'name', // foreign key attribute that is shown to user
+            'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+            'select_all' => true, // show Select All and Clear buttons?
+            'tab' => $tab_info,
         ]);*/
 
 
         //  ## Données de contact.
 
-        /*$this->crud->addField([   // repeatable
-            'name'  => 'contact_methods',
+        $this->crud->addField([   // repeatable
+            'name'  => 'all_contact_methods',
             'label' => 'Méthode pour entrer en contact',
             'type'  => 'repeatable',
             'fields' => [
                 [
-                    'name' => 'contact_method_user',
-                    'type' => 'text',
-                    'label' => 'Nom d\'utilisateur',
-                    'wrapper' => ['class' => 'form-group col-md-6'],
+                    'name'    => 'method_value',
+                    'type'    => 'text',
+                    'label'   => 'Votre utilisateur',
+                    'wrapper' => ['class' => 'form-group col-md-8'],
                 ],[
-                    'name' => 'contactable',
-                    'type' => 'select2',
-                    'label' => 'Méthode de contact',
-                    'entity' => 'contactable',
-                    'model' => 'Domain\ContactMethods\Models\ContactMethod',
-                    'attribute' => 'name',
-                    'pivot' => true,
-                    'wrapper' => ['class' => 'form-group col-md-6'],
+                    'label'     => "Méthodes de contact",
+                    'type'      => 'select2',
+                    'name'      => 'contact_methods', // the method that defines the relationship in your Model
+
+                    // optional
+                    'entity'    => 'contact_methods', // the method that defines the relationship in your Model
+                    'model'     => "Domain\ContactMethods\Models\ContactMethod", // foreign key model
+                    'attribute' => 'name', // foreign key attribute that is shown to user
+                    'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+                    'select_all' => true, // show Select All and Clear buttons?
+                    'tab' => $tab_info,
+                    'wrapper' => ['class' => 'form-group col-md-4'],
                 ]
             ],
             // optional
-            'new_item_label' => 'Ajouter une méthode',
+            'new_item_label' => 'Ajouter une méthode de contact',
             'init_rows' => 1,
             'min_rows' => 0,
-            'max_rows' => -1,
+            'max_rows' => 0,
             'tab' => $tab_contact,
-        ]);*/
+        ]);
 
         /*
          * Algolia is killing Places. Please note that Algolia Places will stop working in May 2022
@@ -235,33 +238,27 @@ class PersonCrudController extends BaseCrudController
 
     public function update()
     {
-        //$redirect =  parent::traitUpdate();
 
-        //$request = $this->crud->getRequest();
+        /*$request = $this->crud->getRequest();
 
-        //$inputs = $request->inputs();
-        /*$request->request->get('avatar');
-        $avatarBase64 = $request->request->get('avatar');
-        if (isset($avatarBase64)) {
-            $retour = Person::addMediaFromRequest('avatar')->toMediaCollection('avatars');
-            dd($retour);
+        $repeatable_field = 'model_has_contact_methods';
+        $target_field = $request->get($repeatable_field);
+
+        $current_person = Person::find($this->crud->getCurrentEntry()->id);
+        $decoded_repeatable_field = json_decode($target_field);
+
+        foreach($decoded_repeatable_field as $index => $method)
+        {
+            $contact_method = $current_person->contact_methods()->attach($method->contact_methods, [
+                'method_value' => $method->method_value,
+            ]);
         }*/
-        //$this->uploadFileToDisk($request->request->get('avatar'), "avatar", "public","persons/avatars/");
         return parent::update();
     }
 
     public function store()
     {
-        //$request = $this->crud->getRequest();
-        //$request = $this->crud->getRequest();
-        //dd($redirect);
-        //$inputs = $request->inputs();
-        //$request->request->get(['avatar'=> '/']);
-        //$this->uploadFileToDisk($request->request->get('avatar'), "avatar", "public","persons/avatars/");
-        /*if (isset($data['avatar'])) {
-            $user->addMediaFromRequest('avatar')->toMediaCollection('avatars');
 
-        }*/
         return parent::store();
     }
 }

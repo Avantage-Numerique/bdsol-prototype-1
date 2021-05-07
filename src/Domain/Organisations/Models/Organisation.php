@@ -4,10 +4,12 @@ namespace Domain\Organisations\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Domain\ContactMethods\Models\Traits\ContactableTrait;
 
 class Organisation extends Model
 {
     use CrudTrait;
+    use ContactableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,37 +21,20 @@ class Organisation extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = [
+        'slug',
+        'name',
+        'legal_name',
+        'address',
+        'description',
+        'logo',
+        'avatar',
+        'header_image',
+        'all_contact_methods',  //polymorphic relation table.
+        'updated_at',
+        'created_at'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 
-    /*
-    |--------------------------------------------------------------------------
-    | FUNCTIONS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | RELATIONS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESSORS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
 }

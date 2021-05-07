@@ -35,23 +35,22 @@ class OrganisationsCrudController extends BaseCrudController
             'label' => __('organisations.avatar')
         ]);
         $this->crud->addColumn([
+            'name' => 'legal_name',
+            'type' => 'text',
+            'label' => __('organisations.avatar')
+        ]);
+        $this->crud->addColumn([
             'name' => 'avatar',
             'type' => 'image',
             'label' => __('organisations.avatar')
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'slug',
-            'type' => 'text',
-            'label' => __('admin.slug')
         ]);
     }
 
     protected function _addFields($state='all')
     {
-
         $tab_info = __('admin.tab-info');
         $tab_medias = __('admin.tab-medias');
+        $tab_contact = __('admin.tab-contacts');
         $tab_parameters = __('admin.tab-parameters');
 
         //  ##  TAB : INFORMATION
@@ -92,6 +91,40 @@ class OrganisationsCrudController extends BaseCrudController
             'type' => 'wysiwyg',
             'label' => __('organisations.description'),
             'tab' => $tab_info,
+        ]);
+
+
+        $this->crud->addField([   // repeatable
+            'name'  => 'all_contact_methods',
+            'label' => 'Méthode pour entrer en contact',
+            'type'  => 'repeatable',
+            'fields' => [
+                [
+                    'name'    => 'method_value',
+                    'type'    => 'text',
+                    'label'   => 'Votre utilisateur',
+                    'wrapper' => ['class' => 'form-group col-md-8'],
+                ],[
+                    'label'     => "Méthodes de contact",
+                    'type'      => 'select2',
+                    'name'      => 'contact_methods', // the method that defines the relationship in your Model
+
+                    // optional
+                    'entity'    => 'contact_methods', // the method that defines the relationship in your Model
+                    'model'     => "Domain\ContactMethods\Models\ContactMethod", // foreign key model
+                    'attribute' => 'name', // foreign key attribute that is shown to user
+                    'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+                    'select_all' => true, // show Select All and Clear buttons?
+                    'tab' => $tab_info,
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ]
+            ],
+            // optional
+            'new_item_label' => 'Ajouter une méthode de contact',
+            'init_rows' => 1,
+            'min_rows' => 0,
+            'max_rows' => 0,
+            'tab' => $tab_contact,
         ]);
 
         //  ##  TAB : MEDIAS

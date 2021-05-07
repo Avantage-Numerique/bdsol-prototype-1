@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\ContactMethods\Traits;
+namespace Domain\ContactMethods\Models\Traits;
 
 
 /**
@@ -14,7 +14,6 @@ namespace Domain\ContactMethods\Traits;
  */
 trait ContactableTrait
 {
-    //  ##  Add the relation with the model ##  //
 
     //  ##  RELATION    ##  //
     public function contact_methods()
@@ -72,7 +71,6 @@ trait ContactableTrait
             //  ##  CREATE : if the contact methods doesn't exist   ##  //
 
             if (!$this->contact_methods->contains($method->contact_methods)) {
-
                 //  ##  It's new, so save the value  ##  //
                 $this->contact_methods()->attach(
                     $method->contact_methods,
@@ -96,6 +94,8 @@ trait ContactableTrait
                 $this->contact_methods()->detach($method_id);
             }
         }
+
+
     }
 
 
@@ -116,5 +116,4 @@ trait ContactableTrait
         }
         return json_encode($return_array);
     }
-
 }

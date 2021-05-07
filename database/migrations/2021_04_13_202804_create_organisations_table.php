@@ -22,7 +22,7 @@ class CreateOrganisationsTable extends Migration
             $table->longtext('description')->nullable();
 
             // Média
-            $table->text('avatar')->nullable();
+            $table->text('logo')->nullable();
             $table->text('header_image')->nullable();//Peut-être trop tot pour un feature comme ça, mais c'est quand même basique.
 
             // Réseaux sociaux
@@ -37,8 +37,6 @@ class CreateOrganisationsTable extends Migration
             // Compétence(s)
             // Occupation(s)
             // Organisation(s)
-
-
 
             $table->timestamps();
         });
