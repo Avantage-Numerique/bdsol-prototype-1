@@ -18,23 +18,23 @@
             @if (!$loop->first && $jump_line)
                 <br>
             @endif
+            @if (isset($address->$field))
+                @if ((is_int($address->$field) || is_string($address->$field)))
+                    {{$address->$field ?? ''}}
+                @endif
 
-            @if (is_int($address->$field) || is_string(($address->$field)))
-                {{$address->$field ?? ''}}
+                @if (is_array($address->$field))
+                    @foreach($field as $key => $subfield)
+                        {{$key}} : {{$subfield}}
+                    @endforeach
+                @endif
+
+                @if (is_object($address->$field))
+                    @foreach($address->$field as $key => $subfield)
+                        {{$key}} : {{$subfield}}
+                    @endforeach
+                @endif
             @endif
-
-            @if (is_array($address->$field))
-                @foreach($field as $key => $subfield)
-                    {{$key}} : {{$subfield}}
-                @endforeach
-            @endif
-
-            @if (is_object($address->$field))
-                @foreach($address->$field as $key => $subfield)
-                    {{$key}} : {{$subfield}}
-                @endforeach
-            @endif
-
         @endforeach
     </address>
 @endif

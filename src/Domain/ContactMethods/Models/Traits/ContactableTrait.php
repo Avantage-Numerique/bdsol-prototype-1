@@ -24,6 +24,9 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
  */
 trait ContactableTrait
 {
+
+    public $all_contact_methods_raw;
+
     /**
      * Events
      */
@@ -37,8 +40,26 @@ trait ContactableTrait
     protected static function bootContactableTrait()
     {
         self::deleting(function ($model) {
-            ray($model);
             $model->contact_methods()->delete();
+        });
+
+        self::created(function ($model) {
+
+            $target_saved_methods = json_decode($model->all_contact_methods_raw);
+            foreach($target_saved_methods as $index => $method) {
+                /**
+                 * CREATE : if the contact methods doesn't exist
+                 */
+                if ($model->id !== null) {
+                    //  ##  It's new, so save the value  ##  //
+                    $model->contact_methods()->attach(
+                        $method->contact_methods,
+                        [
+                            'method_value' => $method->method_value
+                        ]
+                    );
+                }
+            }
         });
     }
 
@@ -79,6 +100,7 @@ trait ContactableTrait
         $current_saved_methods_ids = $this->contact_methods->pluck('id');
         //$current_saved_methods_name = $this->contact_methods->pluck('name', 'id');
         $current_saved_methods_value = $this->contact_methods->pluck('pivot.method_value', 'id');
+        $this->all_contact_methods_raw = $value;
 
         $target_saved_methods = json_decode($value);
         foreach($target_saved_methods as $index => $method)
@@ -106,13 +128,13 @@ trait ContactableTrait
 
             /**
              * CREATE : if the contact methods doesn't exist
+             * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
              */
             if ($this->id !== null && !$this->contact_methods->contains($method->contact_methods)) {
                 //  ##  It's new, so save the value  ##  //
                 $this->contact_methods()->attach(
                     $method->contact_methods,
                     [
-                        'model_id' => $this->id,
                         'method_value' => $method->method_value
                     ]
                 );

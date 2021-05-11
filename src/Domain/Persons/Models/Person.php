@@ -43,6 +43,7 @@ class Person extends Model
         'avatar',
         'header_image',
         'all_contact_methods',  //polymorphic relation table.
+        'all_contact_methods_raw',  //polymorphic relation table.
         'updated_at',
         'created_at'
     ];
@@ -59,7 +60,9 @@ class Person extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'all_contact_methods_raw'
+    ];
 
 
 

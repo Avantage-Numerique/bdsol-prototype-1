@@ -247,27 +247,11 @@ class PersonCrudController extends BaseCrudController
 
     public function update()
     {
-
-        /*$request = $this->crud->getRequest();
-
-        $repeatable_field = 'model_has_contact_methods';
-        $target_field = $request->get($repeatable_field);
-
-        $current_person = Person::find($this->crud->getCurrentEntry()->id);
-        $decoded_repeatable_field = json_decode($target_field);
-
-        foreach($decoded_repeatable_field as $index => $method)
-        {
-            $contact_method = $current_person->contact_methods()->attach($method->contact_methods, [
-                'method_value' => $method->method_value,
-            ]);
-        }*/
         return parent::update();
     }
 
     public function store()
     {
-        ray('In store method from controller PersonCrudController.');
         return parent::store();
     }
 }
