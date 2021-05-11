@@ -22,10 +22,9 @@ class CreatePersonsTable extends Migration
             $table->longtext('description')->nullable();
 
             // Géo
-            $table->text('address')->nullable();
+            $table->longtext('address')->nullable();
 
             // Média
-            $table->text('logo')->nullable();
             $table->text('avatar')->nullable();
             $table->text('header_image')->nullable();//Peut-être trop tot pour un feature comme ça, mais c'est quand même basique.
 

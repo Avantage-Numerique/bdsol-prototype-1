@@ -32,6 +32,12 @@ class BaseCrudController extends CrudController
         destroy as traitDelete;
     }
 
+    public $tab_info;
+    public $tab_medias;
+    public $tab_contact;
+    public $tab_parameter;
+
+
     public function setupShowOperation()
     {
         $this->_addColumns('list');
@@ -61,6 +67,10 @@ class BaseCrudController extends CrudController
 
     public function setup() {
         parent::setup();
+        $this->tab_info = __('admin.tab-info');
+        $this->tab_medias = __('admin.tab-medias');
+        $this->tab_contact = __('admin.tab-contacts');
+        $this->tab_parameters = __('admin.tab-parameters');
     }
 
     public function index()

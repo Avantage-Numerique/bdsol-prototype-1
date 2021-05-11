@@ -3,6 +3,7 @@
 namespace Domain\Organisations\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Domain\Uri\Models\Traits\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Domain\ContactMethods\Models\Traits\ContactableTrait;
 
@@ -10,6 +11,7 @@ class Organisation extends Model
 {
     use CrudTrait;
     use ContactableTrait;
+    use SluggableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -28,9 +30,9 @@ class Organisation extends Model
         'address',
         'description',
         'logo',
-        'avatar',
         'header_image',
         'all_contact_methods',  //polymorphic relation table.
+        'all_contact_methods_raw',  //polymorphic relation table.
         'updated_at',
         'created_at'
     ];

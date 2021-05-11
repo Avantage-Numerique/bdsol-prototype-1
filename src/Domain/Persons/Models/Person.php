@@ -81,7 +81,6 @@ class Person extends Model
     }
 
 
-
     /**
      * Use Backpack upload field to save the image on target storage.
      * @param $value String with base64 value.

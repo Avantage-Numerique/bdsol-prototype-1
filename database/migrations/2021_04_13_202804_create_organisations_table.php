@@ -18,8 +18,9 @@ class CreateOrganisationsTable extends Migration
 
             $table->text('name');
             $table->string('slug');
-            $table->text('legal_name');
+            $table->text('legal_name')->nullable();
             $table->longtext('description')->nullable();
+            $table->longtext('address')->nullable();
 
             // Média
             $table->text('logo')->nullable();

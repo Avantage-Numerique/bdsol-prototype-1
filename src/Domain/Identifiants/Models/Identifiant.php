@@ -19,7 +19,13 @@ class Identifiant extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'slug',
+        'base_url',
+        'connection_method',
+        'is_syncable'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 

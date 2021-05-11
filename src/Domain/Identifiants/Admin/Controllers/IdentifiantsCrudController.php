@@ -34,12 +34,7 @@ class IdentifiantsCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-        $this->crud->setFromDb(); // fields
+        $this->crud->setFromDb();
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         */
     }
 }

@@ -19,9 +19,10 @@ class CreatePlacesTable extends Migration
             $table->text('name');
             $table->string('slug');
             $table->longtext('description')->nullable();
+            $table->longtext('address')->nullable();
 
             // Média
-            $table->text('avatar')->nullable();
+            $table->text('logo')->nullable();
             $table->text('header_image')->nullable();//Peut-être trop tot pour un feature comme ça, mais c'est quand même basique.
             // Galerie de médias : images, vidéos, sons. associés à un folder ? ou autres.
 

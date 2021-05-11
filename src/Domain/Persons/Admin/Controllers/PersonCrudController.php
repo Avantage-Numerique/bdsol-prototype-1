@@ -28,6 +28,7 @@ class PersonCrudController extends BaseCrudController
 
     public function setup()
     {
+        parent::setup();
         $this->contact_method_model = $contact_method_model = ContactMethod::class;
 
         $this->crud->setModel('\Domain\Persons\Models\Person');
@@ -103,19 +104,6 @@ class PersonCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-        /*'slug',
-        'firstname',
-        'lastname',
-        'nickname',
-        'description',
-        'logo',
-        'avatar',
-        'header_image',*/
-        $tab_info = __('admin.tab-info');
-        $tab_medias = __('admin.tab-medias');
-        $tab_contact = __('admin.tab-contacts');
-        $tab_identifiants = __('admin.tab-identifiants');
-        $tab_parameters = __('admin.tab-parameters');
 
         //  ##  TAB : INFORMATION
 
@@ -126,7 +114,7 @@ class PersonCrudController extends BaseCrudController
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
-            'tab' => $tab_info,
+            'tab' => $this->tab_info,
         ]);
         $this->crud->addField([
             'name' => 'lastname',
@@ -135,7 +123,7 @@ class PersonCrudController extends BaseCrudController
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
-            'tab' => $tab_info,
+            'tab' => $this->tab_info,
         ]);
         $this->crud->addField([
             'name' => 'nickname',
@@ -144,7 +132,7 @@ class PersonCrudController extends BaseCrudController
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
-            'tab' => $tab_info,
+            'tab' => $this->tab_info,
         ]);
 
 
@@ -171,7 +159,7 @@ class PersonCrudController extends BaseCrudController
                     'attribute' => 'name', // foreign key attribute that is shown to user
                     'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
                     'select_all' => true, // show Select All and Clear buttons?
-                    'tab' => $tab_info,
+                    'tab' => $this->tab_info,
                     'wrapper' => ['class' => 'form-group col-md-4'],
                 ]
             ],
@@ -180,7 +168,7 @@ class PersonCrudController extends BaseCrudController
             'init_rows' => 0,
             'min_rows' => 0,
             'max_rows' => 0,
-            'tab' => $tab_contact,
+            'tab' => $this->tab_contact,
         ]);
 
 
@@ -191,7 +179,7 @@ class PersonCrudController extends BaseCrudController
             'name' => 'address',
             'type'=> 'address',
             'label' => __('persons.address'),
-            'tab' => $tab_info,
+            'tab' => $this->tab_info,
             // optional
             'store_as_json' => true
         ]);
@@ -200,7 +188,7 @@ class PersonCrudController extends BaseCrudController
             'name' => 'description',
             'type' => 'wysiwyg',
             'label' => __('persons.description'),
-            'tab' => $tab_info,
+            'tab' => $this->tab_info,
         ]);
 
 
@@ -216,20 +204,20 @@ class PersonCrudController extends BaseCrudController
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
-            'tab' => $tab_medias,
+            'tab' => $this->tab_medias,
         ]);
         /*$this->crud->addField([
             'name' => 'logo',
             'type' => 'image',
             'label' => __('persons.logo'),
-            'tab' => $tab_medias,
+            'tab' => $this->tab_medias,
         ]);*/
 
         $this->crud->addField([
             'name' => 'header_image',
             'type' => 'image',
             'label' => __('persons.header-image'),
-            'tab' => $tab_medias,
+            'tab' => $this->tab_medias,
         ]);
 
 
@@ -240,7 +228,7 @@ class PersonCrudController extends BaseCrudController
             'type' => 'text',
             'label' => __('admin.slug'),
             'hint' => __('admin.slug-hint'),
-            'tab' => $tab_parameters,
+            'tab' => $this->tab_parameters,
         ]);
     }
 
