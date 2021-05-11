@@ -24,6 +24,8 @@ trait ContactMethodsCrudTrait
                 'type' => 'model_function',
                 'label' => __('contact-methods.label'),
                 'function_name' => 'columnContactMethods',
+                'escaped' => false,
+                'limit' => 2000,//model_function type limit at 40 if not specified. We know html could be big sometime.
             ]);
         }
     }

@@ -171,10 +171,10 @@ trait ContactableTrait
 
     public function columnContactMethods(): string
     {
-        $return = "";
+        $return = ""; $sep = " | "; $total = $this->contact_methods->count()-1;
         foreach ($this->contact_methods as $index => $method)
         {
-            $return .= $this->getContactMethodLinkTag($method)." ";
+            $return .= $this->getContactMethodLinkTag($method).($index < $total ? $sep : "");
         }
         return $return;
     }

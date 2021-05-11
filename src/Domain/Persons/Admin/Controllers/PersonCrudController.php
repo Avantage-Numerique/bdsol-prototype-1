@@ -80,7 +80,25 @@ class PersonCrudController extends BaseCrudController
             'type' => 'text',
             'label' => __('admin.slug')
         ]);
+
+        /**
+         * From ContactMethodsCrudTrait
+         */
         $this->add_contact_methods_columns();
+
+        $this->crud->addColumn([
+            'name' => 'address',
+            'type'=> 'address',
+            'label' => __('persons.address'),
+            // optional
+            'fields' => [
+                'name' => true,
+                'administrative'=> true,
+                'country' => false,
+                'postcode' => false,
+                'latlng' => true,
+            ],
+        ]);
     }
 
     protected function _addFields($state='all')
