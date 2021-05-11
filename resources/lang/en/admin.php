@@ -14,4 +14,5 @@ return [
     'tab-medias'   => 'Medias',
     'tab-parameters'   => 'Parameters',
     'tab-contacts'   => 'Contact data',
+    'tab-identifiants'   => 'Identifiants',
 ];

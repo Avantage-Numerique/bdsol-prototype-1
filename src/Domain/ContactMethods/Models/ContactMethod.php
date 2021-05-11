@@ -25,7 +25,13 @@ class ContactMethod extends Model
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
-    // protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'base_url',
+        'link_prefix',
+        'slug'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 

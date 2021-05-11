@@ -8,6 +8,7 @@ use Domain\Persons\Admin\Requests\PersonCrudRequest as StoreRequest;
 use Domain\Persons\Admin\Requests\PersonCrudRequest as UpdateRequest;
 use Domain\Persons\Models\Person;
 use Domain\ContactMethods\Models\ContactMethod;
+use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
 
 
 /**
@@ -21,6 +22,7 @@ use Domain\ContactMethods\Models\ContactMethod;
 class PersonCrudController extends BaseCrudController
 {
     use HasUploadFields;
+    use ContactMethodsCrudTrait;
 
     public $contact_method_model;
 
@@ -78,6 +80,7 @@ class PersonCrudController extends BaseCrudController
             'type' => 'text',
             'label' => __('admin.slug')
         ]);
+        $this->add_contact_methods_columns();
     }
 
     protected function _addFields($state='all')
@@ -93,6 +96,7 @@ class PersonCrudController extends BaseCrudController
         $tab_info = __('admin.tab-info');
         $tab_medias = __('admin.tab-medias');
         $tab_contact = __('admin.tab-contacts');
+        $tab_identifiants = __('admin.tab-identifiants');
         $tab_parameters = __('admin.tab-parameters');
 
         //  ##  TAB : INFORMATION
@@ -126,21 +130,6 @@ class PersonCrudController extends BaseCrudController
         ]);
 
 
-        /*$this->crud->addField([    // Select2Multiple = n-n relationship (with pivot table)
-            'label'     => "Méthodes de contact",
-            'type'      => 'checklist',
-            'name'      => 'contact_methods', // the method that defines the relationship in your Model
-
-            // optional
-            'entity'    => 'contact_methods', // the method that defines the relationship in your Model
-            'model'     => "Domain\ContactMethods\Models\ContactMethod", // foreign key model
-            'attribute' => 'name', // foreign key attribute that is shown to user
-            'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
-            'select_all' => true, // show Select All and Clear buttons?
-            'tab' => $tab_info,
-        ]);*/
-
-
         //  ## Données de contact.
 
         $this->crud->addField([   // repeatable
@@ -170,11 +159,12 @@ class PersonCrudController extends BaseCrudController
             ],
             // optional
             'new_item_label' => 'Ajouter une méthode de contact',
-            'init_rows' => 1,
+            'init_rows' => 0,
             'min_rows' => 0,
             'max_rows' => 0,
             'tab' => $tab_contact,
         ]);
+
 
         /*
          * Algolia is killing Places. Please note that Algolia Places will stop working in May 2022
@@ -194,6 +184,7 @@ class PersonCrudController extends BaseCrudController
             'label' => __('persons.description'),
             'tab' => $tab_info,
         ]);
+
 
         //  ##  TAB : MEDIAS
 
@@ -258,7 +249,7 @@ class PersonCrudController extends BaseCrudController
 
     public function store()
     {
-
+        ray('In store method from controller PersonCrudController.');
         return parent::store();
     }
 }

@@ -9,7 +9,6 @@
 
 return [
 
-
     'entities'   => 'Entités',
     'entity'   => 'Entité',
     'persons'   => 'Personnes',
