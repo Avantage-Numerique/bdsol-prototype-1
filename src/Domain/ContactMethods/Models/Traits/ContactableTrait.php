@@ -180,11 +180,6 @@ trait ContactableTrait
         return json_encode($return_array);
     }
 
-    public function getContactMethodAttribute()
-    {
-
-    }
-
 
     /**
      * Columns functions
@@ -229,8 +224,7 @@ trait ContactableTrait
      */
     public function getContactMethodLinkTag(ContactMethod $method): string
     {
-        $link_tag = '<a href=":url" title=":title">:label</a>';
-        return __($link_tag, [
+        return __('utils.default-link-structure', [
             'url' => $method->link_prefix . $method->base_url . $method->pivot->method_value,
             'title' => $method->name." - ".$method->pivot->method_value,
             'label' => $method->name

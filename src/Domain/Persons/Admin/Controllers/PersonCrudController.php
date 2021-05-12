@@ -9,6 +9,7 @@ use Domain\Persons\Admin\Requests\PersonCrudRequest as UpdateRequest;
 use Domain\Persons\Models\Person;
 use Domain\ContactMethods\Models\ContactMethod;
 use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
+use Domain\Identifiants\Admin\Controllers\Traits\IdentifiantsCrudTrait;
 
 
 /**
@@ -23,6 +24,7 @@ class PersonCrudController extends BaseCrudController
 {
     use HasUploadFields;
     use ContactMethodsCrudTrait;
+    use IdentifiantsCrudTrait;
 
     public $contact_method_model;
 
@@ -86,6 +88,7 @@ class PersonCrudController extends BaseCrudController
          * From ContactMethodsCrudTrait
          */
         $this->add_contact_methods_columns();
+        $this->add_identifiants_columns();
 
         $this->crud->addColumn([
             'name' => 'address',

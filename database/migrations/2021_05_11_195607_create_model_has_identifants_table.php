@@ -13,7 +13,7 @@ class CreateModelHasIdentifantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_has_identifants', function (Blueprint $table) {
+        Schema::create('model_has_identifiants', function (Blueprint $table) {
 
             $table->unsignedBigInteger('identifiant_id');
             $table->string('model_type');

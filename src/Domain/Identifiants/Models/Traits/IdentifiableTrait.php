@@ -1,8 +1,9 @@
 <?php
 
-namespace Domain\ContactMethods\Models\Traits;
+namespace Domain\Identifiants\Models\Traits;
 
 use Domain\ContactMethods\Models\ContactMethod;
+use Domain\Identifiants\Models\Identifiant;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
@@ -37,29 +38,29 @@ trait IdentifiableTrait
      * @deleting : Delete the current model contact_methods saved in the pivot table.
      * @todo Add this to an observer. Check when there will be multiple event listener.
      */
-    protected static function bootContactableTrait()
+    protected static function bootIdentifiableTrait()
     {
         self::deleting(function ($model) {
-            //$model->contact_methods()->delete();
+            $model->identifiants()->delete();
         });
 
         self::created(function ($model) {
 
-            //$target_saved_methods = json_decode($model->all_contact_methods_raw);
-            //foreach($target_saved_methods as $index => $method) {
-            //    /**
-            //     * CREATE : if the contact methods doesn't exist
-            //     */
-            //    if ($model->id !== null) {
-            //        //  ##  It's new, so save the value  ##  //
-            //        $model->contact_methods()->attach(
-            //            $method->contact_methods,
-            //            [
-            //                'method_value' => $method->method_value
-            //            ]
-            //        );
-            //    }
-            //}
+            $target_saved_methods = json_decode($model->all_identifiants_raw);
+            foreach($target_saved_identifiant as $index => $identifiant) {
+                /**
+                 * CREATE : if the identifiant doesn't exist
+                 */
+                if ($model->id !== null) {
+                    //  ##  It's new, so save the value  ##  //
+                    $model->contact_methods()->attach(
+                        $identifiant->contact_methods,
+                        [
+                            'method_value' => $identifiant->model_value
+                        ]
+                    );
+                }
+            }
         });
     }
 
@@ -72,15 +73,15 @@ trait IdentifiableTrait
      * Add the n:n polymorphic relationship to the model to manage these data.
      * @return BelongsToMany
      */
-    public function contact_methods(): MorphToMany
+    public function identifiants(): MorphToMany
     {
         return $this->morphToMany(
-            'Domain\ContactMethods\Models\ContactMethod',
+            'Domain\Identifiants\Models\Identifiant',
             'model',
-            'model_has_contact_methods',
+            'model_has_identifiants',
             'model_id',
-            'contact_method_id'
-        )->withPivot('method_value');
+            'identifiant_id'
+        )->withPivot('model_value');
     }
 
 
@@ -89,53 +90,53 @@ trait IdentifiableTrait
      */
 
     /**
-     * Save the Contact methods for the model
+     * Save the identifiant for the model
      * @param $value String as Json to be decode
      */
-    public function setAllContactMethodsAttribute($value)
+    public function setAllIdentifiantsAttribute($value)
     {
         /**
          * Regroup collections for checks
          */
-        $current_saved_methods_ids = $this->contact_methods->pluck('id');
-        //$current_saved_methods_name = $this->contact_methods->pluck('name', 'id');
-        $current_saved_methods_value = $this->contact_methods->pluck('pivot.method_value', 'id');
-        $this->all_contact_methods_raw = $value;
+        $current_saved_methods_ids = $this->identifiants->pluck('id');
+        //$current_saved_methods_name = $this->identifiants->pluck('name', 'id');
+        $current_saved_methods_value = $this->identifiants->pluck('pivot.model_value', 'id');
+        $this->all_identifiants_raw = $value;
 
         $target_saved_methods = json_decode($value);
-        foreach($target_saved_methods as $index => $method)
+        foreach($target_saved_methods as $index => $identifiant)
         {
             /**
              * UPDATE : If the mehod have alreay been saved.
              */
-            if ($this->contact_methods->contains($method->contact_methods)) {
+            if ($this->identifiants->contains($identifiant->identifiants)) {
 
-                $current_value = $current_saved_methods_value[$method->contact_methods];
+                $current_value = $current_saved_methods_value[$identifiant->identifiants];
 
                 /**
                  * The method already exist, but it check if the value has changed and update it.
                  */
-                if ($current_value !== $method->method_value) {
+                if ($current_value !== $identifiant->model_value) {
 
-                    $this->contact_methods()->updateExistingPivot(
-                        $method->contact_methods,
+                    $this->identifiants()->updateExistingPivot(
+                        $identifiant->identifiants,
                         [
-                            'method_value' => $method->method_value
+                            'model_value' => $identifiant->model_value
                         ]
                     );
                 }
             }
 
             /**
-             * CREATE : if the contact methods doesn't exist
+             * CREATE : if the identifiant doesn't exist
              * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
              */
-            if ($this->id !== null && !$this->contact_methods->contains($method->contact_methods)) {
+            if ($this->id !== null && !$this->identifiants->contains($identifiant->identifiants)) {
                 //  ##  It's new, so save the value  ##  //
-                $this->contact_methods()->attach(
-                    $method->contact_methods,
+                $this->identifiants()->attach(
+                    $identifiant->identifiants,
                     [
-                        'method_value' => $method->method_value
+                        'model_value' => $identifiant->model_value
                     ]
                 );
             }
@@ -146,17 +147,17 @@ trait IdentifiableTrait
          */
         if (count($target_saved_methods) !== $current_saved_methods_value->count())
         {
-            $target_saved_methods_ids = \Arr::pluck($target_saved_methods, 'contact_methods');
+            $target_saved_methods_ids = \Arr::pluck($target_saved_methods, 'identifiants');
             $to_delete = $current_saved_methods_ids->diff($target_saved_methods_ids);
 
             /**
              *  we already check if the value changed
              */
-            foreach($to_delete as $method_id) {
+            foreach($to_delete as $identifiant_id) {
                 /**
                  *  It's new, so save the value
                  */
-                $this->contact_methods()->detach($method_id);
+                $this->identifiants()->detach($identifiant_id);
             }
         }
     }
@@ -167,22 +168,17 @@ trait IdentifiableTrait
      * (for now 2021-05-07)
      * @return false|string as JSON
      */
-    public function getAllContactMethodsAttribute()
+    public function getAllIdentifiantsAttribute()
     {
         $return_array = array();
-        foreach ($this->contact_methods as $index => $contact_method)
+        foreach ($this->identifiants as $index => $identifiant)
         {
             $return_array[] = [
-                'contact_methods' => $contact_method->id,
-                'method_value' => $contact_method->pivot->method_value,
+                'identifiant' => $identifiant->id,
+                'model_value' => $identifiant->pivot->model_value,
             ];
         }
         return json_encode($return_array);
-    }
-
-    public function getContactMethodAttribute()
-    {
-
     }
 
 
@@ -191,12 +187,12 @@ trait IdentifiableTrait
      * @return string
      */
 
-    public function columnContactMethods(): string
+    public function columnIdentifiants(): string
     {
-        $return = ""; $sep = " | "; $total = $this->contact_methods->count()-1;
-        foreach ($this->contact_methods as $index => $method)
+        $return = ""; $sep = " | "; $total = $this->identifiants->count()-1;
+        foreach ($this->identifiants as $index => $identifiants)
         {
-            $return .= $this->getContactMethodLinkTag($method).($index < $total ? $sep : "");
+            $return .= $this->getIdentifiantLinkTag($identifiants).($index < $total ? $sep : "");
         }
         return $return;
     }
@@ -206,34 +202,19 @@ trait IdentifiableTrait
      * TOOLS
      */
 
-    /**
-     * getContactMethodById
-     * Get the target method by it's id.
-     * @param $contact_method_id
-     * @return mixed
-     */
-    public function getContactMethodById($contact_method_id): ContactMethod
-    {
-        foreach ($this->contact_methods as $index => $method)
-        {
-            if ($method->id = $contact_method_id) return $method;
-        }
-    }
-
 
     /**
      * Return the link value html value
-     * @param ContactMethod $method
+     * @param ContactMethod $identifiant
      * @return string
      * @todo make that an helper or url helper add
      */
-    public function getContactMethodLinkTag(ContactMethod $method): string
+    public function getIdentifiantLinkTag(Identifiant $identifiant): string
     {
-        $link_tag = '<a href=":url" title=":title">:label</a>';
-        return __($link_tag, [
-            'url' => $method->link_prefix . $method->base_url . $method->pivot->method_value,
-            'title' => $method->name." - ".$method->pivot->method_value,
-            'label' => $method->name
+        return __('utils.default-link-structure', [
+            'url' => $identifiant->base_url . $identifiant->pivot->model_value,
+            'title' => $identifiant->name." - ".$identifiant->pivot->model_value,
+            'label' => $identifiant->name
         ]);
     }
 }

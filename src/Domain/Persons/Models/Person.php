@@ -5,6 +5,7 @@ namespace Domain\Persons\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\ContactMethods\Models\Traits\ContactableTrait;
+use Domain\Identifiants\Models\Traits\IdentifiableTrait;
 use Domain\Images\Traits\AvatarTrait;
 use Domain\Uri\Models\Traits\SluggableTrait;
 
@@ -24,6 +25,7 @@ class Person extends Model
     //use InteractsWithMedia;
     //use AvatarTrait;
     use ContactableTrait;
+    use IdentifiableTrait;
 
     protected $table = 'persons';
 
