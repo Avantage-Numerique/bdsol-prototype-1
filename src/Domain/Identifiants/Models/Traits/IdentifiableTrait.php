@@ -46,21 +46,27 @@ trait IdentifiableTrait
 
         self::created(function ($model) {
 
-            $target_saved_methods = json_decode($model->all_identifiants_raw);
-            foreach($target_saved_identifiant as $index => $identifiant) {
-                /**
-                 * CREATE : if the identifiant doesn't exist
-                 */
-                if ($model->id !== null) {
-                    //  ##  It's new, so save the value  ##  //
-                    $model->contact_methods()->attach(
-                        $identifiant->contact_methods,
-                        [
-                            'method_value' => $identifiant->model_value
-                        ]
-                    );
+            $target_saved_identifiant = json_decode($model->all_identifiants);
+
+            if (is_array($target_saved_identifiant))
+            {
+                foreach($target_saved_identifiant as $index => $identifiant)
+                {
+                    /**
+                     * CREATE : if the identifiant doesn't exist
+                     */
+                    if ($model->id !== null) {
+                        //  ##  It's new, so save the value  ##  //
+                        $model->identifiants()->attach(
+                            $identifiant->identifiants,
+                            [
+                                'model_value' => $identifiant->identifiant_value
+                            ]
+                        );
+                    }
                 }
             }
+
         });
     }
 
@@ -104,41 +110,45 @@ trait IdentifiableTrait
         $this->all_identifiants_raw = $value;
 
         $target_saved_methods = json_decode($value);
-        foreach($target_saved_methods as $index => $identifiant)
-        {
-            /**
-             * UPDATE : If the mehod have alreay been saved.
-             */
-            if ($this->identifiants->contains($identifiant->identifiants)) {
 
-                $current_value = $current_saved_methods_value[$identifiant->identifiants];
+        if (is_array($target_saved_methods))
+        {
+            foreach($target_saved_methods as $index => $identifiant)
+            {
+                /**
+                 * UPDATE : If the mehod have alreay been saved.
+                 */
+                if ($this->identifiants->contains($identifiant->identifiants)) {
+
+                    $current_value = $current_saved_methods_value[$identifiant->identifiants];
+
+                    /**
+                     * The method already exist, but it check if the value has changed and update it.
+                     */
+                    if ($current_value !== $identifiant->model_value) {
+
+                        $this->identifiants()->updateExistingPivot(
+                            $identifiant->identifiants,
+                            [
+                                'model_value' => $identifiant->identifiant_value
+                            ]
+                        );
+                    }
+                }
 
                 /**
-                 * The method already exist, but it check if the value has changed and update it.
+                 * CREATE : if the identifiant doesn't exist
+                 * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
                  */
-                if ($current_value !== $identifiant->model_value) {
-
-                    $this->identifiants()->updateExistingPivot(
+                if ($this->id !== null && !$this->identifiants->contains($identifiant->identifiants)) {
+                    //  ##  It's new, so save the value  ##  //
+                    $this->identifiants()->attach(
                         $identifiant->identifiants,
                         [
-                            'model_value' => $identifiant->model_value
+                            'model_value' => $identifiant->identifiant_value
                         ]
                     );
                 }
-            }
-
-            /**
-             * CREATE : if the identifiant doesn't exist
-             * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
-             */
-            if ($this->id !== null && !$this->identifiants->contains($identifiant->identifiants)) {
-                //  ##  It's new, so save the value  ##  //
-                $this->identifiants()->attach(
-                    $identifiant->identifiants,
-                    [
-                        'model_value' => $identifiant->model_value
-                    ]
-                );
             }
         }
 
@@ -173,9 +183,10 @@ trait IdentifiableTrait
         $return_array = array();
         foreach ($this->identifiants as $index => $identifiant)
         {
+            ray($identifiant);
             $return_array[] = [
-                'identifiant' => $identifiant->id,
-                'model_value' => $identifiant->pivot->model_value,
+                'identifiants' => $identifiant->id,
+                'identifiant_value' => $identifiant->pivot->model_value,
             ];
         }
         return json_encode($return_array);

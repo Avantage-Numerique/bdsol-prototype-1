@@ -14,7 +14,6 @@ namespace Domain\Identifiants\Admin\Controllers\Traits;
  */
 trait IdentifiantsCrudTrait
 {
-
     public function add_identifiants_columns()
     {
         if( isset($this->crud))
@@ -22,12 +21,11 @@ trait IdentifiantsCrudTrait
             $this->crud->addColumn([
                 'name' => 'identifiants',
                 'type' => 'model_function',
-                'label' => __('identifiants.label'),
+                'label' => __('identifiants.identifiants'),
                 'function_name' => 'columnIdentifiants',
                 'escaped' => false,
                 'limit' => 2000,//model_function type limit at 40 if not specified. We know html could be big sometime.
             ]);
         }
     }
-
 }

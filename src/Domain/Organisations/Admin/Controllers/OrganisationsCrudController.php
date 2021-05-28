@@ -38,28 +38,17 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addColumn([
             'name' => 'logo',
             'type' => 'image',
-            'label' => __('organisations.avatar')
+            'label' => __('admin.avatar')
         ]);
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
-            'label' => __('organisations.name')
+            'label' => __('admin.name')
         ]);
         $this->crud->addColumn([
             'name' => 'legal_name',
             'type' => 'text',
-            'label' => __('organisations.legal-name')
-        ]);
-
-        $this->crud->addColumn([
-            'name' => 'name',
-            'type' => 'text',
-            'label' => __('organisations.name')
-        ]);
-        $this->crud->addColumn([
-            'name' => 'legal_name',
-            'type' => 'text',
-            'label' => __('organisations.legal-name')
+            'label' => __('admin.legal-name')
         ]);
 
         $this->crud->addColumn([
@@ -76,7 +65,7 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addColumn([
             'name' => 'address',
             'type'=> 'address',
-            'label' => __('organisations.address'),
+            'label' => __('admin.address'),
             // optional
             'fields' => [
                 'name' => true,
@@ -96,7 +85,7 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'name',
             'type' => 'text',
-            'label' => __('organisations.name'),
+            'label' => __('admin.name'),
             'wrapper'   => [
                 'class'      => 'form-group col-md-6'
             ],
@@ -105,7 +94,7 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'legal_name',
             'type' => 'text',
-            'label' => __('organisations.legal-name'),
+            'label' => __('admin.legal-name'),
             'wrapper'   => [
                 'class'      => 'form-group col-md-6'
             ],
@@ -118,7 +107,7 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'address',
             'type'=> 'address',
-            'label' => __('organisations.address'),
+            'label' => __('admin.address'),
             'tab' => $this->tab_info,
             // optional
             'store_as_json' => true
@@ -127,7 +116,7 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'description',
             'type' => 'wysiwyg',
-            'label' => __('organisations.description'),
+            'label' => __('admin.description'),
             'tab' => $this->tab_info,
         ]);
 
@@ -170,14 +159,14 @@ class OrganisationsCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'logo',
             'type' => 'image',
-            'label' => __('organisations.logo'),
+            'label' => __('admin.logo'),
             'tab' => $this->tab_medias,
         ]);
 
         $this->crud->addField([
             'name' => 'header_image',
             'type' => 'image',
-            'label' => __('organisations.header-image'),
+            'label' => __('admin.header-image'),
             'tab' => $this->tab_medias,
         ]);
 

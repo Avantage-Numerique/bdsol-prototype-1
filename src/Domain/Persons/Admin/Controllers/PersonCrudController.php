@@ -162,7 +162,6 @@ class PersonCrudController extends BaseCrudController
                     'attribute' => 'name', // foreign key attribute that is shown to user
                     'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
                     'select_all' => true, // show Select All and Clear buttons?
-                    'tab' => $this->tab_info,
                     'wrapper' => ['class' => 'form-group col-md-4'],
                 ]
             ],
@@ -172,6 +171,41 @@ class PersonCrudController extends BaseCrudController
             'min_rows' => 0,
             'max_rows' => 0,
             'tab' => $this->tab_contact,
+        ]);   //  ## Données de contact.
+
+
+        //  ## Données Identifiant.
+
+        $this->crud->addField([   // repeatable
+            'name'  => 'all_identifiants',
+            'label' => 'Identifiant pour la personne',
+            'type'  => 'repeatable',
+            'fields' => [
+                [
+                    'name'    => 'identifiant_value',
+                    'type'    => 'text',
+                    'label'   => 'Votre numéro ou identifiants',
+                    'wrapper' => ['class' => 'form-group col-md-8'],
+                ],[
+                    'label'     => "Identifiant",
+                    'type'      => 'select2',
+                    'name'      => 'identifiants', // the method that defines the relationship in your Model
+
+                    // optional
+                    'entity'    => 'identifiants', // the method that defines the relationship in your Model
+                    'model'     => "Domain\Identifiants\Models\Identifiant", // foreign key model
+                    'attribute' => 'name', // foreign key attribute that is shown to user
+                    'pivot'     => true, // on create&update, do you need to add/delete pivot table entries?
+                    'select_all' => true, // show Select All and Clear buttons?
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ]
+            ],
+            // optional
+            'new_item_label' => 'Ajouter un identifiant',
+            'init_rows' => 0,
+            'min_rows' => 0,
+            'max_rows' => 0,
+            'tab' => $this->tab_identifiants,
         ]);
 
 
@@ -181,7 +215,7 @@ class PersonCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'address',
             'type'=> 'address',
-            'label' => __('persons.address'),
+            'label' => __('admin.address'),
             'tab' => $this->tab_info,
             // optional
             'store_as_json' => true
@@ -190,7 +224,7 @@ class PersonCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'description',
             'type' => 'wysiwyg',
-            'label' => __('persons.description'),
+            'label' => __('admin.description'),
             'tab' => $this->tab_info,
         ]);
 
@@ -200,7 +234,7 @@ class PersonCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'avatar',
             'type' => 'image',
-            'label' => __('persons.avatar'),
+            'label' => __('admin.avatar'),
             'upload' => true,
             'prefix' => 'persons/avatars/',
             'disk'   => 'public',

@@ -22,9 +22,10 @@ class ProjectsCrudController extends BaseCrudController
      */
     public function setup()
     {
+        parent::setup();
         $this->crud->setModel(\Domain\Projects\Models\Project::class);
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/projets');
-        $this->crud->setEntityNameStrings('project', 'projects');
+        $this->crud->setEntityNameStrings('projet', 'projets');
     }
 
     protected function _addColumns($state='all')
@@ -32,45 +33,40 @@ class ProjectsCrudController extends BaseCrudController
         $this->crud->addColumn([
             'name' => 'avatar',
             'type' => 'image',
-            'label' => __('organisations.avatar')
+            'label' => __('admin.avatar'),
         ]);
 
         $this->crud->addColumn([
             'name' => 'name',
             'type' => 'text',
-            'label' => __('admin.name')
+            'label' => __('admin.name'),
         ]);
         $this->crud->addColumn([
             'name' => 'slug',
             'type' => 'text',
-            'label' => __('admin.slug')
+            'label' => __('admin.slug'),
         ]);
     }
 
     protected function _addFields($state='all')
     {
-
-        $tab_info = __('admin.tab-info');
-        $tab_medias = __('admin.tab-medias');
-        $tab_parameters = __('admin.tab-parameters');
-
         //  ##  TAB : INFORMATION
 
         $this->crud->addField([
             'name' => 'name',
             'type' => 'text',
-            'label' => __('organisations.name'),
+            'label' => __('admin.name'),
             'wrapper'   => [
                 'class'      => 'form-group col-md-6'
             ],
-            'tab' => $tab_info,
+            'tab' => $this->tab_info,
         ]);
 
         $this->crud->addField([
             'name' => 'description',
             'type' => 'wysiwyg',
-            'label' => __('organisations.description'),
-            'tab' => $tab_info,
+            'label' => __('admin.description'),
+            'tab' => $this->tab_info,
         ]);
 
         //  ##  TAB : MEDIAS
@@ -78,18 +74,18 @@ class ProjectsCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'avatar',
             'type' => 'image',
-            'label' => __('organisations.avatar'),
+            'label' => __('admin.avatar'),
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
-            'tab' => $tab_medias,
+            'tab' => $this->tab_medias,
         ]);
 
         $this->crud->addField([
             'name' => 'header_image',
             'type' => 'image',
-            'label' => __('organisations.header-image'),
-            'tab' => $tab_medias,
+            'label' => __('admin.header-image'),
+            'tab' => $this->tab_medias,
         ]);
 
 
@@ -100,7 +96,7 @@ class ProjectsCrudController extends BaseCrudController
             'type' => 'text',
             'label' => __('admin.slug'),
             'hint' => __('admin.slug-hint'),
-            'tab' => $tab_parameters,
+            'tab' => $this->tab_parameters,
         ]);
     }
 }

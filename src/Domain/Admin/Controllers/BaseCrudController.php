@@ -35,7 +35,8 @@ class BaseCrudController extends CrudController
     public $tab_info;
     public $tab_medias;
     public $tab_contact;
-    public $tab_parameter;
+    public $tab_identifiants;
+    public $tab_parameters;
 
 
     public function setupShowOperation()
@@ -70,6 +71,7 @@ class BaseCrudController extends CrudController
         $this->tab_info = __('admin.tab-info');
         $this->tab_medias = __('admin.tab-medias');
         $this->tab_contact = __('admin.tab-contacts');
+        $this->tab_identifiants = __('admin.tab-identifiants');
         $this->tab_parameters = __('admin.tab-parameters');
     }
 

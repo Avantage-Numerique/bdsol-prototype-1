@@ -15,4 +15,12 @@ return [
     'tab-parameters'   => 'Parameters',
     'tab-contacts'   => 'Contact data',
     'tab-identifiants'   => 'Identifiants',
+
+    'name'   => 'Name',
+    'legal-name' => 'Legal name',
+    'description' => 'Description',
+    'address' => 'Address',
+    'logo' => 'Logo',
+    'avatar' => 'Avatar',
+    'header-image' => 'Header image',
 ];

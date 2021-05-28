@@ -18,7 +18,7 @@ class AddMarcAndreUser extends Seeder
             $target_user = User::create([
                 'name' => 'Marc-André Martin',
                 'email' => 'marcandre@mamarmite.com',
-                'password' => 'h44VGW@K^8>FBW?iY])k0RRm+',
+                'password' => \Hash::make('h44VGW@K^8>FBW?iY])k0RRm+')
             ]);
             //$target_user = User::where('email','marcandre@mamarmite.com')->first();
             $target_user->assignRole('admin');

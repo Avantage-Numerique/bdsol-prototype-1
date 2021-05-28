@@ -22,6 +22,7 @@ class SkillsCrudController extends BaseCrudController
      */
     public function setup()
     {
+        parent::setup();
         $this->crud->setModel(\Domain\Skills\Models\Skill::class);
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/competences');
         $this->crud->setEntityNameStrings('Compétences', 'Compétences');
@@ -34,12 +35,34 @@ class SkillsCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-        $this->crud->setFromDb(); // fields
+        //  ##  TAB : INFORMATION
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         */
+        $this->crud->addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => __('admin.name'),
+            'wrapper'   => [
+                'class'      => 'form-group col-md-6'
+            ],
+            'tab' => $this->tab_info,
+        ]);
+
+        $this->crud->addField([
+            'name' => 'description',
+            'type' => 'wysiwyg',
+            'label' => __('admin.description'),
+            'tab' => $this->tab_info,
+        ]);
+
+
+        //  ##  TAB : PARAMÈTRES
+
+        $this->crud->addField([
+            'name' => 'slug',
+            'type' => 'text',
+            'label' => __('admin.slug'),
+            'hint' => __('admin.slug-hint'),
+            'tab' => $this->tab_parameters,
+        ]);
     }
 }
