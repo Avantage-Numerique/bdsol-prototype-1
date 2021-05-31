@@ -5,8 +5,9 @@ namespace Domain\Projects\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Domain\ContactMethods\Models\Traits\ContactableTrait;
 use Domain\Identifiants\Models\Traits\IdentifiableTrait;
+use Domain\Projects\Models\Traits\FinalitableTrait;
 use Domain\Uri\Models\Traits\SluggableTrait;
-use Domain\Projects\Models\Finality;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -15,6 +16,7 @@ class Project extends Model
     use SluggableTrait;
     use ContactableTrait;
     use IdentifiableTrait;
+    use FinalitableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -32,13 +34,15 @@ class Project extends Model
         'description',
         'logo',
         'header_image',
-        'all_contact_methods',  //polymorphic relation table.
-        'all_contact_methods_raw',  //polymorphic relation table.
-        'all_identifiants',  //polymorphic relation table.
-        'all_identifiants_raw',  //polymorphic relation table.
+        'all_contact_methods',
+        'all_contact_methods_raw',
+        'all_identifiants',
+        'all_identifiants_raw',
+        'all_finalities',
+        'all_finalities_raw',
         'updated_at',
         'created_at',
-        'finality_id',
+        //'finality_id',
     ];
     // protected $hidden = [];
     // protected $dates = [];
@@ -50,7 +54,8 @@ class Project extends Model
      */
     protected $casts = [
         'all_contact_methods_raw',
-        'all_identifiants_raw'
+        'all_identifiants_raw',
+        'all_finalities_raw'
     ];
 
 
@@ -59,9 +64,4 @@ class Project extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function finality() {
-        return $this->belongsTo(Finality::class);
-    }
-
 }

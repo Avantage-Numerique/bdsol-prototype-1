@@ -7,7 +7,8 @@ use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
 use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
 use Domain\Identifiants\Admin\Controllers\Traits\IdentifiantsCrudTrait;
-use  Domain\Projects\Models\Finality;
+use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
+use Domain\Projects\Models\Finality;
 
 /**
  * ProjectCrudController
@@ -22,6 +23,7 @@ class ProjectsCrudController extends BaseCrudController
     use HasUploadFields;
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
+    use FinalitableCrudTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -56,20 +58,12 @@ class ProjectsCrudController extends BaseCrudController
             'label' => __('admin.slug'),
         ]);
 
-        $this->crud->addColumn([
-            'name' => 'finality_id',
-            'type' => 'select',
-            'label' => __('projects.finality'),
-            'entity' => 'finality',
-            'attribute' => 'name',
-            'model' => '\Domain\Projects\Models\Finality',
-        ]);
-
         /**
          * From ContactMethodsCrudTrait
          */
         $this->add_contact_methods_columns();
         $this->add_identifiants_columns();
+        $this->add_finalitable_columns();
 
     }
 
@@ -88,25 +82,15 @@ class ProjectsCrudController extends BaseCrudController
         ]);
 
         $this->crud->addField([
-            'label' => __('projects.finality'),
-            'type' => 'select2',
-            'name' => 'finality_id',
-            'entity' => 'finality',
-            'model' => '\Domain\Projects\Models\Finality',
-            'attribute' => 'name',
-            'default' => null,
-            'wrapper'   => [
-                'class' => 'form-group col-md-6'
-            ],
-            'tab' => $this->tab_info,
-        ]);
-
-        $this->crud->addField([
             'name' => 'description',
             'type' => 'wysiwyg',
             'label' => __('admin.description'),
             'tab' => $this->tab_info,
         ]);
+
+
+        //  ## Données Finalities.
+        $this->add_finalities_fields();
 
 
         //  ## Données de contact.

@@ -183,7 +183,6 @@ trait IdentifiableTrait
         $return_array = array();
         foreach ($this->identifiants as $index => $identifiant)
         {
-            ray($identifiant);
             $return_array[] = [
                 'identifiants' => $identifiant->id,
                 'identifiant_value' => $identifiant->pivot->model_value,

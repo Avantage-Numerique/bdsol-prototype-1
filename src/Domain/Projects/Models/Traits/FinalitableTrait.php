@@ -4,6 +4,7 @@ namespace Domain\Projects\Models\Traits;
 
 use Domain\Projects\Models\Finality;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  *
@@ -26,6 +27,7 @@ trait FinalitableTrait
 {
 
     public $all_finalities_raw;
+    public $model_relation_method;
 
     /**
      * Events
@@ -42,13 +44,14 @@ trait FinalitableTrait
             $model->finalities()->delete();
         });
 
+        /**
+         * ON CREATED : Assume that isn't saved on create.
+         */
         self::created(function ($model) {
 
             $target_saved_methods = json_decode($model->all_finalities_raw);
             foreach($target_saved_methods as $index => $method) {
-                /**
-                 * CREATE : if the contact methods doesn't exist
-                 */
+
                 if ($model->id !== null) {
                     //  ##  It's new, so save the value  ##  //
                     $model->contact_methods()->attach(
@@ -91,39 +94,39 @@ trait FinalitableTrait
      * setAllFinalitiesAttribute
      * Save the Contact methods for the model
      * @param $value String as Json to be decode
+     * @todo Simplify this by separate the save, update and delete parts. Use that in created (save).  It make the loop clearer to read.
      */
     public function setAllFinalitiesAttribute($value)
     {
-        /**
-         * Regroup collections for checks
-         */
-        $current_saved_methods_ids = $this->finalities->pluck('id');
+        $model_method = 'finalities';
+        $form_param = 'finality';
 
-        //add finalities functions.
+        //Regroup collections for checks
+        $current_ids = $this->$model_method->pluck('id');
 
-        //$current_saved_methods_name = $this->contact_methods->pluck('name', 'id');
-        $current_saved_methods_value = $this->finalities->pluck('pivot.method_value', 'id');
-        $this->all_contact_methods_raw = $value;
+        $current_values = $this->$model_method->pluck('pivot.model_value', 'id');
 
-        $target_saved_methods = json_decode($value);
-        foreach($target_saved_methods as $index => $method)
+        //  Save the value in a property for the created event.
+        $this->all_finalities_raw = $value;
+
+        $target_saved = json_decode($value);
+        foreach($target_saved as $index => $entry)
         {
             /**
              * UPDATE : If the mehod have alreay been saved.
              */
-            if ($this->finalities->contains($method->contact_methods)) {
+            if ($this->$model_method->contains($entry->$model_method)) {
 
-                $current_value = $current_saved_methods_value[$method->contact_methods];
-
+                $current_value = $current_values[$entry->$model_method];
                 /**
                  * The method already exist, but it check if the value has changed and update it.
                  */
-                if ($current_value !== $method->method_value) {
-
+                if ($current_value !== $entry->finality_value) {
+                    $form_property = $form_param.'_value';
                     $this->finalities()->updateExistingPivot(
-                        $method->finalities,
+                        $entry->$model_method,
                         [
-                            'method_value' => $method->finality_value
+                            'model_value' => $entry->$form_property   //finality_value
                         ]
                     );
                 }
@@ -133,12 +136,14 @@ trait FinalitableTrait
              * CREATE : if the contact methods doesn't exist
              * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
              */
-            if ($this->id !== null && !$this->finalities->contains($method->contact_methods)) {
+            if ($this->id !== null && !$this->$model_method->contains($entry->$model_method))
+            {
+                $form_property = $form_param.'_value';
                 //  ##  It's new, so save the value  ##  //
-                $this->finalities()->attach(
-                    $method->finalities,
+                $this->$model_method()->attach(
+                    $entry->$model_method,
                     [
-                        'model_value' => $method->finality_value
+                        'model_value' => $entry->$form_property
                     ]
                 );
             }
@@ -147,19 +152,16 @@ trait FinalitableTrait
         /**
          * DELETE methods that isn't there anymore.
          */
-        if (count($target_saved_methods) !== $current_saved_methods_value->count())
+        if (count($target_saved) !== $current_values->count())
         {
-            $target_saved_methods_ids = \Arr::pluck($target_saved_methods, 'contact_methods');
-            $to_delete = $current_saved_methods_ids->diff($target_saved_methods_ids);
+            $target_saved_ids = \Arr::pluck($target_saved, $model_method);
+            $to_delete = $current_ids->diff($target_saved_ids);
 
-            /**
-             *  we already check if the value changed
-             */
-            foreach($to_delete as $finality_id) {
-                /**
-                 *  It's new, so save the value
-                 */
-                $this->finalities()->detach($finality_id);
+            //we already check if the value changed
+            foreach($to_delete as $id)
+            {
+                //  It's new, so save the value
+                $this->$model_method()->detach($id);
             }
         }
     }
@@ -172,15 +174,32 @@ trait FinalitableTrait
      */
     public function getAllFinalitiesAttribute()
     {
-        $return_array = array();
-        foreach ($this->finalities as $index => $finality)
+        return $this->_return_attribute_to_json('finalities', 'finality');
+    }
+
+
+    /**
+     * @param $property String The relation methods as property to get the polymorphic releation values.
+     * @param $form_param_name the value of the repeatable field.
+     * @return string JSON or empty of not a properties.
+     * @exemple
+     * Works only for 2 values per row for now. Need to implement a map function to map the properties in the a more complex polymorphic relation.
+     */
+    protected function _return_attribute_to_json($property, $form_param_name): string
+    {
+        if (isset($this->$property))
         {
-            $return_array[] = [
-                'finality' => $finality->id,
-                'finality_value' => $finality->pivot->model_value,
-            ];
+            $return_array = array();
+            foreach ($this->$property as $index => $target_property)
+            {
+                $return_array[] = [
+                    $property => $target_property->id,
+                    $form_param_name.'_value' => $target_property->pivot->model_value,
+                ];
+            }
+            return json_encode($return_array);
         }
-        return json_encode($return_array);
+        return "";
     }
 
 
@@ -188,36 +207,28 @@ trait FinalitableTrait
      * Columns functions
      * @return string
      */
-
-    public function columnContactMethods(): string
+    public function columnFinalities(): string
     {
-        $return = ""; $sep = " | "; $total = $this->finalities->count()-1;
-        foreach ($this->finalities as $index => $finality)
-        {
-            $return .= $this->getfinalityLinkTag($finality).($index < $total ? $sep : "");
-        }
-        return $return;
+        return $this->_getRepeatableColumn('finalities');
     }
 
 
-    /**
-     * TOOLS
-     */
-
-    /**
-     * getfinalityById
-     * Get the target method by it's id.
-     * @param $contact_method_id
-     * @return mixed
-     */
-    public function getfinalityById($finality_id): Finality
+    protected function _getRepeatableColumn($property): string
     {
-        foreach ($this->finalities as $index => $finality)
+        if (isset($this->$property))
         {
-            if ($finality->id = $finality_id) return $finality;
+            $return = ""; $sep = " | "; $total = $this->$property->count() - 1;
+            foreach ($this->$property as $index => $property_value)
+            {
+                $return .= $this->getAsLinkTag($property_value).($index < $total ? $sep : "");
+            }
+            return $return;
         }
+        return "";
     }
 
+
+    //  TOOLS
 
     /**
      * Return the link value html value
@@ -225,8 +236,8 @@ trait FinalitableTrait
      * @return string
      * @todo make that an helper or url helper add
      */
-    public function getfinalityLinkTag(Finality $finality): string
+    public function getAsLinkTag(Model $model): string
     {
-        return $finality->name;
+        return $model->name;
     }
 }

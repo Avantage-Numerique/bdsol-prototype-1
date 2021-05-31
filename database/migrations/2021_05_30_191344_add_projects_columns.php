@@ -13,9 +13,9 @@ class AddProjectsColumns extends Migration
      */
     public function up()
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->unsignedBigInteger('finality_id')->nullable();
-        });
+        ///Schema::table('projects', function (Blueprint $table) {
+        ///    $table->unsignedBigInteger('finality_id')->nullable();
+        ///});
     }
 
     /**
@@ -25,8 +25,8 @@ class AddProjectsColumns extends Migration
      */
     public function down()
     {
-        Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('finality_id');
-        });
+        //Schema::table('projects', function (Blueprint $table) {
+        //    $table->dropColumn('finality_id');
+        //});
     }
 }
