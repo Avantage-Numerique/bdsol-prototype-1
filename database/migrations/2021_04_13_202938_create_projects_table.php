@@ -20,7 +20,7 @@ class CreateProjectsTable extends Migration
             $table->longtext('description')->nullable();
 
             // Média
-            $table->text('avatar')->nullable();
+            $table->text('logo')->nullable();
             $table->text('header_image')->nullable();//Peut-être trop tot pour un feature comme ça, mais c'est quand même basique.
             // Galerie de médias : images, vidéos, sons. associés à un folder ? ou autres.
 

@@ -32,7 +32,7 @@ class Identifiant extends Model
 
 
     /**
-     * Link contact_methods to persons with model_has_contact_methods table.
+     * Link identifiants to persons with model_has_identifiants table.
      * no params
      * @return BelongsToMany the n:n polymorphic relation
      */
@@ -40,6 +40,40 @@ class Identifiant extends Model
     {
         return $this->morphedByMany(
             'Domain\Persons\Models\Person',
+            'model',
+            'model_has_identifiants',
+            'identifiant_id',
+            'model_id'
+        )->withPivot('model_value');
+    }
+
+
+    /**
+     * Link identifiants to organisations with model_has_identifiants table.
+     * no params
+     * @return BelongsToMany the n:n polymorphic relation
+     */
+    public function organisations(): BelongsToMany
+    {
+        return $this->morphedByMany(
+            'Domain\Organisations\Models\Organisation',
+            'model',
+            'model_has_identifiants',
+            'identifiant_id',
+            'model_id'
+        )->withPivot('model_value');
+    }
+
+
+    /**
+     * Link identifiants to persons with model_has_identifiants table.
+     * no params
+     * @return BelongsToMany the n:n polymorphic relation
+     */
+    public function projects(): BelongsToMany
+    {
+        return $this->morphedByMany(
+            'Domain\Projects\Models\Project',
             'model',
             'model_has_identifiants',
             'identifiant_id',

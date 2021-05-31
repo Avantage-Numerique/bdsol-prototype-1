@@ -3,7 +3,11 @@
 namespace Domain\Projects\Admin\Controllers;
 
 use Backpack\CRUD\app\Http\Controllers\CrudController;
+use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
+use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
+use Domain\Identifiants\Admin\Controllers\Traits\IdentifiantsCrudTrait;
+use  Domain\Projects\Models\Finality;
 
 /**
  * ProjectCrudController
@@ -15,6 +19,10 @@ use Domain\Admin\Controllers\BaseCrudController;
  */
 class ProjectsCrudController extends BaseCrudController
 {
+    use HasUploadFields;
+    use ContactMethodsCrudTrait;
+    use IdentifiantsCrudTrait;
+
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      *
@@ -31,9 +39,9 @@ class ProjectsCrudController extends BaseCrudController
     protected function _addColumns($state='all')
     {
         $this->crud->addColumn([
-            'name' => 'avatar',
+            'name' => 'logo',
             'type' => 'image',
-            'label' => __('admin.avatar'),
+            'label' => __('admin.logo'),
         ]);
 
         $this->crud->addColumn([
@@ -41,11 +49,28 @@ class ProjectsCrudController extends BaseCrudController
             'type' => 'text',
             'label' => __('admin.name'),
         ]);
+
         $this->crud->addColumn([
             'name' => 'slug',
             'type' => 'text',
             'label' => __('admin.slug'),
         ]);
+
+        $this->crud->addColumn([
+            'name' => 'finality_id',
+            'type' => 'select',
+            'label' => __('projects.finality'),
+            'entity' => 'finality',
+            'attribute' => 'name',
+            'model' => '\Domain\Projects\Models\Finality',
+        ]);
+
+        /**
+         * From ContactMethodsCrudTrait
+         */
+        $this->add_contact_methods_columns();
+        $this->add_identifiants_columns();
+
     }
 
     protected function _addFields($state='all')
@@ -63,18 +88,41 @@ class ProjectsCrudController extends BaseCrudController
         ]);
 
         $this->crud->addField([
+            'label' => __('projects.finality'),
+            'type' => 'select2',
+            'name' => 'finality_id',
+            'entity' => 'finality',
+            'model' => '\Domain\Projects\Models\Finality',
+            'attribute' => 'name',
+            'default' => null,
+            'wrapper'   => [
+                'class' => 'form-group col-md-6'
+            ],
+            'tab' => $this->tab_info,
+        ]);
+
+        $this->crud->addField([
             'name' => 'description',
             'type' => 'wysiwyg',
             'label' => __('admin.description'),
             'tab' => $this->tab_info,
         ]);
 
+
+        //  ## Données de contact.
+        $this->add_contact_methods_fields();   //  ## Données de contact.
+
+
+        //  ## Données Identifiant.
+        $this->add_identifiants_fields();
+
+
         //  ##  TAB : MEDIAS
 
         $this->crud->addField([
-            'name' => 'avatar',
+            'name' => 'logo',
             'type' => 'image',
-            'label' => __('admin.avatar'),
+            'label' => __('admin.logo'),
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
             ],
@@ -87,7 +135,6 @@ class ProjectsCrudController extends BaseCrudController
             'label' => __('admin.header-image'),
             'tab' => $this->tab_medias,
         ]);
-
 
         //  ##  TAB : PARAMÈTRES
 

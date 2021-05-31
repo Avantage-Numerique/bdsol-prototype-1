@@ -46,7 +46,7 @@ trait IdentifiableTrait
 
         self::created(function ($model) {
 
-            $target_saved_identifiant = json_decode($model->all_identifiants);
+            $target_saved_identifiant = json_decode($model->all_identifiants_raw);
 
             if (is_array($target_saved_identifiant))
             {
@@ -125,7 +125,7 @@ trait IdentifiableTrait
                     /**
                      * The method already exist, but it check if the value has changed and update it.
                      */
-                    if ($current_value !== $identifiant->model_value) {
+                    if ($current_value !== $identifiant->identifiant_value) {
 
                         $this->identifiants()->updateExistingPivot(
                             $identifiant->identifiants,
@@ -212,7 +212,6 @@ trait IdentifiableTrait
     /**
      * TOOLS
      */
-
 
     /**
      * Return the link value html value

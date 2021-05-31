@@ -3,11 +3,13 @@
 namespace Domain\Domaines\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Domain\Uri\Models\Traits\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Domaines extends Model
 {
     use CrudTrait;
+    use SluggableTrait;
 
     /*
     |--------------------------------------------------------------------------

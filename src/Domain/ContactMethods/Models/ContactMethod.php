@@ -59,6 +59,7 @@ class ContactMethod extends Model
         )->withPivot('method_value');
     }
 
+
     /**
      * Link contact_methods to organisations with model_has_contact_methods table.
      * no params
@@ -76,5 +77,19 @@ class ContactMethod extends Model
     }
 
 
-
+    /**
+     * Link contact_methods to Projects with model_has_contact_methods table.
+     * no params
+     * @return BelongsToMany the n:n polymorphic relation
+     */
+    public function projects(): BelongsToMany
+    {
+        return $this->morphedByMany(
+            'Domain\Projects\Models\Project',
+            'model',
+            'model_has_contact_methods',
+            'contact_method_id',
+            'model_id'
+        )->withPivot('method_value');
+    }
 }

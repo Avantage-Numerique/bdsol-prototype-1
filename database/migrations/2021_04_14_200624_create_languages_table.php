@@ -18,9 +18,6 @@ class CreateLanguagesTable extends Migration
             $table->text('name');
             $table->string('slug');
             $table->longtext('description')->nullable();
-            //Niveaux
-            //utilisations
-            //
 
             $table->timestamps();
         });

@@ -21,6 +21,14 @@ class DatabaseSeeder extends Seeder
             SeedIdentifiersTable::class,
             AddOccupationArtistique::class,
             AddMarcAndreUser::class,
+            AddFinalitiesValues::class,
+            AddLevelsValues::class,
+            AddMediaTypesValues::class,
+            AddEventTypesValues::class,
+            AddOperationTypesValues::class,
+            AddOrganisationTypesValues::class,
+            AddPlaceTypesValues::class,
+            AddEntityRolesValues::class,
         );
         foreach($seeders as $seeder) {
             $this->call($seeder);
