@@ -22,6 +22,9 @@ class AddMarcAndreUser extends Seeder
             ]);
             //$target_user = User::where('email','marcandre@mamarmite.com')->first();
             $target_user->assignRole('admin');
+        } else {
+            $target_first = User::where('email', 'marcandre@mamarmite.com')->first();
+            $target_first->assignRole('admin');
         }
     }
 }
