@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Admin\Models\Traits;
+namespace Domain\Projects\Models\Traits;
 
 use Domain\Projects\Models\Finality;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -23,136 +23,72 @@ use Illuminate\Database\Eloquent\Model;
  * 4. Add the field name : all_contact_methods, to the fillable arrays.
  *
  */
-trait PolymorphicRepeatableTrait
+trait ExperiencableTrait
 {
 
-    public $all_finalities_raw;//this need to move to another scope.
-
-
-    public $model_all_raw_property;//all value raw from the repeatable field.
+    public $all_experiences_raw;
     public $model_relation_method;
-    public $column_id_from_form;//relations() method name. Callable
-    public $column_value_from_form; //model_value.  Callable
-
-    protected $_column_additional_value; //String
 
     /**
      * Events
      */
 
     /**
-     * bootPolymorphicRepeatableTrait
+     * bootFinalitableTrait
      * On boot this trait, add event listence
      * @deleting : Delete the current model contact_methods saved in the pivot table.
      */
-    protected static function bootPolymorphicRepeatableTrait()
+    protected static function bootExperiencableTrait()
     {
         self::deleting(function ($model) {
-            $model->finalities()->delete();
+            $model->experiences()->delete();
         });
 
         /**
          * ON CREATED : Assume that isn't saved on create.
          */
-        self::created(function ($model)
-        {
-            self::_addRepeatableValuesToRelationTable($model);
-        });
-    }
+        self::created(function ($model) {
 
-    protected static function _addRepeatableValuesToRelationTable($model)
-    {
-        $target_saved = json_decode($model->{$model->$model_all_raw_property});
+            $target_saved_methods = json_decode($model->all_experiences_raw);
+            foreach($target_saved_methods as $index => $method) {
 
-        foreach($target_saved as $index => $model)
-        {
-            if ($model->id !== null) {
-                //  ##  It's new, so save the value  ##  //
-                $model->{$model->$model_relation_method}()->attach(
-                    $model->{$model->$column_id_from_form},
-                    [
-                        $model->_column_additional_value => $model->{$model->$column_value_from_form}
-                    ]
-                );
+                if ($model->id !== null) {
+                    //  ##  It's new, so save the value  ##  //
+                    $model->experiences()->attach(
+                        $method->experiences,
+                        [
+                            'method_value' => $method->experience_value
+                        ]
+                    );
+                }
             }
-        }
+        });
     }
 
 
     /**
      * RELATIONS
      */
-    //  Need to be added to the model.
 
-    //finalisties
-
-
+    /**
+     * Add the n:n polymorphic relationship to the model to manage these data.
+     * @return BelongsToMany
+     */
+    public function experiences(): MorphToMany
+    {
+        return $this->morphToMany(
+            'Domain\Projects\Models\Experience',
+            'model',
+            'model_has_experiences',
+            'model_id',
+            'experience_id'
+        )->withPivot('model_value');
+    }
 
 
     /**
      * MUTATORS / ACCESSORS
      */
-
-    /**
-     * _updateRepeatableFieldValues
-     * UPDATE the value for the
-     */
-    protected function _updateRepeatableFieldValues($value)
-    {
-        //$current_ids = $this->{$this->$model_relation_method}->pluck('id');   //only needed in delete method.
-        $current_values = $this
-            ->{$this->$model_relation_method}
-            ->pluck('pivot.'.$this->_column_additional_value, 'id');
-
-        if ($this
-            ->{$this->$model_relation_method}
-            ->contains($entry->{$this->$model_relation_method}))
-        {
-            $current_value = $current_values[$entry->{$this->$model_relation_method}];
-
-            // The method already exist, but it check if the value has changed and update it.
-            if ($current_value !== $entry->{$this->$column_value_from_form})
-            {
-                $this->{$this->$model_relation_method}()->updateExistingPivot(
-                    $entry->{$this->$model_relation_method},
-                    [
-                        $this->_column_additional_value => $entry->{$this->$column_value_from_form}   //like finality_value set in the repeatable field. See the repeatable CRUD trait.
-                    ]
-                );
-            }
-        }
-    }
-
-    protected function _createEntryFromRepeatableFieldValues($entry)
-    {
-        $target_saved = json_decode($model->$model_all_raw_property);
-
-        if ($model->id !== null && !$this->{$model->$model_relation_method}->contains($entry->$model_method)) {
-            //  ##  It's new, so save the value  ##  //
-            $model->{$model->$model_relation_method}()->attach(
-                $model->{$model->$column_id_from_form},
-                [
-                    $model->_column_additional_value => $model->{$model->$column_value_from_form}
-                ]
-            );
-        }
-
-        /**
-         * CREATE : if the contact methods doesn't exist
-         * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
-         */
-        if ($this->id !== null && !$this->$model_method->contains($entry->$model_method))
-        {
-            $form_property = $form_param.'_value';
-            //  ##  It's new, so save the value  ##  //
-            $this->$model_method()->attach(
-                $entry->$model_method,
-                [
-                    'model_value' => $entry->$form_property
-                ]
-            );
-        }
-    }
 
     /**
      * setAllFinalitiesAttribute
@@ -179,11 +115,12 @@ trait PolymorphicRepeatableTrait
             /**
              * UPDATE : If the mehod have alreay been saved.
              */
-            if ($this->$model_method->contains($entry->$model_method))
-            {
-                $current_value = $current_values[$entry->$model_method];
+            if ($this->$model_method->contains($entry->$model_method)) {
 
-                // The method already exist, but it check if the value has changed and update it.
+                $current_value = $current_values[$entry->$model_method];
+                /**
+                 * The method already exist, but it check if the value has changed and update it.
+                 */
                 if ($current_value !== $entry->finality_value) {
                     $form_property = $form_param.'_value';
                     $this->finalities()->updateExistingPivot(

@@ -49,15 +49,15 @@ trait FinalitableTrait
          */
         self::created(function ($model) {
 
-            $target_saved_methods = json_decode($model->all_finalities_raw);
-            foreach($target_saved_methods as $index => $method) {
+            $target_saved = json_decode($model->all_finalities_raw);
+            foreach($target_saved as $index => $model) {
 
                 if ($model->id !== null) {
                     //  ##  It's new, so save the value  ##  //
-                    $model->contact_methods()->attach(
-                        $method->finalities,
+                    $model->finalities()->attach(
+                        $model->finalities,
                         [
-                            'method_value' => $method->finality_value
+                            'method_value' => $model->finality_value
                         ]
                     );
                 }
@@ -115,12 +115,11 @@ trait FinalitableTrait
             /**
              * UPDATE : If the mehod have alreay been saved.
              */
-            if ($this->$model_method->contains($entry->$model_method)) {
-
+            if ($this->$model_method->contains($entry->$model_method))
+            {
                 $current_value = $current_values[$entry->$model_method];
-                /**
-                 * The method already exist, but it check if the value has changed and update it.
-                 */
+
+                // The method already exist, but it check if the value has changed and update it.
                 if ($current_value !== $entry->finality_value) {
                     $form_property = $form_param.'_value';
                     $this->finalities()->updateExistingPivot(
