@@ -1,12 +1,12 @@
 # Base de données structurée, ouverte et liée
-*Version 1.5.1 de ce document, 2021-02-11*
+*Version 1.5.2 de ce document, 2021-09-06*
 
 Établir une base de données structurées, ouvertes et liées (BDSOL) qui recense et géolocalise dans le Croissant Boréal les talents, compétences, équipements, initiatives technocréatives et apprentissages.
 La BDSOL utilisera les données de la communauté Avantage numérique et intégrera ensuite celles existantes dans le Croissant boréal.
 La mise en ligne de cet outil augmentera la découvrabilité, la visibilité, ainsi que la transmission des savoirs. Les données seront structurées selon un travail méthodique de métadonnées et référencement. En parallèle, des formations, accompagnements et wikiclub seront réalisés, ainsi qu’une activité de cocréation sur une plateforme de partage des équipements. Des chantiers de réflexion seront organisés autour de la gouvernance des données et de la réduction de l’impact environnemental.
 
 
-## Outils de gestions
+## Outils de gestion
 
 - [Gestion du projet et de l'avancement](https://github.com/Avantage-Numerique/bdsol/projects/1)
 - [Structure de la base de données](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw)
@@ -22,11 +22,13 @@ La mise en ligne de cet outil augmentera la découvrabilité, la visibilité, ai
 
 
 ## Les utilisateurs anticipés
+- Entreprises/organismes/institutions qui font un virage numérique (tous les secteurs)
+- Technocréatifs (professionnels, semi-professionnels, amateurs)
+- Chercheurs / penseurs du numérique
+- Médias et grand public
+- Animateurs culturels et enseignants (écoles et lieux culturels)
+- Activateurs du Hub (porteurs de dossier et coordonnateurs, actuels et potentiels)
 
-Les organismes et les membres de la communauté d’Avantage numérique
-- **Technocréatif et Organisme oeuvrant dans le numérique** : Personne ayant déjà des compétences acquises dans le domaine des technologies numériques.
-- **Technocurieux et Organisme qui orbite autour du numérique** : Personne tentant d’acquérir des compétences dans le domaine des technologies numériques.
-- **Technonul et Organisme curieuse du numérique** : Personne qui cherche à en savoir plus dans un domaine.
 
 
 ## Objectifs de la plateforme
@@ -76,9 +78,26 @@ On gèrera les fonctionnalités ici, dans Github, dans l'outil de gestionde proj
 [Version 1.0.2](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw) (10 mars)
 En cours de migration du travail effectué dans File Maker.
 
-## Collaboration
-Vous aimeriez contribuer ? Ou vous avez des idées pour des fonctionnalités ou pour des choix technologique ?
+## Installation
+Pré-requis : PHP 8, un environnement local de développement
+1. `git clone --branch developement https://github.com/Avantage-Numerique/bdsol.git`
+2. `composer install`
+3. `php artisan migrate`
+4. `php artisan db:seed`
 
+
+## Collaboration
+Vous aimeriez contribuer ?
+- Cloner le répertoire dans votre environnement dev.
+- S'assurer d'être dans la branche `developpement`.
+- Créer une sous-branche pour votre fonctionnalité.
+- Conceptualiser, développer, tester.
+
+
+## Test
+Les tests ne sont pas écrit encore, sauf ceux venant des librairies utilisées.
+
+Ou vous avez des idées pour des fonctionnalités ou pour des choix technologique ?
 [Ajouter un ticket en documentant votre idée](https://github.com/Avantage-Numerique/bdsol/issues).
 
 Plus de mécanismes seront mis en place lorsque les corrections à la version #1 utilisable seront actives.
