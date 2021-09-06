@@ -92,15 +92,15 @@ Vous aimeriez contribuer ?
 - S'assurer d'être dans la branche `developpement`.
 - Créer une sous-branche pour votre fonctionnalité.
 - Conceptualiser, développer, tester.
-
-
-## Test
-Les tests ne sont pas écrit encore, sauf ceux venant des librairies utilisées.
+- Ajouter un PR au répertoire DEV en décrivant votre fonctionnalité (context, objectif, état du développement)
 
 Ou vous avez des idées pour des fonctionnalités ou pour des choix technologique ?
 [Ajouter un ticket en documentant votre idée](https://github.com/Avantage-Numerique/bdsol/issues).
 
 Plus de mécanismes seront mis en place lorsque les corrections à la version #1 utilisable seront actives.
+
+## Test
+Les tests ne sont pas écrit encore, sauf ceux venant des librairies utilisées.
 
 
 ## Définition :
