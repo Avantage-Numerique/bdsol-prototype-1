@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    @if ($title)
+    @if (isset($title))
         <title>{{$title}}</title>
     @else
         <title>{{config('app.name')}} v.{{config('app.version')}}</title>
