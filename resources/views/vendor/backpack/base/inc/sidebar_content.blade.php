@@ -49,6 +49,18 @@
 @endif
 
 <!-- Users, Roles, Permissions -->
+@if (backpack_user()->hasPermissionTo('manage ontology'))
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-database"></i> @lang('menu.ontology')</a>
+    <ul class="nav-dropdown-items">
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('ontology-classes') }}"><i class="nav-icon la la-server"></i> <span>@lang('menu.ontology-classe')</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('ontology-properties') }}"><i class="nav-icon la la-hdd"></i> <span>@lang('menu.ontology-property')</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('ontology-sources') }}"><i class="nav-icon la la-plug"></i> <span>@lang('menu.ontology-source')</span></a></li>
+    </ul>
+</li>
+@endif
+
+<!-- Users, Roles, Permissions -->
 @if (backpack_user()->hasPermissionTo('manage users'))
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> @lang('auth.authentication')</a>

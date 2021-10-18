@@ -9,7 +9,6 @@
 
 return [
 
-    'entities'   => 'Entités',
     'entity'   => 'Entité',
     'persons'   => 'Personnes',
     'organisations'   => 'Organisations',
@@ -39,4 +38,11 @@ return [
     'entities' => 'Entitées',
     'administration' => 'Administration',
     'categorisation' => 'Categorisation',
+
+    //Ontology
+    'ontology' => 'Ontologie',
+    'ontology-classe' => 'Classes',
+    'ontology-property' => 'Propriété',
+    'ontology-source' => 'Source',
+    'ontology-link' => 'Lien',
 ];

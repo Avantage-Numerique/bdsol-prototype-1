@@ -32,6 +32,10 @@ Route::group([
     Route::crud('formes-juridique', 'JuridicForms\Admin\Controllers\JuridicFormsCrudController');
     Route::crud('domaines', 'Domaines\Admin\Controllers\DomainesCrudController');
 
+    Route::crud('ontology-classes', 'Ontology\Admin\Controllers\OntologyClassesCrudController');
+    Route::crud('ontology-classes', 'Ontology\Admin\Controllers\OntologyClassesCrudController');
+    Route::crud('ontology-classes', 'Ontology\Admin\Controllers\OntologyClassesCrudController');
+
 });
 
 Route::group([

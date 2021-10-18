@@ -16,7 +16,8 @@ return [
     */
 
     'data' => env('DB_CONNECTION_DATA', 'data'),
-    'users' => env('DB_CONNECTION_DATA', 'data'),//env('DB_CONNECTION_USERS', 'users'),
+    'users' => env('DB_CONNECTION_DATA', 'data'),
+    'ontology' => env('DB_CONNECTION_ONTOLOGY', 'data'),
 
 
     'default' => env('DB_CONNECTION_DATA', 'data'),
@@ -76,6 +77,26 @@ return [
             'username' => env('DB_USERNAME_DATA', 'forge'),
             'password' => env('DB_PASSWORD_DATA', ''),
             'unix_socket' => env('DB_SOCKET_DATA', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'ontology' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_DATA'),
+            'host' => env('DB_HOST_ONTOLOGY', '127.0.0.1'),
+            'port' => env('DB_PORT_ONTOLOGY', '3306'),
+            'database' => env('DB_DATABASE_ONTOLOGY', 'forge'),
+            'username' => env('DB_USERNAME_ONTOLOGY', 'forge'),
+            'password' => env('DB_PASSWORD_ONTOLOGY', ''),
+            'unix_socket' => env('DB_SOCKET_ONTOLOGY', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
