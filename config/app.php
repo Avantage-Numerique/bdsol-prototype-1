@@ -176,7 +176,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Ontology
+        Domain\Ontology\Providers\OntologyRoutesProvider::class,
 
+        //dev
         Mamarmite\Generators\GeneratorsServiceProvider::class,
 
     ],

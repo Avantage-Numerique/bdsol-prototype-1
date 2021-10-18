@@ -4,11 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModelHasProperties extends Migration
+class CreateModelHasPropertiesTable extends Migration
 {
     use \Mamarmite\Database\Traits\SecondaryDBTrait;
-
-    protected $migration_connection = "secondary";
 
     /**
      * Run the migrations.
@@ -17,6 +15,7 @@ class CreateModelHasProperties extends Migration
      */
     public function up()
     {
+        $this->migration_connection = "secondary";
         $this->createTable('model_has_properties', function (Blueprint $table) {
 
             $table->unsignedBigInteger('property_id');
@@ -43,6 +42,7 @@ class CreateModelHasProperties extends Migration
      */
     public function down()
     {
+        $this->migration_connection = "secondary";
         $this->dropIfExistsTable('model_has_properties');
     }
 }

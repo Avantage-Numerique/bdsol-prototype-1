@@ -16,7 +16,8 @@ return [
     */
 
     'data' => env('DB_CONNECTION_DATA', 'data'),
-    'users' => env('DB_CONNECTION_DATA', 'data'),//env('DB_CONNECTION_USERS', 'users'),
+    'users' => env('DB_CONNECTION_DATA', 'data'),
+    'ontology' => env('DB_CONNECTION_ONTOLOGY', 'data'),
 
 
     'default' => env('DB_CONNECTION_DATA', 'data'),
@@ -105,7 +106,7 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
-        ]
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',

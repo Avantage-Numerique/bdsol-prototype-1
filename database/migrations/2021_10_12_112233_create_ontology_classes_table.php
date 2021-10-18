@@ -8,8 +8,6 @@ class CreateOntologyClassesTable extends Migration
 {
     use \Mamarmite\Database\Traits\SecondaryDBTrait;
 
-    protected $migration_connection = "secondary";
-
     /**
      * Run the migrations.
      *
@@ -17,9 +15,10 @@ class CreateOntologyClassesTable extends Migration
      */
     public function up()
     {
+        $this->migration_connection = "secondary";
         $this->createTable('classes', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('id');
+            $table->bigIncrements('id');
             $table->string('slug');
             $table->string('title');
             $table->longText('intro');
@@ -36,6 +35,7 @@ class CreateOntologyClassesTable extends Migration
      */
     public function down()
     {
+        $this->migration_connection = "secondary";
         $this->dropIfExistsTable('classes');
     }
 }

@@ -4,12 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSourcesTable extends Migration
+class CreateOntologySourcesTable extends Migration
 {
 
     use \Mamarmite\Database\Traits\SecondaryDBTrait;
-
-    protected $migration_connection = "secondary";
 
     /**
      * Run the migrations.
@@ -18,9 +16,10 @@ class CreateSourcesTable extends Migration
      */
     public function up()
     {
+        $this->migration_connection = "secondary";
         $this->createTable('sources', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('id');
+            $table->bigIncrements('id');
             $table->string('slug');
             $table->string('title');
             $table->string('value_expected');//like text, integer, img, etc.
@@ -38,6 +37,7 @@ class CreateSourcesTable extends Migration
      */
     public function down()
     {
+        $this->migration_connection = "secondary";
         $this->dropIfExistsTable('sources');
     }
 }

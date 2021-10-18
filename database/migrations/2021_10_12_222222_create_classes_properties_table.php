@@ -9,8 +9,6 @@ class CreateClassesPropertiesTable extends Migration
 
     use \Mamarmite\Database\Traits\SecondaryDBTrait;
 
-    protected $migration_connection = "secondary";
-
     /**
      * Run the migrations.
      *
@@ -18,9 +16,10 @@ class CreateClassesPropertiesTable extends Migration
      */
     public function up()
     {
+        $this->migration_connection = "secondary";
         $this->createTable('properties', function (Blueprint $table) {
 
-            $table->unsignedBigInteger('id');
+            $table->bigIncrements('id');
             $table->string('slug');
             $table->string('title');
             $table->longText('intro');
@@ -42,6 +41,7 @@ class CreateClassesPropertiesTable extends Migration
      */
     public function down()
     {
+        $this->migration_connection = "secondary";
         $this->dropIfExistsTable('properties');
     }
 }

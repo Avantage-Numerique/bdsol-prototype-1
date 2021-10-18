@@ -7,7 +7,6 @@
 */
 
 return [
-    'entities'   => 'Entities',
     'entity'   => 'Entity',
     'persons'   => 'Persons',
     'organisations'   => 'Organisations',
@@ -37,4 +36,11 @@ return [
     'entities' => 'Entities',
     'administration' => 'Administration',
     'categorisation' => 'Catégorisation',
+
+    //Ontology
+    'ontology' => 'Ontology',
+    'ontology-classe' => 'Classe',
+    'ontology-property' => 'Property',
+    'ontology-source' => 'Source',
+    'ontology-link' => 'Link',
 ];

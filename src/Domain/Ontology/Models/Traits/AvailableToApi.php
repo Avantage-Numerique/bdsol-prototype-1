@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Ontology\Traits;
+namespace Domain\Ontology\Models\Traits;
 
 
 trait AvailableToApi {

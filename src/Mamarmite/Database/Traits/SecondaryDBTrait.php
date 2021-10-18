@@ -16,19 +16,24 @@ trait SecondaryDBTrait
 
     protected function createTable($name, \Closure $callback, $connection = 'primary')
     {
-        $connection = $this->migration_connection ?? $connection;
-        Schema::connection($this->get_connection($connection))->create($name, $callback);
+        if (!Schema::connection($this->get_connection($connection))->hasTable($name))
+        {
+            Schema::connection($this->get_connection($connection))->create($name, $callback);
+        }
     }
 
     protected function dropIfExistsTable($name, $connection = 'primary')
     {
-        $connection = $this->migration_connection ?? $connection;
-        Schema::connection($this->get_connection($connection))->dropIfExists($name, $callback);
+        Schema::connection($this->get_connection($connection))->dropIfExists($name);
     }
 
 
     //v. 0.0.1
     protected function get_connection($connection) {
+        if ($this->migration_connection) {
+            $connection = $this->migration_connection;
+        }
+        echo "using connection". $connection;
         switch($connection) {
 
             case "secondary":

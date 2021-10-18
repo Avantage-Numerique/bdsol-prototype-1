@@ -17,8 +17,11 @@ class AddAdminOnlyPermission extends Seeder
     {
         $manage_users = 'manage users';
         $manage_users_id = Permission::create(['name' => $manage_users]);
+        $manage_ontology = 'manage ontology';
+        $manage_ontology_id = Permission::create(['name' => $manage_ontology]);
 
         $admin_role = Role::where('name','admin')->first();
         $admin_role->givePermissionTo($manage_users);
+        $admin_role->givePermissionTo($manage_ontology_id);
     }
 }
