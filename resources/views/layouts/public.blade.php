@@ -15,7 +15,7 @@
 
 <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center sm:pt-0">
     <div class="zone-centered">
-        @if ($title)
+        @if (isset($title))
             <h1 class="text-center">{{$title}}</h1>
         @else
             <h1 class="text-center">{{config('app.name')}} v.{{config('app.version')}}</h1>
