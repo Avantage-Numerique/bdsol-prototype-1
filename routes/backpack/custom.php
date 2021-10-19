@@ -33,8 +33,8 @@ Route::group([
     Route::crud('domaines', 'Domaines\Admin\Controllers\DomainesCrudController');
 
     Route::crud('ontology-classes', 'Ontology\Admin\Controllers\OntologyClassesCrudController');
-    Route::crud('ontology-classes', 'Ontology\Admin\Controllers\OntologyClassesCrudController');
-    Route::crud('ontology-classes', 'Ontology\Admin\Controllers\OntologyClassesCrudController');
+    Route::crud('ontology-properties', 'Ontology\Admin\Controllers\OntologyPropertiesCrudController');
+    Route::crud('ontology-sources', 'Ontology\Admin\Controllers\OntologySourcesCrudController');
 
 });
 

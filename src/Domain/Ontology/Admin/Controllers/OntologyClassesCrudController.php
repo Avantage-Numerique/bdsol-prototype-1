@@ -33,12 +33,45 @@ class OntologyClassesCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-        $this->crud->setFromDb(); // fields
+        //$this->crud->setFromDb(); // fields
+        $tabs_principal = 'Principale';
+        $tab_properties = 'Properties';
+        $tab_sub_classes = 'Classes liées';
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         */
+        $this->crud->addField([
+            'name' => 'title',
+            'label' => 'Titre',
+            'type' => 'text',
+            'tab' => $tabs_principal,
+        ]);
+
+        $this->crud->addField([
+            'name' => 'intro',
+            'label' => 'Introduction',
+            'type' => 'wysiwyg',
+            'tab' => $tabs_principal,
+        ]);
+
+        $this->crud->addField([
+            'name' => 'description',
+            'label' => 'Description',
+            'type' => 'wysiwyg',
+            'tab' => $tabs_principal,
+        ]);
+
+
+        $this->crud->addField([
+            'name' => 'properties',
+            'label' => 'Properties',
+            'type' => 'text',
+            'tab' => $tab_properties,
+        ]);
+
+        $this->crud->addField([
+            'name' => 'subclasses',
+            'label' => 'Sous-classes',
+            'type' => 'text',
+            'tab' => $tab_sub_classes,
+        ]);
     }
 }

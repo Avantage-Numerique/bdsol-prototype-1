@@ -27,4 +27,14 @@ Route::get('/o/v1', function (Request $request) {
 });
 
 
+Route::group([
+    'prefix'     => '/o/v1',
+    'namespace'  => 'Domain\Ontology\Api',
+], function () { // custom admin routes
+
+    Route::get('classes', 'OntologyClassesController@index')->name('ontology.classes');
+    Route::get('classes/{slug}', 'OntologyClassesController@target')->name('ontology.target-classe');
+}); // this should be the absolute last line of this file
+
+
 //return response()->json(['data' => $user->toArray()], 201);

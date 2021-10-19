@@ -12,7 +12,7 @@ use Domain\Admin\Controllers\BaseCrudController;
  * @author  <>
  * @license <https://opensource.org/licenses/MIT> MIT
  */
-class OntologyPropertiesCrudController extends BaseCrudController
+class OntologySourcesCrudController extends BaseCrudController
 {
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -21,7 +21,7 @@ class OntologyPropertiesCrudController extends BaseCrudController
      */
     public function setup()
     {
-        $this->crud->setModel(\Domain\Ontology\Models\OntologyProperty::class);
+        $this->crud->setModel(\Domain\Ontology\Models\OntologySource::class);
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/ontology-properties');
         $this->crud->setEntityNameStrings('Propriété des classes de l\'ontologie', 'Propriétés des classes  de l\'ontologie');
     }
@@ -33,27 +33,12 @@ class OntologyPropertiesCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-        $tabs_principal = 'Principale';
+        $this->crud->setFromDb(); // fields
 
-        $this->crud->addField([
-            'name' => 'title',
-            'label' => 'Titre',
-            'type' => 'text',
-            'tab' => $tabs_principal,
-        ]);
-
-        $this->crud->addField([
-            'name' => 'intro',
-            'label' => 'Introduction',
-            'type' => 'wysiwyg',
-            'tab' => $tabs_principal,
-        ]);
-
-        $this->crud->addField([
-            'name' => 'description',
-            'label' => 'Description',
-            'type' => 'wysiwyg',
-            'tab' => $tabs_principal,
-        ]);
+        /**
+         * Fields can be defined using the fluent syntax or array syntax:
+         * - CRUD::field('price')->type('number');
+         * - CRUD::addField(['name' => 'price', 'type' => 'number']));
+         */
     }
 }

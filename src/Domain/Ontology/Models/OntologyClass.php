@@ -23,4 +23,11 @@ class OntologyClass extends Model
     // protected $hidden = [];
     // protected $dates = [];
 
+
+    //  Relation
+
+    /*public function properties() {
+
+    }*/
+
 }

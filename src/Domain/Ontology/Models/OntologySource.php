@@ -7,7 +7,7 @@ use Domain\Ontology\Models\Traits\AvailableToApi;
 use Illuminate\Database\Eloquent\Model;
 use Mamarmite\Database\Traits\SecondaryDBTrait;
 
-class OntologyProperty extends Model
+class OntologySource extends Model
 {
     use CrudTrait;
     use AvailableToApi;
@@ -15,7 +15,7 @@ class OntologyProperty extends Model
 
     protected $connection = 'ontology';
 
-    protected $table = 'properties';
+    protected $table = 'sources';
     // protected $primaryKey = 'id';
     // public $timestamps = false;
     protected $guarded = ['id'];
@@ -23,8 +23,9 @@ class OntologyProperty extends Model
         "title",
         "slug",
         "intro",
-        "description",
-        "source",
+        "value_expected",
+        "url",
+        "url_parent",
     ];
     // protected $hidden = [];
     // protected $dates = [];a
