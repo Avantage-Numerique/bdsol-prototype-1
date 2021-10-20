@@ -22,6 +22,27 @@ class SeedOntologyClasses extends Seeder
                 'description' => 'Lorem ipsum',
                 'source' => ''
             ],
+            [
+                'title' => 'Organisme',
+                'slug' => 'organisme',
+                'intro' => 'Lorem ipsum',
+                'description' => 'Lorem ipsum',
+                'source' => ''
+            ],
+            [
+                'title' => 'Équipement',
+                'slug' => 'equipement',
+                'intro' => 'Lorem ipsum',
+                'description' => 'Lorem ipsum',
+                'source' => ''
+            ],
+            [
+                'title' => 'Compétences',
+                'slug' => 'competences',
+                'intro' => 'Lorem ipsum',
+                'description' => 'Lorem ipsum',
+                'source' => ''
+            ]
         ];
 
         foreach($classes as $index => $onto_class_raw) {
