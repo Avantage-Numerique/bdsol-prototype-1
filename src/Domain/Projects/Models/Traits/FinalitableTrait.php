@@ -163,9 +163,11 @@ trait FinalitableTrait
                 );
             }
         }
+
         //updates currents values, after the create.
         $current_values = $this->$model_method->pluck('pivot.model_value', 'id');
         $current_ids = $this->$model_method->pluck('id');
+
         /**
          * DELETE methods that isn't there anymore.
          */
@@ -173,7 +175,7 @@ trait FinalitableTrait
         {
             $target_saved_ids = \Arr::pluck($target_saved, $form_param);
             $to_delete = $current_ids->diff($target_saved_ids);
-            ray($target_saved, $target_saved_ids, 'DELETE ?', $to_delete);
+
             //we already check if the value changed
             foreach($to_delete as $id)
             {
