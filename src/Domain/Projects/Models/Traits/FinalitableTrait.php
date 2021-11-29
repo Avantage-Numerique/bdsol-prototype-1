@@ -63,7 +63,6 @@ trait FinalitableTrait
             {
                 if ($model->id !== null)
                 {
-                    ray('attaching', $method->$form_param_id, $method->$form_param_value);
                     // It's new, so save the value
                     $model->$model_relationship_method()->attach(
                         $method->$form_param_id,
@@ -198,31 +197,6 @@ trait FinalitableTrait
 
 
     /**
-     * @param $property String The relation methods as property to get the polymorphic releation values.
-     * @param $form_param_name String the value of the repeatable field.
-     * @return string JSON or empty of not a properties.
-     * @exemple
-     * Works only for 2 values per row for now. Need to implement a map function to map the properties in the a more complex polymorphic relation.
-     */
-    protected function _return_attribute_to_json($property, $form_param_name): string
-    {
-        if (isset($this->$property))
-        {
-            $return_array = array();
-            foreach ($this->$property as $index => $target_property)
-            {
-                $return_array[] = [
-                    $form_param_name => $target_property->id,
-                    $form_param_name.'_value' => $target_property->pivot->model_value,
-                ];
-            }
-            return json_encode($return_array);
-        }
-        return "";
-    }
-
-
-    /**
      * Columns functions
      * @return string
      */
@@ -231,32 +205,4 @@ trait FinalitableTrait
         return $this->_getRepeatableColumn('finalities');
     }
 
-
-    protected function _getRepeatableColumn($property): string
-    {
-        if (isset($this->$property))
-        {
-            $return = ""; $sep = " | "; $total = $this->$property->count() - 1;
-            foreach ($this->$property as $index => $property_value)
-            {
-                $return .= $this->getAsLinkTag($property_value).($index < $total ? $sep : "");
-            }
-            return $return;
-        }
-        return "";
-    }
-
-
-    //  TOOLS
-
-    /**
-     * Return the link value html value
-     * @param Finality $finality
-     * @return string
-     * @todo make that an helper or url helper add
-     */
-    public function getAsLinkTag(Model $model): string
-    {
-        return $model->name;
-    }
 }
