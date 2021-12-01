@@ -8,7 +8,8 @@ use Domain\Admin\Controllers\BaseCrudController;
 use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
 use Domain\Identifiants\Admin\Controllers\Traits\IdentifiantsCrudTrait;
 use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
-use Domain\Projects\Models\Finality;
+use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
+
 
 /**
  * ProjectCrudController
@@ -20,6 +21,7 @@ use Domain\Projects\Models\Finality;
  */
 class ProjectsCrudController extends BaseCrudController
 {
+    use FetchOperation;
     use HasUploadFields;
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
@@ -69,7 +71,8 @@ class ProjectsCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-        //  ##  TAB : INFORMATION
+        $tab_team = __('admin.tab-equipe');
+        // INFORMATION
 
         $this->crud->addField([
             'name' => 'name',
@@ -105,19 +108,43 @@ class ProjectsCrudController extends BaseCrudController
         ]);
 
 
-        //  ## Données Finalities.
+        // Données Finalities.
         $this->add_finalities_fields();
 
 
-        //  ## Données de contact.
+        // TEAM
+
+        $this->crud->addField([   // relationship
+            'type' => "relationship",
+            'name' => 'persons', // the method on your model that defines the relationship
+            'ajax' => true,
+            'inline_create' => [ 'entity' => 'personnes' ],
+            'tab' => $tab_team,
+
+            // OPTIONALS:
+            // 'label' => "Category",
+            // 'attribute' => "name", // foreign key attribute that is shown to user (identifiable attribute)
+            // 'entity' => 'category', // the method that defines the relationship in your Model
+            // 'model' => "App\Models\Category", // foreign key Eloquent model
+            // 'placeholder' => "Select a category", // placeholder for the select2 input
+
+            // AJAX OPTIONALS:
+            // 'delay' => 500, // the minimum amount of time between ajax requests when searching in the field
+            // 'data_source' => url("fetch/category"), // url to controller search function (with /{id} should return model)
+            // 'minimum_input_length' => 2, // minimum characters to type before querying results
+            // 'dependencies'         => ['category'], // when a dependency changes, this select2 is reset to null
+            // 'include_all_form_fields'  => false, // optional - only send the current field through AJAX (for a smaller payload if you're not using multiple chained select2s)
+        ],);
+
+        // Données de contact.
         $this->add_contact_methods_fields();   //  ## Données de contact.
 
 
-        //  ## Données Identifiant.
+        // Données Identifiant.
         $this->add_identifiants_fields();
 
 
-        //  ##  TAB : MEDIAS
+        // MEDIAS
 
         $this->crud->addField([
             'name' => 'logo',
@@ -145,5 +172,12 @@ class ProjectsCrudController extends BaseCrudController
             'hint' => __('admin.slug-hint'),
             'tab' => $this->tab_parameters,
         ]);
+    }
+
+
+
+    public function fetchPersons()
+    {
+        return $this->fetch(\Domain\Persons\Models\Person::class);
     }
 }

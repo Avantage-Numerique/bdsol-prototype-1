@@ -42,7 +42,7 @@ trait FinalitableCrudTrait
                     [
                         'label'     => __('projects.finality'),//"Identifiant",
                         'type'      => 'select2',
-                        'name'      => 'finalities',
+                        'name'      => 'finality',
 
                         // optional
                         'entity'    => 'finalities',

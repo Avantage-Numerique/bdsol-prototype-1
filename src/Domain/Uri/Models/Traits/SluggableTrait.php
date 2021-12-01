@@ -8,13 +8,16 @@ use Spatie\Sluggable\HasSlug;
 trait SluggableTrait
 {
     use hasSlug;
+
+    protected $default_slug_from = 'name';
+
     /**
      * Get the options for generating the slug.
      */
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom(($this->slug_from ?? $this->default_slug_from))
             ->saveSlugsTo('slug');
     }
 

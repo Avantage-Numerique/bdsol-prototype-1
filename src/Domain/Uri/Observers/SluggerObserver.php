@@ -10,9 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 class SluggerObserver
 {
 
+    protected $supported_base_properties = ['name', 'title'];
+
+
     /**
      *	Will observe all model that have slug and set this.
-     *	Flaws : parameters don't have type, assume the main property for the slug is name.
      */
     public function creating(Model $targetModelWithSlug)
     {
@@ -22,7 +24,6 @@ class SluggerObserver
 
     /**
      *	Will observe all model that have slug and set this.
-     *	Flaws : parameters don't have type, assume the main property for the slug is name.
      */
     public function updating(Model $targetModelWithSlug)
     {
@@ -30,15 +31,21 @@ class SluggerObserver
     }
 
 
-    protected function _set_slug($targetModelWithSlug)
+    protected function _set_slug(Model $targetModelWithSlug)
     {
-        if (!empty($targetModelWithSlug->name))
-        {
-            $targetModelWithSlug->slug = $this->_create_slug(class_basename($targetModelWithSlug), $targetModelWithSlug->name, $targetModelWithSlug->id);
-        }
-        elseif (!empty($targetModelWithSlug->title))
-        {
-            $targetModelWithSlug->slug = $this->_create_slug(class_basename($targetModelWithSlug), $targetModelWithSlug->title, $targetModelWithSlug->id);
+        foreach ($this->supported_base_properties as $base_property) {
+            if (isset($targetModelWithSlug->$base_property) &&
+                !empty($targetModelWithSlug->$base_property))
+            {
+                $newslug = $this->_create_slug(
+                    get_class($targetModelWithSlug),
+                    $targetModelWithSlug->$base_property,
+                    $targetModelWithSlug->id
+                );
+
+                $targetModelWithSlug->slug = $newslug;
+                $targetModelWithSlug["slug"] = $newslug;
+            }
         }
     }
 

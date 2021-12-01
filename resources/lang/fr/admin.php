@@ -15,6 +15,7 @@ return [
     'tab-parameters'   => 'Paramètres',
     'tab-contacts'   => 'Données de contact',
     'tab-identifiants'   => 'Identifiants',
+    'tab-equipe' => 'Équipe',
 
     'name'   => 'Nom',
     'legal-name' => 'Nom légal',

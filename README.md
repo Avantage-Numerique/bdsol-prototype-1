@@ -1,4 +1,4 @@
-# Repo. pour envoyé en production.
+*Branche production*
 
 # Base de données structurée, ouverte et liée
 *Version 1.5.2 de ce document, 2021-09-06*

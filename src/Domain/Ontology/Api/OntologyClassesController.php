@@ -28,4 +28,5 @@ class OntologyClassesController extends ApiController
         return $this->push_data($target_class);
     }
 
+
 }

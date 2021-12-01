@@ -3,10 +3,12 @@
 namespace Domain\Projects\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Domain\Admin\Models\Traits\AbstractPolymorphicTrait;
 use Domain\ContactMethods\Models\Traits\ContactableTrait;
 use Domain\Identifiants\Models\Traits\IdentifiableTrait;
 use Domain\Projects\Models\Traits\FinalitableTrait;
 use Domain\Uri\Models\Traits\SluggableTrait;
+use Domain\Persons\Models\Traits\PersonableTrait;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,9 +16,14 @@ class Project extends Model
 {
     use CrudTrait;
     use SluggableTrait;
+
+
+    use AbstractPolymorphicTrait;
+
     use ContactableTrait;
     use IdentifiableTrait;
     use FinalitableTrait;
+    use PersonableTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -66,4 +73,5 @@ class Project extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
 }

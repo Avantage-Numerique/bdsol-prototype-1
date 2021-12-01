@@ -73,6 +73,22 @@ class Person extends Model
 
     //  ##  Relations   ##  //
 
+    /**
+     * Link identifiants to persons with model_has_identifiants table.
+     * no params
+     * @return BelongsToMany the n:n polymorphic relation
+     */
+    public function projects()
+    {
+        return $this->morphedByMany(
+            'Domain\Projects\Models\Project',
+            'model',
+            'model_has_persons',
+            'person_id',
+            'model_id'
+        )->withPivot('model_value');
+    }
+
 
     //  ##  MUTATORS    ##  //
 

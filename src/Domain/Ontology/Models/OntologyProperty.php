@@ -4,16 +4,20 @@ namespace Domain\Ontology\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Domain\Ontology\Models\Traits\AvailableToApi;
+use Domain\Uri\Models\Traits\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Mamarmite\Database\Traits\SecondaryDBTrait;
 
 class OntologyProperty extends Model
 {
     use CrudTrait;
-    use AvailableToApi;
+    use SluggableTrait;
     use SecondaryDBTrait;
 
     protected $connection = 'ontology';
+
+
+    protected $slug_from = 'title';
 
     protected $table = 'properties';
     // protected $primaryKey = 'id';
@@ -32,7 +36,7 @@ class OntologyProperty extends Model
 
     // relations
 
-    /*public function classes() {
+    public function classes() {
         return $this->morphedByMany(
             'Domain\Ontology\Models\OntologyClass',
             'model',
@@ -40,6 +44,6 @@ class OntologyProperty extends Model
             'property_id',
             'model_id'
         )->withPivot('model_value');
-    }*/
+    }
 
 }

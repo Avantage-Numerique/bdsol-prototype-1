@@ -2,6 +2,7 @@
 
 namespace Domain\Persons\Admin\Controllers;
 
+use Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
 use Domain\Persons\Admin\Requests\PersonCrudRequest as StoreRequest;
@@ -25,6 +26,7 @@ class PersonCrudController extends BaseCrudController
     use HasUploadFields;
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
+    use InlineCreateOperation;
 
     public $contact_method_model;
 

@@ -103,21 +103,38 @@ trait ContactableTrait
         $this->all_contact_methods_raw = $value;
 
         $target_saved_methods = json_decode($value);
-        foreach($target_saved_methods as $index => $method)
+        if (isset($target_saved_methods) && is_countable($target_saved_methods))
         {
-            /**
-             * UPDATE : If the mehod have alreay been saved.
-             */
-            if ($this->contact_methods->contains($method->contact_methods)) {
+            foreach($target_saved_methods as $index => $method)
+            {
+                /**
+                 * UPDATE : If the mehod have alreay been saved.
+                 */
+                if ($this->contact_methods->contains($method->contact_methods)) {
 
-                $current_value = $current_saved_methods_value[$method->contact_methods];
+                    $current_value = $current_saved_methods_value[$method->contact_methods];
+
+                    /**
+                     * The method already exist, but it check if the value has changed and update it.
+                     */
+                    if ($current_value !== $method->method_value) {
+
+                        $this->contact_methods()->updateExistingPivot(
+                            $method->contact_methods,
+                            [
+                                'method_value' => $method->method_value
+                            ]
+                        );
+                    }
+                }
 
                 /**
-                 * The method already exist, but it check if the value has changed and update it.
+                 * CREATE : if the contact methods doesn't exist
+                 * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
                  */
-                if ($current_value !== $method->method_value) {
-
-                    $this->contact_methods()->updateExistingPivot(
+                if ($this->id !== null && !$this->contact_methods->contains($method->contact_methods)) {
+                    //  ##  It's new, so save the value  ##  //
+                    $this->contact_methods()->attach(
                         $method->contact_methods,
                         [
                             'method_value' => $method->method_value
@@ -127,36 +144,22 @@ trait ContactableTrait
             }
 
             /**
-             * CREATE : if the contact methods doesn't exist
-             * if id isn't say, it's because we are in create mode. So it's the event created that is used to add these.
+             * DELETE methods that isn't there anymore.
              */
-            if ($this->id !== null && !$this->contact_methods->contains($method->contact_methods)) {
-                //  ##  It's new, so save the value  ##  //
-                $this->contact_methods()->attach(
-                    $method->contact_methods,
-                    [
-                        'method_value' => $method->method_value
-                    ]
-                );
-            }
-        }
+            if (count($target_saved_methods) !== $current_saved_methods_value->count())
+            {
+                $target_saved_methods_ids = \Arr::pluck($target_saved_methods, 'contact_methods');
+                $to_delete = $current_saved_methods_ids->diff($target_saved_methods_ids);
 
-        /**
-         * DELETE methods that isn't there anymore.
-         */
-        if (count($target_saved_methods) !== $current_saved_methods_value->count())
-        {
-            $target_saved_methods_ids = \Arr::pluck($target_saved_methods, 'contact_methods');
-            $to_delete = $current_saved_methods_ids->diff($target_saved_methods_ids);
-
-            /**
-             *  we already check if the value changed
-             */
-            foreach($to_delete as $method_id) {
                 /**
-                 *  It's new, so save the value
+                 *  we already check if the value changed
                  */
-                $this->contact_methods()->detach($method_id);
+                foreach($to_delete as $method_id) {
+                    /**
+                     *  It's new, so save the value
+                     */
+                    $this->contact_methods()->detach($method_id);
+                }
             }
         }
     }

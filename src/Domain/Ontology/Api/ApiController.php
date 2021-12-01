@@ -2,6 +2,8 @@
 
 namespace Domain\Ontology\Api;
 
+use Spatie\Ray\Request;
+
 /**
  * ApiController
  *
@@ -20,10 +22,7 @@ class ApiController {
 
     public function push_data($data) {
         if (is_object($data)) {
-
-            return json_encode($data);
+            return response()->json($data);
         }
     }
-
-
 }
