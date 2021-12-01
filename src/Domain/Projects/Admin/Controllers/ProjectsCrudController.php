@@ -91,18 +91,10 @@ class ProjectsCrudController extends BaseCrudController
             'tab' => $this->tab_info,
         ]);
 
-        /* New starting date for the project - V.P.R */
-        $this->crud->addField([
-            'name' => 'starting_date',
-            'type' => 'timestamp',
-            'label' => __('admin.starting_date'),
-            'tab' => $this->tab_info,
-        ]);
-
         /* New ending date for the project - V.P.R */
         $this->crud->addField([
-            'name' => 'ending_date',
-            'type' => 'timestamp',
+            'name' => ['starting_date', 'ending_date'],
+            'type' => 'date_range',
             'label' => __('admin.ending_date'),
             'tab' => $this->tab_info,
         ]);
