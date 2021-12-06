@@ -55,18 +55,19 @@ trait PersonableTrait
             $form_param_value = 'person_value';
 
             $target_saved = json_decode($model->$model_all_relationship_raw_property);
-
-            foreach($target_saved as $index => $method)
-            {
-                if ($model->id !== null)
+            if (isset($target_saved)) {
+                foreach($target_saved as $index => $method)
                 {
-                    // It's new, so save the value
-                    $model->$model_relationship_method()->attach(
-                        $method->$form_param_id,
-                        [
-                            'model_value' => $method->$form_param_value
-                        ]
-                    );
+                    if ($model->id !== null)
+                    {
+                        // It's new, so save the value
+                        $model->$model_relationship_method()->attach(
+                            $method->$form_param_id,
+                            [
+                                'model_value' => $method->$form_param_value
+                            ]
+                        );
+                    }
                 }
             }
         });
@@ -79,7 +80,7 @@ trait PersonableTrait
 
     /**
      * Add the n:n polymorphic relationship to the model to manage these data.
-     * @return BelongsToMany
+     * @return MorphToMany //BelongsToMany
      */
     public function persons(): MorphToMany
     {
@@ -223,7 +224,9 @@ trait PersonableTrait
         return $this->_getRepeatableColumn('persons');
     }
 
-
+    /**
+     * Move to the abstract trait to use the composite design : AbstractPolymorphicTrait
+     */
     /*protected function _getRepeatableColumn($property): string
     {
         if (isset($this->$property))

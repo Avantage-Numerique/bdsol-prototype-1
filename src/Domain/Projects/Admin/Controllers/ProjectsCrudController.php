@@ -106,27 +106,15 @@ class ProjectsCrudController extends BaseCrudController
 
         // TEAM
 
-        $this->crud->addField([   // relationship
+        $this->crud->addField([
             'type' => "relationship",
-            'name' => 'persons', // the method on your model that defines the relationship
+            'name' => 'persons',
+            'label' => "Personnes",
             'ajax' => true,
-            'inline_create' => [ 'entity' => 'personnes' ],
+            'inline_create' => ['entity' => 'personnes'],
+            'attribute' => "fullname",
             'tab' => $tab_team,
-
-            // OPTIONALS:
-            // 'label' => "Category",
-            // 'attribute' => "name", // foreign key attribute that is shown to user (identifiable attribute)
-            // 'entity' => 'category', // the method that defines the relationship in your Model
-            // 'model' => "App\Models\Category", // foreign key Eloquent model
-            // 'placeholder' => "Select a category", // placeholder for the select2 input
-
-            // AJAX OPTIONALS:
-            // 'delay' => 500, // the minimum amount of time between ajax requests when searching in the field
-            // 'data_source' => url("fetch/category"), // url to controller search function (with /{id} should return model)
-            // 'minimum_input_length' => 2, // minimum characters to type before querying results
-            // 'dependencies'         => ['category'], // when a dependency changes, this select2 is reset to null
-            // 'include_all_form_fields'  => false, // optional - only send the current field through AJAX (for a smaller payload if you're not using multiple chained select2s)
-        ],);
+        ]);
 
         // Données de contact.
         $this->add_contact_methods_fields();   //  ## Données de contact.
@@ -170,6 +158,10 @@ class ProjectsCrudController extends BaseCrudController
 
     public function fetchPersons()
     {
-        return $this->fetch(\Domain\Persons\Models\Person::class);
+        return $this->fetch([
+            'model' => \Domain\Persons\Models\Person::class,
+            'searchable_attributes' => ['firstname', 'lastname'],
+            //'searchableAttributes' => 'firstname',//['firstname', 'lastname'],
+        ]);
     }
 }

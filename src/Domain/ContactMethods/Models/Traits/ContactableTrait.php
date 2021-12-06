@@ -46,18 +46,20 @@ trait ContactableTrait
         self::created(function ($model) {
 
             $target_saved_methods = json_decode($model->all_contact_methods_raw);
-            foreach($target_saved_methods as $index => $method) {
-                /**
-                 * CREATE : if the contact methods doesn't exist
-                 */
-                if ($model->id !== null) {
-                    //  ##  It's new, so save the value  ##  //
-                    $model->contact_methods()->attach(
-                        $method->contact_methods,
-                        [
-                            'method_value' => $method->method_value
-                        ]
-                    );
+            if (isset($target_saved_methods)) {
+                foreach($target_saved_methods as $index => $method) {
+                    /**
+                     * CREATE : if the contact methods doesn't exist
+                     */
+                    if ($model->id !== null) {
+                        //  ##  It's new, so save the value  ##  //
+                        $model->contact_methods()->attach(
+                            $method->contact_methods,
+                            [
+                                'method_value' => $method->method_value
+                            ]
+                        );
+                    }
                 }
             }
         });
