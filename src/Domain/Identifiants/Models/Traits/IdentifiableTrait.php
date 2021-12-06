@@ -155,7 +155,7 @@ trait IdentifiableTrait
         /**
          * DELETE methods that isn't there anymore.
          */
-        if (count($target_saved_methods) !== $current_saved_methods_value->count())
+        if (is_countable($target_saved_methods) && count($target_saved_methods) !== $current_saved_methods_value->count())
         {
             $target_saved_methods_ids = \Arr::pluck($target_saved_methods, 'identifiants');
             $to_delete = $current_saved_methods_ids->diff($target_saved_methods_ids);

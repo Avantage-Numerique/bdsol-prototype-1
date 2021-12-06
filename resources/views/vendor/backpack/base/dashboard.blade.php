@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-4">
             <h2>Personnes</h2>
             @foreach($personnes as $personne)
                 <article>
@@ -24,7 +24,7 @@
                             @if (!empty($personne->avatar))
                                 <img class="w-50 img-avatar" src="{{asset('storage/persons/avatars/'.$personne->avatar)}}" alt="{{$personne->name}}" style="width: 100%; max-width: 30px; height: auto;" />
                             @endif
-                            <span class="ml-3">{{$personne->name}}</span>
+                            <span class="ml-3">{{$personne->fullname}}</span>
                         </div>
                     </div>
                 </article>

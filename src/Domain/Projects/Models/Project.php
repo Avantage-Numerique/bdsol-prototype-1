@@ -49,6 +49,8 @@ class Project extends Model
         'all_finalities_raw',
         'updated_at',
         'created_at',
+        'starting_date',
+        'ending_date',
         //'finality_id',
     ];
     // protected $hidden = [];

@@ -66,10 +66,12 @@ class Person extends Model
      */
     protected $casts = [
         'all_contact_methods_raw',
-        'all_identifiants_raw'
+        'all_identifiants_raw',
     ];
 
-
+    protected $appends = [
+        'fullname'
+    ];
 
     //  ##  Relations   ##  //
 
@@ -97,9 +99,9 @@ class Person extends Model
      * Concatenate the firstname and lastname value, to avoid having a column for that.
      * @return string
      */
-    public function getNameAttribute() {
+    /*public function getNameAttribute() {
         return $this->firstname." ".$this->lastname;
-    }
+    }*/
 
 
     /**
@@ -146,6 +148,15 @@ class Person extends Model
         }
     }
 
+    /**
+     * Get person full name
+     *
+     * @return string
+     */
+    public function getFullnameAttribute()
+    {
+        return "{$this->firstname} {$this->lastname}";
+    }
 
 
     //  ##  TOOLS   ##  //
