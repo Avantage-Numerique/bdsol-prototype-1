@@ -29,6 +29,8 @@ class Person extends Model
 
     protected $table = 'persons';
 
+    protected $slug_from = 'fullname';
+
     /**
      * The attributes that are mass assignable.
      *

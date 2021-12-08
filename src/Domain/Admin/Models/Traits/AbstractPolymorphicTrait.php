@@ -48,14 +48,14 @@ trait AbstractPolymorphicTrait
      * @param $property String Will be called as a property
      * @return string
      */
-    protected function _getRepeatableColumn($property): string
+    protected function _getRepeatableColumn($property, $target_property='name'): string
     {
         if (isset($this->$property))
         {
             $return = ""; $sep = " | "; $total = $this->$property->count() - 1;
-            foreach ($this->$property as $index => $property_value)
-            {
-                $return .= $this->getAsLinkTag($property_value).($index < $total ? $sep : "");
+            foreach ($this->$property as $index => $property_value) {
+                ray($property_value);
+                $return .= $this->getAsLinkTag($property_value, $target_property).($index < $total ? $sep : "");
             }
             return $return;
         }
@@ -69,10 +69,10 @@ trait AbstractPolymorphicTrait
      * @return string
      * @todo make that an helper or url helper add
      */
-    public function getAsLinkTag(Model $model): string
+    public function getAsLinkTag(Model $model, $target_property='name'): string
     {
-        if (isset($model->name)) {
-            return $model->name;
+        if (isset($model->$target_property)) {
+            return $model->$target_property;
         }
         return "";
     }
