@@ -33,5 +33,8 @@ class AppServiceProvider extends ServiceProvider
         //Auto set slug on save.
         //OntologyClass::observe(SluggerObserver::class);
         //OntologyProperty::observe(SluggerObserver::class);
+        if($this->app->environment('production')) {
+            \URL::forceScheme('https');
+        }
     }
 }
