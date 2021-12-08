@@ -24,4 +24,12 @@ return [
     'logo' => 'Logo',
     'avatar' => 'Avatar',
     'header-image' => 'Image entête',
+
+    'person' => 'Personne',
+    'persons' => 'Personnes',
+    'plural-persons' => 'Personne|Personnes',
+
+    'organisation' => 'Organisation',
+    'organisations' => 'Organisations',
+    'plural-organisations' => 'Organisation|Organisations'
 ];

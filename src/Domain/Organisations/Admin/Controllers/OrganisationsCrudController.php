@@ -3,6 +3,7 @@
 namespace Domain\Organisations\Admin\Controllers;
 
 
+use Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
 use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
@@ -21,6 +22,7 @@ class OrganisationsCrudController extends BaseCrudController
     use HasUploadFields;
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
+    use InlineCreateOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -63,6 +65,8 @@ class OrganisationsCrudController extends BaseCrudController
          * From ContactMethodsCrudTrait
          */
         $this->add_contact_methods_columns();
+        $this->add_identifiants_columns();
+
         $this->add_identifiants_columns();
 
 
