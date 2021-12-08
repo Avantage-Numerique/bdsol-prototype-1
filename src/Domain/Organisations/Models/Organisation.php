@@ -7,6 +7,7 @@ use Domain\Identifiants\Models\Traits\IdentifiableTrait;
 use Domain\Uri\Models\Traits\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Domain\ContactMethods\Models\Traits\ContactableTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Organisation extends Model
 {
@@ -52,4 +53,24 @@ class Organisation extends Model
         'all_contact_methods_raw',
         'all_identifiants_raw'
     ];
+
+
+    //  Relations
+
+
+    /**
+     * Link identifiants to persons with model_has_identifiants table.
+     * no params
+     * @return BelongsToMany the n:n polymorphic relation
+     */
+    public function projects()
+    {
+        return $this->morphedByMany(
+            'Domain\Projects\Models\Project',
+            'model',
+            'model_has_organisations',
+            'organisation_id',
+            'model_id'
+        )->withPivot('model_value');
+    }
 }

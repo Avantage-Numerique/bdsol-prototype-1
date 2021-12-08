@@ -7,6 +7,8 @@ use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
 use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
 use Domain\Identifiants\Admin\Controllers\Traits\IdentifiantsCrudTrait;
+use Domain\Organisations\Admin\Controllers\Traits\OrganisationsCrudTrait;
+use Domain\Persons\Admin\Controllers\Traits\PersonsCrudTrait;
 use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 
@@ -26,6 +28,8 @@ class ProjectsCrudController extends BaseCrudController
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
     use FinalitableCrudTrait;
+    use OrganisationsCrudTrait;
+    use PersonsCrudTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -60,12 +64,11 @@ class ProjectsCrudController extends BaseCrudController
             'label' => __('admin.slug'),
         ]);
 
-        /**
-         * From ContactMethodsCrudTrait
-         */
+
         $this->add_contact_methods_columns();
         $this->add_identifiants_columns();
-        $this->add_finalitable_columns();
+        $this->add_organisations_columns();
+        $this->add_persons_columns();
 
     }
 
@@ -109,10 +112,20 @@ class ProjectsCrudController extends BaseCrudController
         $this->crud->addField([
             'type' => "relationship",
             'name' => 'persons',
-            'label' => "Personnes",
+            'label' => __('admin.persons'),
             'ajax' => true,
             'inline_create' => ['entity' => 'personnes'],
             'attribute' => "fullname",
+            'tab' => $tab_team,
+        ]);
+
+        $this->crud->addField([
+            'type' => "relationship",
+            'name' => 'organisations',
+            'label' => __('admin.organisations'),
+            'ajax' => true,
+            'inline_create' => ['entity' => 'organisations'],
+            'attribute' => "name",
             'tab' => $tab_team,
         ]);
 
@@ -164,4 +177,5 @@ class ProjectsCrudController extends BaseCrudController
             //'searchableAttributes' => 'firstname',//['firstname', 'lastname'],
         ]);
     }
+
 }
