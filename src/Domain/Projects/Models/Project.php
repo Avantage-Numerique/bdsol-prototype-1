@@ -51,10 +51,12 @@ class Project extends Model
         'created_at',
         'starting_date',
         'ending_date',
+        'time_lapse_id',
         //'finality_id',
     ];
     // protected $hidden = [];
     // protected $dates = [];
+   
 
     /**
      * The attributes that should be cast to native types.
@@ -73,5 +75,11 @@ class Project extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    //Relation to link the project model to the time lapse model : One to many
+    public function timelapse()
+    {   
+        return $this->belongsTo('Domain\TimeLapse\Models\TimeLapse', 'time_lapse_id', 'id');
+    }
 
 }

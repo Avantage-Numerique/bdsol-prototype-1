@@ -11,6 +11,8 @@ use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 
 
+
+
 /**
  * ProjectCrudController
  *
@@ -26,6 +28,7 @@ class ProjectsCrudController extends BaseCrudController
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
     use FinalitableCrudTrait;
+
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -67,6 +70,7 @@ class ProjectsCrudController extends BaseCrudController
         $this->add_identifiants_columns();
         $this->add_finalitable_columns();
 
+
     }
 
     protected function _addFields($state='all')
@@ -91,7 +95,7 @@ class ProjectsCrudController extends BaseCrudController
             'tab' => $this->tab_info,
         ]);
 
-        /* New ending date for the project - V.P.R */
+        /* Date range for the project - V.P.R */
         $this->crud->addField([
             'name' => ['starting_date', 'ending_date'],
             'type' => 'date_range',
@@ -99,10 +103,26 @@ class ProjectsCrudController extends BaseCrudController
             'tab' => $this->tab_info,
         ]);
 
+        //Project time lapse selector
+        $this->crud->addField([
+            'type' => 'select2_multiple',
+            'label' => 'Échéancier',
+            'name' => 'time_lapse_id', // the relationship name in your Model
+            'entity' => 'timelapse', // the relationship name in your Model
+            'attribute' => 'time_lapse', // attribute on Article that is shown to admin
+            'model' => "Domain\TimeLapse\Models\TimeLapse",
+            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
+            'tab' => $this->tab_info,
+        ]);
+
+
 
         // Données Finalities.
         $this->add_finalities_fields();
 
+        
+      
+        
 
         // TEAM
 
