@@ -125,7 +125,7 @@ class ProjectsCrudController extends BaseCrudController
             'label' => __('admin.organisations'),
             'ajax' => true,
             'inline_create' => ['entity' => 'organisations'],
-            'attribute' => "name",
+            'attribute' => "all_names",
             'tab' => $tab_team,
         ]);
 
@@ -174,7 +174,14 @@ class ProjectsCrudController extends BaseCrudController
         return $this->fetch([
             'model' => \Domain\Persons\Models\Person::class,
             'searchable_attributes' => ['firstname', 'lastname'],
-            //'searchableAttributes' => 'firstname',//['firstname', 'lastname'],
+        ]);
+    }
+
+    public function fetchOrganisations()
+    {
+        return $this->fetch([
+            'model' => \Domain\Organisations\Models\Organisation::class,
+            'searchable_attributes' => ['name','legal_name'],
         ]);
     }
 
