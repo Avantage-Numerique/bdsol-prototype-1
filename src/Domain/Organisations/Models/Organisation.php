@@ -54,6 +54,9 @@ class Organisation extends Model
         'all_identifiants_raw'
     ];
 
+    protected $appends = [
+        'all_names'
+    ];
 
     //  Relations
 
@@ -72,5 +75,16 @@ class Organisation extends Model
             'organisation_id',
             'model_id'
         )->withPivot('model_value');
+    }
+
+
+    /**
+     * Get person full name
+     *
+     * @return string
+     */
+    public function getAllNamesAttribute()
+    {
+        return "{$this->name} {$this->legal_name}";
     }
 }
