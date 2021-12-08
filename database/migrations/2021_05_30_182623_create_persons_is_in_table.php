@@ -18,7 +18,7 @@ class CreatePersonsIsInTable extends Migration
             $table->unsignedBigInteger($entity.'_id');
             $table->string('model_type');
             $table->unsignedBigInteger('model_id');
-            $table->string('model_value')->default('');
+            //$table->string('model_value')->default('');
 
             $table->index(['model_id', 'model_type'], 'model_has_'.$entity.'s_model_id_model_type_index');
 
