@@ -9,11 +9,10 @@ use App\Http\Requests\TimeLapseRequest;
 
 
 /**
- * ContactMethodCrudController
  *
  * @projet
- * @organisation <>
- * @author  <>
+ * @organisation <Avantage Numérique>
+ * @author  <Vincent Poirier Ruel>
  * @license <https://opensource.org/licenses/MIT> MIT
  */
 
@@ -38,31 +37,12 @@ class TimeLapseCrudController extends BaseCrudController
         $this->crud->setEntityNameStrings('Échéance', 'Échéances');
     }
 
-    /*
-    protected function _addColumns($state='all')
-    {
-        //$this->crud->setFromDb(); // columns
-    }
-    */
-
-    /*
-    protected function _addFields($state='all')
-    {
-        $this->crud->setFromDb(); // fields
-
-        
-        // Fields can be defined using the fluent syntax or array syntax:
-        // - CRUD::field('price')->type('number');
-        // - CRUD::addField(['name' => 'price', 'type' => 'number']));
-         
-    }
-    */
-
     public function setupListOperation()
     {
         $this->crud->setColumns(['time_lapse']);
     }
 
+    //Create time lapse
     public function setupCreateOperation()
     {
         $this->crud->setValidation(TimeLapseRequest::class);
@@ -70,8 +50,21 @@ class TimeLapseCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'time_lapse',
             'type' => 'text',
-            'label' => "Échéance"
+            'label' => "Échéance",
+    
         ]);
+    }
 
+
+    //Edit the existing time lapses
+    public function setupUpdateOperation()
+    {
+        $this->crud->setValidation(TimeLapseRequest::class);
+
+        $this->crud->addField([
+            'name' => 'time_lapse',
+            'type' => 'text',
+            'label' => "Échéance",
+        ]);
     }
 }
