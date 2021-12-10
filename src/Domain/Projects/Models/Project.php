@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Domain\Admin\Models\Traits\AbstractPolymorphicTrait;
 use Domain\ContactMethods\Models\Traits\ContactableTrait;
 use Domain\Identifiants\Models\Traits\IdentifiableTrait;
+use Domain\Organisations\Models\Traits\OrganisationableTrait;
 use Domain\Projects\Models\Traits\FinalitableTrait;
 use Domain\Uri\Models\Traits\SluggableTrait;
 use Domain\Persons\Models\Traits\PersonableTrait;
@@ -24,6 +25,7 @@ class Project extends Model
     use IdentifiableTrait;
     use FinalitableTrait;
     use PersonableTrait;
+    use OrganisationableTrait;
 
     /*
     |--------------------------------------------------------------------------

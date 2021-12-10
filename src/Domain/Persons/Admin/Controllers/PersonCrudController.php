@@ -79,7 +79,6 @@ class PersonCrudController extends BaseCrudController
             'type' => 'text',
             'label' => __('persons.nickname')
         ]);
-
         $this->crud->addColumn([
             'name' => 'slug',
             'type' => 'text',
@@ -109,7 +108,6 @@ class PersonCrudController extends BaseCrudController
 
     protected function _addFields($state='all')
     {
-
         //  ##  TAB : INFORMATION
 
         $this->crud->addField([
@@ -133,6 +131,7 @@ class PersonCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'nickname',
             'type' => 'text',
+            'allows_null' => true,
             'label' => __('persons.nickname'),
             'wrapper'   => [
                 'class'      => 'form-group col-md-4'
@@ -157,6 +156,7 @@ class PersonCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'address',
             'type'=> 'address',
+            'allows_null' => true,
             'label' => __('admin.address'),
             'tab' => $this->tab_info,
             // optional
@@ -166,6 +166,7 @@ class PersonCrudController extends BaseCrudController
         $this->crud->addField([
             'name' => 'description',
             'type' => 'wysiwyg',
+            'allows_null' => true,
             'label' => __('admin.description'),
             'tab' => $this->tab_info,
         ]);

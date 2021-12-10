@@ -1,10 +1,8 @@
 <?php
 
-namespace Domain\Persons\Models\Traits;
+namespace Domain\Organisations\Models\Traits;
 
-use Domain\Persons\Models\Person;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  *
@@ -23,24 +21,23 @@ use Illuminate\Database\Eloquent\Model;
  * 4. Add the field name : all_contact_methods, to the fillable arrays.
  *
  */
-trait PersonableTrait
+trait OrganisationableTrait
 {
 
-    public $all_persons_raw;
+    public $all_organisations_raw;
 
     /**
      * Events
      */
 
     /**
-     * bootPersonableTrait
-     * On boot this trait, add event listence
-     * @deleting : Delete the current model contact_methods saved in the pivot table.
+     * bootOrganisationableTrait
+     * On boot this trait, add event listencer
      */
-    protected static function bootPersonableTrait()
+    protected static function bootOrganisationableTrait()
     {
         self::deleting(function ($model) {
-            $model->persons()->delete();
+            $model->organisations()->delete();
         });
 
         /**
@@ -49,10 +46,10 @@ trait PersonableTrait
         //this doesn't work.
         self::created(function ($model) {
 
-            $model_relationship_method = 'persons';
-            $model_all_relationship_raw_property = 'all_persons_raw';
-            $form_param_id = 'person';
-            $form_param_value = 'person_value';
+            $model_relationship_method = 'organisations';
+            $model_all_relationship_raw_property = 'all_organisations_raw';
+            $form_param_id = 'organisation';
+            $form_param_value = 'organisation_value';
 
             $target_saved = json_decode($model->$model_all_relationship_raw_property);
             if (isset($target_saved)) {
@@ -82,14 +79,14 @@ trait PersonableTrait
      * Add the n:n polymorphic relationship to the model to manage these data.
      * @return MorphToMany //BelongsToMany
      */
-    public function persons(): MorphToMany
+    public function organisations(): MorphToMany
     {
         return $this->morphToMany(
-            'Domain\Persons\Models\Person',
+            'Domain\Organisations\Models\Organisation',
             'model',
-            'model_has_persons',
+            'model_has_organisations',
             'model_id',
-            'person_id'
+            'organisation_id'
         )->withPivot('model_value');
     }
 
@@ -104,19 +101,16 @@ trait PersonableTrait
      * @param $value String as Json to be decode
      * @todo Simplify this by separate the save, update and delete parts. Use that in created (save).  It make the loop clearer to read.
      */
-    public function setAllPersonsAttribute($value)
+    public function setAllOrganisationsAttribute($value)
     {
-        $model_method = 'persons';
-        $form_param = 'person';
+        $model_method = 'organisations';
+        $form_param = 'organisation';
         $form_property = $form_param.'_value';
-
-        //Regroup collections for checks
-        $current_ids = $this->$model_method->pluck('id');
 
         $current_values = $this->$model_method->pluck('pivot.model_value', 'id');
 
         //  Save the value in a property for the created event.
-        $this->all_persons_raw = $value;
+        $this->all_organisations_raw = $value;
 
         $target_saved = json_decode($value);
         if (isset($target_saved) && !empty($target_saved)) {
@@ -131,7 +125,7 @@ trait PersonableTrait
 
                     // The method already exist, but it check if the value has changed and update it.
                     if ($current_value !== $entry->$form_property) {
-                        $this->persons()->updateExistingPivot(
+                        $this->$model_method()->updateExistingPivot(
                             $entry->$form_param,
                             [
                                 'model_value' => $entry->$form_property   //finality_value
@@ -184,9 +178,9 @@ trait PersonableTrait
      * (for now 2021-05-07)
      * @return false|string as JSON
      */
-    public function getAllPersonsAttribute()
+    public function getAllOrganisationsAttribute()
     {
-        return $this->_return_attribute_to_json('persons', 'person');
+        return $this->_return_attribute_to_json('organisations', 'organisation');
     }
 
 
@@ -194,8 +188,8 @@ trait PersonableTrait
      * Columns functions
      * @return string
      */
-    public function columnPersons(): string
+    public function columnOrganisations(): string
     {
-        return $this->_getRepeatableColumn('persons', 'fullname');
+        return $this->_getRepeatableColumn('organisations');
     }
 }

@@ -7,6 +7,8 @@ use Backpack\CRUD\app\Models\Traits\HasUploadFields;
 use Domain\Admin\Controllers\BaseCrudController;
 use Domain\ContactMethods\Admin\Controllers\Traits\ContactMethodsCrudTrait;
 use Domain\Identifiants\Admin\Controllers\Traits\IdentifiantsCrudTrait;
+use Domain\Organisations\Admin\Controllers\Traits\OrganisationsCrudTrait;
+use Domain\Persons\Admin\Controllers\Traits\PersonsCrudTrait;
 use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 
@@ -28,6 +30,8 @@ class ProjectsCrudController extends BaseCrudController
     use ContactMethodsCrudTrait;
     use IdentifiantsCrudTrait;
     use FinalitableCrudTrait;
+    use OrganisationsCrudTrait;
+    use PersonsCrudTrait;
 
 
     /**
@@ -63,12 +67,11 @@ class ProjectsCrudController extends BaseCrudController
             'label' => __('admin.slug'),
         ]);
 
-        /**
-         * From ContactMethodsCrudTrait
-         */
+
         $this->add_contact_methods_columns();
         $this->add_identifiants_columns();
-        $this->add_finalitable_columns();
+        $this->add_organisations_columns();
+        $this->add_persons_columns();
 
 
     }
@@ -126,27 +129,25 @@ class ProjectsCrudController extends BaseCrudController
 
         // TEAM
 
-        $this->crud->addField([   // relationship
+        $this->crud->addField([
             'type' => "relationship",
-            'name' => 'persons', // the method on your model that defines the relationship
+            'name' => 'persons',
+            'label' => __('admin.persons'),
             'ajax' => true,
-            'inline_create' => [ 'entity' => 'personnes' ],
+            'inline_create' => ['entity' => 'personnes'],
+            'attribute' => "fullname",
             'tab' => $tab_team,
+        ]);
 
-            // OPTIONALS:
-            // 'label' => "Category",
-            // 'attribute' => "name", // foreign key attribute that is shown to user (identifiable attribute)
-            // 'entity' => 'category', // the method that defines the relationship in your Model
-            // 'model' => "App\Models\Category", // foreign key Eloquent model
-            // 'placeholder' => "Select a category", // placeholder for the select2 input
-
-            // AJAX OPTIONALS:
-            // 'delay' => 500, // the minimum amount of time between ajax requests when searching in the field
-            // 'data_source' => url("fetch/category"), // url to controller search function (with /{id} should return model)
-            // 'minimum_input_length' => 2, // minimum characters to type before querying results
-            // 'dependencies'         => ['category'], // when a dependency changes, this select2 is reset to null
-            // 'include_all_form_fields'  => false, // optional - only send the current field through AJAX (for a smaller payload if you're not using multiple chained select2s)
-        ],);
+        $this->crud->addField([
+            'type' => "relationship",
+            'name' => 'organisations',
+            'label' => __('admin.organisations'),
+            'ajax' => true,
+            'inline_create' => ['entity' => 'organisations'],
+            'attribute' => "all_names",
+            'tab' => $tab_team,
+        ]);
 
         // Données de contact.
         $this->add_contact_methods_fields();   //  ## Données de contact.
@@ -190,6 +191,18 @@ class ProjectsCrudController extends BaseCrudController
 
     public function fetchPersons()
     {
-        return $this->fetch(\Domain\Persons\Models\Person::class);
+        return $this->fetch([
+            'model' => \Domain\Persons\Models\Person::class,
+            'searchable_attributes' => ['firstname', 'lastname'],
+        ]);
     }
+
+    public function fetchOrganisations()
+    {
+        return $this->fetch([
+            'model' => \Domain\Organisations\Models\Organisation::class,
+            'searchable_attributes' => ['name','legal_name'],
+        ]);
+    }
+
 }
