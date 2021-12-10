@@ -16,7 +16,6 @@ class TimeLapse extends Model
     use HasFactory;
     use CrudTrait;
 /*show
-    use CrudTrait;
     use SluggableTrait;
 */
     /*
