@@ -13,6 +13,8 @@ use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 
 
+
+
 /**
  * ProjectCrudController
  *
@@ -30,6 +32,7 @@ class ProjectsCrudController extends BaseCrudController
     use FinalitableCrudTrait;
     use OrganisationsCrudTrait;
     use PersonsCrudTrait;
+
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -70,6 +73,7 @@ class ProjectsCrudController extends BaseCrudController
         $this->add_organisations_columns();
         $this->add_persons_columns();
 
+
     }
 
     protected function _addFields($state='all')
@@ -94,7 +98,7 @@ class ProjectsCrudController extends BaseCrudController
             'tab' => $this->tab_info,
         ]);
 
-        /* New ending date for the project - V.P.R */
+        /* Date range for the project - V.P.R */
         $this->crud->addField([
             'name' => ['starting_date', 'ending_date'],
             'type' => 'date_range',
@@ -102,10 +106,25 @@ class ProjectsCrudController extends BaseCrudController
             'tab' => $this->tab_info,
         ]);
 
+        //Project time lapse selector
+        $this->crud->addField([
+            'type' => 'select',
+            'label' => 'Échéancier',
+            'name' => 'time_lapse', // the relationship name in your Model
+            'entity' => 'timelapse', // the relationship name in your Model
+            'attribute' => 'time_lapse', // attribute on Article that is shown to admin
+            'model' => "Domain\TimeLapse\Models\TimeLapse",
+            'tab' => $this->tab_info,
+        ]);
+
+
 
         // Données Finalities.
         $this->add_finalities_fields();
 
+        
+      
+        
 
         // TEAM
 

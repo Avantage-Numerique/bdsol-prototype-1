@@ -33,6 +33,7 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('identifiants') }}'><i class='nav-icon la la-id-card'></i> @lang('menu.identifiers')</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('langues') }}'><i class='nav-icon la la-language'></i> @lang('menu.languages')</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('formes-juridique') }}'><i class='nav-icon la la-question'></i> @lang('menu.juridic-forms')</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('echeance') }}'><i class='nav-icon la la-question'></i>Échéances</a></li>
     </ul>
 </li>
 
