@@ -51,7 +51,7 @@ class TimeLapseCrudController extends BaseCrudController
             'name' => 'time_lapse',
             'type' => 'text',
             'label' => "Échéance",
-    
+            'attribute' => 'Échéance',
         ]);
     }
 
@@ -59,12 +59,8 @@ class TimeLapseCrudController extends BaseCrudController
     //Edit the existing time lapses
     public function setupUpdateOperation()
     {
-        $this->crud->setValidation(TimeLapseRequest::class);
-
-        $this->crud->addField([
-            'name' => 'time_lapse',
-            'type' => 'text',
-            'label' => "Échéance",
-        ]);
+        $this->setupCreateOperation();
     }
+
+    
 }

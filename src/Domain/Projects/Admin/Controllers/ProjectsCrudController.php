@@ -108,13 +108,12 @@ class ProjectsCrudController extends BaseCrudController
 
         //Project time lapse selector
         $this->crud->addField([
-            'type' => 'select2_multiple',
+            'type' => 'select',
             'label' => 'Échéancier',
-            'name' => 'time_lapse_id', // the relationship name in your Model
+            'name' => 'time_lapse', // the relationship name in your Model
             'entity' => 'timelapse', // the relationship name in your Model
             'attribute' => 'time_lapse', // attribute on Article that is shown to admin
             'model' => "Domain\TimeLapse\Models\TimeLapse",
-            'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
             'tab' => $this->tab_info,
         ]);
 

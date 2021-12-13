@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Domain\Projects\Models\TimeLapse;
+use Domain\TimeLapse\Models\TimeLapse;
 
 class TimeLapseSeeder extends Seeder
 {

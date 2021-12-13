@@ -71,6 +71,7 @@ class Project extends Model
         'all_finalities_raw'
     ];
 
+  
 
     /*
     |--------------------------------------------------------------------------
@@ -81,7 +82,7 @@ class Project extends Model
     //Relation to link the project model to the time lapse model : One to many
     public function timelapse()
     {   
-        return $this->belongsTo('Domain\TimeLapse\Models\TimeLapse', 'time_lapse_id', 'id');
+        return $this->belongsTo('Domain\TimeLapse\Models\TimeLapse', 'time_lapse_id');
     }
 
 }

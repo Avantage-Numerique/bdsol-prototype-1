@@ -32,6 +32,7 @@ class TimeLapse extends Model
         'time_lapse'
     ];
 
+
     // Avoid Eloquent to manage and expect the created_at and updated_at columns
     public $timestamps = false;
 
@@ -42,14 +43,16 @@ class TimeLapse extends Model
     |--------------------------------------------------------------------------
     */
 
-    /*
+    
     //Relation to link this model to project 
     //Doesn't seem to be necessay for now 
     
     public function projects()
     {
-        return $this->hasMany('Domain\Projects\Models\Project');
+        return $this->hasMany('Domain\Projects\Models\Project', 'time_lapse_id');
     }
-    */
+
+
+    
 
 }
