@@ -10,8 +10,7 @@ La mise en ligne de cet outil augmentera la découvrabilité, la visibilité, ai
 
 ## Outils de gestion
 
-- [Gestion du projet et de l'avancement](https://github.com/Avantage-Numerique/bdsol/projects/1)
-- [Structure de la base de données](https://whimsical.com/bdsol-prototype-1-Q2abPCFJMh5SbTUEdjPAEw)
+- [Ontologie avec schema.org](https://whimsical.com/bdsol-ontologie-0-5-schemas-org-6PrdG53G8KTMtwTEEgzDy5)
 - [Gestion des versions](https://github.com/Avantage-Numerique/bdsol) (Github)
 - [Cahier des charge](Cahier-des-charges.md) (choix technologiques pour l'instant seulement, version 1.00)
 
