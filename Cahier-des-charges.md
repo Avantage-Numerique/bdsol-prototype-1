@@ -1,16 +1,30 @@
-# Cahier des charges
-BDSOL prototype 1.00
+# Cahier des charges BDSOL prototype 1.1
 
-Voir le lexique des concepts.
+On a mis de côté la version 1 du prototype. Nous passons tout de suite à une version 1.1.
+**Avec déjà la mise en forme qui nous voulions pour l'alpha et toujours avec l'utilisateur au centre des décisions.**
 
+## Structure
+- Vue publique (*front-end*)
+- Section de gestion pour les utilisateurs - section utilisateur publique (*user's backend*)
+- Section de gestion de l'application, API et autres mécanismes (*Backend*)
 
 ## Choix technologiques
 
+### Pour les vues publiques
+
+#### La vue publique et la zone utilisateur
+Elles seront une application [NEXTJS](https://nextjs.org/). Avec une gestion des authorisations via une API.
+
+#### La gestionde l'application
+Elle sera via Laravel en mode API et avec une des interfaces de gestions. Pour aider les administrateurs à gérer la plateforme avec des outils précis sans avoir à ajouter des permissions dans l'application nextjs.
+
+
+
 ### Gestion de l'administration
 
-#### Laravel 8 comme *framework*
+#### Laravel comme *framework* pour l'API et gestion de l'application web.
 - Versatile pour plusieurs grosseurs de projet.
-    - Pour le prototype #1 et #2, possible d'augmenter l'envergure du code facilement.
+    - Framework répandu et versatile, possible d'augmenter l'envergure du code facilement.
     - Facile à installer sur plusieurs services d'hébergement pour toutes les étapes du projet.
 - Une très grande communauté active de développeur.
 - Outil Open Source
@@ -18,22 +32,25 @@ Voir le lexique des concepts.
 - EasyRDF : https://github.com/easyrdf/easyrdf
 
 #### Backpack for Laravel comme interface CRUD
-- Une administration Laravel permet de sauter plusieurs étapes énergivores
+- A été utilisé pour la version du prototype 1.0.
+- Une administration Laravel permet de sauter plusieurs étapes énergivores.
 - Backpack for Laravel permet une gestion des entités bien faite et à jour.
 
-#### Type de relation utiliser dans la base de données
+#### Type de relation utiliser dans la base de données relationnelles.
 - Relation 1:n
-- Releation 1:1
+- Relation 1:1
 - Relation n:n
-- Relation polymorhpique
+- [Relation polymorphique](https://laravel.com/docs/8.x/eloquent-relationships#polymorphic-relationships)
 - Planification d'ajouter les Enums
 
-#### Méthode de développement
-- Utilisation du DDD (Domain Driven Design).
-- Prototype #1 utilise le MVC de Laravel.
+### Méthode de développement
+- Utilisation du DDD ([Domain Driven Design](https://fr.wikipedia.org/wiki/Conception_pilot%C3%A9e_par_le_domaine)).
+- Prototype 1.1 utilise le MVC de Laravel pour la section de gestion de l'application.
+- Pour la zone d'utilisateur : MVC aussi ?
+- Pour la zone publique : MVC aussi ?
 
 
-### Gestion des autorisations (structure des utilisateurs)
+## Gestion des autorisations (structure des utilisateurs)
 Cette facette a été mise de côté dans le prototype #1.
 
 Le plugin `backpack/permissionmanager` qui est basé sur spatie-permission.
@@ -51,82 +68,55 @@ Cette structure demande un peu plus de travail et un petit peu de duplication, p
 
 
 
-### Gestion de l'API
+## Gestion de l'API
 
-Par Laravel pour l'instant. Étant donné que l'API est dû pour plus tard. Fais partie des raisons pour lesquelles j'ai choisi Laravel.
-
-Mais la porte est ouverte pour tout : GraphQL, Walder ?, Node, flask/django/python, etc.
+L'API Pour l'application publique (zone membre et vue publique) se fera via Laravel développer pour NextJS.
+Pour l'accès à notre base de donnée en mode graph, on explore encore :
+GraphQL, Walder ?, Node, flask/django/python, etc.
 
 
 ## Plan de développement
 
-### Version utilisable
-1. Transfert en web de la BD File Maker.
-   1. Restructuration pour avoir une base de données relationnels un peu plus versatile.
-2. Mise en place de l'interface CRUD pour une entrée
-3. Mise en place d'une interface pour importé des CSV/JSON, etc.
-4. 
+### Prototype 1.1
 
-### Prototype #1
-
-1. Mise en place d'une interface CRUD  pour les données.
+1. Mise en place d'une interface CRUD pour les données.
     1. Dans une interface web sous
     2. Dans une méthodes de batch import (CSV ou autre format).
 2. Mise en place d'une présentation des données dans la vue publique de la BDSOL.
 
-### Ontologie 0.5
-1. Mise en graphe la structure de la base de données relationnel.
-   1. Détermination des classes pour chacune des `nœuds`.
-   3. Détermniation de toutes les propriétés des classes établies.
-   2. Détermination des types de liens entre les `nœuds` principales.
-2. Documenter toutes ces informations dans un microsite
-    1. Où chacun des nœuds ont une page pour décrire ses propriétés, l'utilisation de ces propriétés.
-    2. En créant une structure dynamique pour que l'ontologie officiel et la documentation soit bien lié ensemble.
-    3. On peut hébergerle microsite sur github et le bâtir avec Jekyll ou autres.
-3. Affronter les donners au monde réelle
-   1. Tenter de décrire un nom X de projets, personnes, org, etc. (BÉRÉNICE, préparer cette étable d'avance.)
-4. Retgroupement des classes dans un fichier `rdf`.
-5. Tester le fichier RDF.
+### Ontologie 0.6 à 1.0
+1. [X] Lié avec l'ontologie [schema.org](https://schema.org/)
+2. [ ] Lié avec l'ontologie [FoaF](http://xmlns.com/foaf/spec/)
+3. [ ] Lié l'ontologie avec la nouvelle version d'artsdata qui s'en vient
+4. [ ] Lié l'ontologie avec le projet Dia-Log des conseils de la cultures développé par culture Laval.
+5. [X] Mise en graphe théorique de la structure de la base de données relationnel (schema.org)
+    1. [X] Détermination des classes pour chacun des `nœuds`.
+    2. [ ] Détermination des propriétés des classes établies.
+    3. [X] Détermination des types de liens entre les `nœuds` principaux.
+6. [ ] Documenter toutes ces informations dans un microsite.
+    1. Où chacun des nœuds a une page pour décrire ses propriétés, l'utilisation de ces propriétés.
+    2. En créant une structure dynamique pour que l'ontologie officielle et la documentation soient bien liées ensemble.
+    3. On peut héberger le microsite sur github et le bâtir avec Jekyll ou autres.
+7. [ ] Affronter les données au monde réel.
+    1. Tenter de décrire un nom X de projets, personnes, org, etc. (BÉRÉNICE, préparer cette étable d'avance.)
+8. [ ] Retgroupement des classes dans un fichier `rdf`.
+9. [ ] Tester le fichier RDF.
 
 ### Design Système 0.5
-1. Détermination du spectre d'application du design system (BDSOL seulement ?).
-2. Partage des personnnas déterminé par Camille et Maude.
+1. [ ] Détermination du spectre d'application du design system (BDSOL seulement ?).
+2. [ ] Partage des personnes déterminé par Camille et Maude.
+3. [ ] Élaboration des outils de formulaire et visuel pour le prototype actuel.
 
-### Application de connexion multiplateforme
-1. Élaboration de l'algorithme selon les besoins actuels
-    1. Connexion à la BDSOL
-    2. Connexion à la plateforme du Hub numérique virtuel
-    3. Connexion à X service tier
-    4. Connexion partiel et accès granulaire à plusieurs niveaux.
-    5. Méthode de gestion des rôles.
-    6. Données nécessaires pour la gestion.
-    7. Élaboration de la politique de confidentialité.
-    8. On touche à [SOLID](https://inrupt.com/solid/) ?
-2. Choix de la meilleure technologie pour permettre cette connexion et son maintient
-    1. Jeton JWT [Exemple](https://www.vaadata.com/blog/fr/jetons-jwt-et-securite-principes-et-cas-dutilisation/)
-    2. oauth2 [Exemple](https://medium.com/google-cloud/understanding-oauth2-and-building-a-basic-authorization-server-of-your-own-a-beginners-guide-cf7451a16f66)
-    3. Autres (N'hésitez pas à ajouter des algorithmes ici).
-    4. Gestion
-3. Designer la mise en ligne de la plateforme pour être en parallèle aux plateformes : BDSOL, site web d'avantage numérique, etc.
-    1. Docker parallèle à la BDSOL ?
-    2. Autres serveurs ?
-4. Conceptualisation du logiciel
-    1. Backend/API
-    2. Frontend
-5. Développement
-    1. Backend
-    2. API
-    3. Frontend
-6. Mise en prod avec un produit en production
-7. Mise en prod avec tous les produits en production
-8. 
-### Livrables
 
-#### Prototype #1
-- Application web avec un système d'accès de base où on peut modifier et ajout des données dans l'ensemble de la structure de la base de données.
+## Livrables
 
-#### Ontologie
-- Microsite documentant la structure du graphe de la BDSOL permettant à un humain de consulter la structure des données et de préparer ses données afin de permettre l'ajout en `bulk`  dans notre BD.
+### Prototype 1.1
+- Application web avec un système d'accès de base où on peut modifier et ajout des données dans l'ensemble de la structure de la base de données relationnelles.
+
+### Ontologie
+- Microsite documentant la structure du graphe de la BDSOL permettant à un humain de consulter la structure des données et de préparer ses données afin de permettre l'ajout en `bulk` dans notre BD.
+- Structure ontologique technique
+- Point d'accès de requête à nos donnés
 
 
 ## Lexique des concepts
