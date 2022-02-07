@@ -11,6 +11,8 @@ use Domain\Organisations\Admin\Controllers\Traits\OrganisationsCrudTrait;
 use Domain\Persons\Admin\Controllers\Traits\PersonsCrudTrait;
 use Domain\Projects\Admin\Controllers\Traits\FinalitableCrudTrait;
 use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
+use Domain\Projects\Admin\Requests\ProjectCrudRequest as StoreRequest;
+use Domain\Projects\Admin\Requests\ProjectCrudRequest as UpdateRequest;
 
 
 
@@ -46,6 +48,20 @@ class ProjectsCrudController extends BaseCrudController
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/projets');
         $this->crud->setEntityNameStrings('projet', 'projets');
     }
+
+
+    public function setupCreateOperation()
+    {
+        parent::setupCreateOperation();
+        $this->crud->setValidation(StoreRequest::class);
+    }
+
+    public function setupUpdateOperation()
+    {
+        parent::setupUpdateOperation();
+        $this->crud->setValidation(UpdateRequest::class);
+    }
+
 
     protected function _addColumns($state='all')
     {
@@ -100,11 +116,27 @@ class ProjectsCrudController extends BaseCrudController
 
         /* Date range for the project - V.P.R */
         $this->crud->addField([
+            'name' => 'starting_date',
+            'type' => 'date_picker',
+            'label' => __('admin.starting_date'),
+            'tab' => $this->tab_info,
+        ]);
+
+        /* Date range for the project - V.P.R */
+        $this->crud->addField([
+            'name' => 'ending_date',
+            'type' => 'date_picker',
+            'label' => __('admin.ending_date'),
+            'tab' => $this->tab_info,
+        ]);
+
+        /* Date range for the project - V.P.R */
+        /*$this->crud->addField([
             'name' => ['starting_date', 'ending_date'],
             'type' => 'date_range',
             'label' => __('admin.ending_date'),
             'tab' => $this->tab_info,
-        ]);
+        ]);*/
 
         //Project time lapse selector
         $this->crud->addField([
@@ -121,10 +153,6 @@ class ProjectsCrudController extends BaseCrudController
 
         // Données Finalities.
         $this->add_finalities_fields();
-
-        
-      
-        
 
         // TEAM
 
@@ -187,6 +215,7 @@ class ProjectsCrudController extends BaseCrudController
     }
 
 
+    // Inline creation fetch for relationship fields.
 
     public function fetchPersons()
     {
